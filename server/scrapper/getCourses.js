@@ -43,6 +43,8 @@ const getCourses = async () => {
       }
     }
 
+    // used query strings to get data
+    // approach used in getExams is similar to actual approach used by NTU website - can consider switching if query strings break in the future
     const { data } = await axios.get("https://wish.wis.ntu.edu.sg/webexe/owa/AUS_SCHEDULE.main_display1", config);
     const $ = cheerio.load(data);
     
