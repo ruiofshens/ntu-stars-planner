@@ -3,6 +3,34 @@ import cheerio from 'cheerio';
 import fs from 'fs';
 
 const getCourses = async () => {
+  /**
+   * Writes to data/courses in JSON, an array of Course objects. 
+   * Each Course object will have an array of Index objects.
+   * Each Index object will have an array of Lesson objects.
+   * 
+   * Example of Course object:
+   * {
+   *  courseCode: "AAA08B",
+   *  courseName: "FASHION & DESIGN: WEARABLE ART AS A SECOND SKIN*~",
+   *  courseAUs: "3.0 AU",
+   *  indexes: [
+   *    {
+   *      indexNo: "39632",
+   *      lessons: [
+   *        {
+   *          type: "LEC/STUDIO",
+   *          group: "L1",
+   *          day: "WED",
+   *          time: "1130-1420",
+   *          venue: "NIE7-02-07",
+   *          teachingWeeks: "Teaching Wk1-12", // if empty, assume weeks 1-13
+   *        }
+   *      ]
+   *    }
+   *  ]
+   * }
+   */
+
   const acadSem = await getAcadSem();
 
   try {
@@ -83,7 +111,7 @@ const getCourses = async () => {
 
     const coursesJSON = JSON.stringify(courses);
     
-    const fileName = `data/${acadSem}.json`
+    const fileName = `data/courses/${acadSem}_courses.json`
     fs.writeFile(fileName, coursesJSON, (err) => {
       if (err) console.log(err);
     });
