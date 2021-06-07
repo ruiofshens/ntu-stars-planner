@@ -17,92 +17,50 @@ function Timetable() {
           <time className="col-sm fw-bold">17:00</time>
           <time className="col-sm fw-bold">18:00</time>
         </div>
-        <div class="row">
+        <div className="row">
           <div className="col list-group-item dayColor fw-bold">Mon</div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-        </div>
-        <div class="row">
+          <TimetableRow/>
+          </div>
+        <div className="row">
           <div className="col list-group-item dayColor fw-bold">Tue</div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
+          <TimetableRow/>
         </div>
-        <div class="row">
+        <div className="row">
           <div className="col list-group-item dayColor fw-bold">Wed</div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
+          <TimetableRow/>
         </div>
-        <div class="row">
+        <div className="row">
           <div className="col list-group-item dayColor fw-bold">Thu</div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
+          <TimetableRow/>
         </div>
-        <div class="row">
+        <div className="row">
           <div className="col list-group-item dayColor fw-bold">Fri</div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
+          <TimetableRow/>
         </div>
-        <div class="row">
+        <div className="row">
           <div className="col list-group-item dayColor fw-bold">Sat</div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
-          <div class="col list-group-item altColor"></div>
-          <div class="col list-group-item"></div>
+          <TimetableRow/>
         </div>
         </>
     );
   }
   
+  // Contains the cells for each day as a row, excluding the day itself
+  function TimetableRow() {
+    return (
+      <>
+        <div className="col list-group-item"></div>
+        <div className="col list-group-item altColor"></div>
+        <div className="col list-group-item"></div>
+        <div className="col list-group-item altColor"></div>
+        <div className="col list-group-item"></div>
+        <div className="col list-group-item altColor"></div>
+        <div className="col list-group-item"></div>
+        <div className="col list-group-item altColor"></div>
+        <div className="col list-group-item"></div>
+        <div className="col list-group-item altColor"></div>
+        <div className="col list-group-item"></div>
+      </>
+    );
+  }
   export default Timetable;

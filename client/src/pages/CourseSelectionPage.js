@@ -9,10 +9,10 @@ function CourseSelectionPage() {
         <h4>Enter Course Codes!</h4>
         <hr/>
         <CourseInputGroup/>
-        <input type="checkbox" class="form-check-input" id="exampleCheck1"></input>
-        <label class="form-check-label" for="exampleCheck1">Consider Vacancies</label>
+        <input type="checkbox" className="form-check-input" id="exampleCheck1"></input>
+        <label className="form-check-label" htmlFor="exampleCheck1">Consider Vacancies</label>
         <hr/>
-        <button type="button" class="btn btn-primary">Plan Timetable!</button>
+        <button type="button" className="btn btn-primary">Plan Timetable!</button>
         
       </div>
 
@@ -20,7 +20,7 @@ function CourseSelectionPage() {
       <h2>The courses retrieved should be inserted here!</h2>
       <hr/>
       <hr/>
-      <button type="button" class="btn btn-primary">Retrieve Courses!</button>
+      <button type="button" className="btn btn-primary">Retrieve Courses!</button>
         
       </div>
     </div>

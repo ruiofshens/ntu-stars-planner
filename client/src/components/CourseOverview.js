@@ -3,7 +3,7 @@ import React from 'react';
 // TODO: Static data for now, to make dynamic
 function CourseOverview() {
     return (
-        <table class="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover">
           <thead>
             <tr>
                 <th scope="col">#</th>

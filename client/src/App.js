@@ -1,63 +1,60 @@
 import './App.css';
 
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
+import logo from './icons/logo.png';
 import HomePage from './pages/HomePage.js';
 import CourseSelectionPage from './pages/CourseSelectionPage.js';
 import SettingsPage from './pages/SettingsPage.js';
 import AboutUsPage from './pages/AboutUsPage.js';
 
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+
+
 function App() {
   return (
-    <Router>
-      <div className="container-fluid">
-        <div className="row vh-100">
+        <Router>
 
-          <nav className="col-md-2 d-none d-md-block bg-dark sidebar">
-            <div className="sidebar-sticky">
-              <ul className="nav nav-pills nav-fill flex-column">
-                <li className="active nav-item">
-                  <Link to="/" className="nav-link active" data-toggle="pill">Home</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/course-selection" className="nav-link" data-toggle="pill">Course Selection</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/settings" className="nav-link" data-toggle="pill">Settings</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/about-us" className="nav-link" data-toggle="pill">About Us</Link>
-                </li>
-              </ul>
-            </div>
-          </nav>
+          <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="sticky-nav">
 
-          <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 bg-light">
-            <Switch className="col-6 tab-content" id="tabContent">
-              <Route exact path="/" className="tab-pane fade show active">
-                <HomePage />
-              </Route>
-              <Route path="/course-selection" className="tab-pane fade">
-                <CourseSelectionPage />
-              </Route>
-              <Route path="/settings" className="tab-pane fade">
-                <SettingsPage />
-              </Route>
-              <Route path="/about-us" className="tab-pane fade">
-                <AboutUsPage />
-              </Route>
-            </Switch>
-          </main>
-        
-        </div>
-      </div>
-    </Router>
+            <LinkContainer to="/">
+              <Navbar.Brand>
+                <img
+                  src={logo}
+                  width="30"
+                  height="30"
+                  className="d-inline-block align-top"
+                  alt="NTU Stars logo"
+                />{' '}
+                NTU Stars V2
+              </Navbar.Brand>
+            </LinkContainer>
+
+            <Nav activeKey={window.location.pathname} className="ml-auto">
+              <LinkContainer to="/">
+                <Nav.Link>Timetable</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/courses">
+                <Nav.Link>Courses</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/settings">
+                <Nav.Link>Settings</Nav.Link>
+              </LinkContainer>
+            </Nav>
+          </Navbar>
+
+          <br />
+
+          <Switch>
+            <Route exact path="/" component={HomePage}/>
+            <Route path="/courses" component={CourseSelectionPage}/>
+            <Route path="/settings" component={SettingsPage}/>
+          </Switch>
+
+        </Router>
   );
 }
 
