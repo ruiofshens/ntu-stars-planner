@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Table from 'react-bootstrap/Table';
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 
 // TODO: Static data for now, to make dynamic
 function CourseOverview() {
@@ -10,7 +12,8 @@ function CourseOverview() {
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Index</th>
-                <th scope="col">Course Code/Name</th>
+                <th scope="col">Index</th>
+                <th scope="col">Course Code and Name</th>
                 <th scope="col">AUs</th>
                 <th scope="col">Exam Timing</th>
             </tr>
@@ -18,7 +21,14 @@ function CourseOverview() {
           <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>10195</td>
+                <td>10118</td>
+                <td>
+                  <DropdownButton id="dropdown-basic-button" title="Index #" size="sm">
+                    <Dropdown.Item href="#/plan-1">10118</Dropdown.Item>
+                    <Dropdown.Item href="#/plan-2">10119</Dropdown.Item>
+                    <Dropdown.Item href="#/plan-3">10120</Dropdown.Item>
+                  </DropdownButton>
+                </td>
                 <td>CZ2001 Algorithms</td>
                 <td>3</td>
                 <td>1 April 2022 1000 - 1200</td>
@@ -26,6 +36,13 @@ function CourseOverview() {
             <tr>
                 <th scope="row">2</th>
                 <td>10482</td>
+                <td>
+                  <DropdownButton id="dropdown-basic-button" title="Index #" size="sm">
+                    <Dropdown.Item href="#/plan-1">10480</Dropdown.Item>
+                    <Dropdown.Item href="#/plan-2">10481</Dropdown.Item>
+                    <Dropdown.Item href="#/plan-3">10482</Dropdown.Item>
+                  </DropdownButton>
+                </td>
                 <td>CZ2002 Intro To Object-Oriented Programming</td>
                 <td>3</td>
                 <td>-</td>

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import logo from './icons/logo.png';
-import HomePage from './pages/HomePage.js';
+import TimetablePage from './pages/TimetablePage.js';
 import CourseSelectionPage from './pages/CourseSelectionPage.js';
 import SettingsPage from './pages/SettingsPage.js';
 import AboutUsPage from './pages/AboutUsPage.js';
@@ -49,7 +49,7 @@ function App() {
           <br />
 
           <Switch>
-            <Route exact path="/" component={HomePage}/>
+            <Route exact path="/" component={TimetablePage}/>
             <Route path="/courses" component={CourseSelectionPage}/>
             <Route path="/settings" component={SettingsPage}/>
           </Switch>

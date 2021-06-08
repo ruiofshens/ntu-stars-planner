@@ -11,3 +11,18 @@
   position: sticky;
   top: 0;
 }
+
+.retrievedCourses {
+  width: 80%;
+  height: 65%;
+  overflow-y: scroll;
+}
+
+.align-text {
+  display: flex;
+  align-items: center;
+}
+
+.app {
+  height: 20vh;
+}
