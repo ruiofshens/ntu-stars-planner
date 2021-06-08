@@ -2,8 +2,9 @@
   background-color: #c9c9c9;
 }
 
-.dayColor {
+.dayCell {
   background-color: #d47c7c;
+  width: 5%;
 }
 
 .sticky-nav {

@@ -1,9 +1,11 @@
 import React from 'react';
 
+import Table from 'react-bootstrap/Table';
+
 // TODO: Static data for now, to make dynamic
 function CourseOverview() {
     return (
-        <table className="table table-sm table-striped table-hover">
+        <Table striped hover size="sm">
           <thead>
             <tr>
                 <th scope="col">#</th>
@@ -29,7 +31,7 @@ function CourseOverview() {
                 <td>-</td>
             </tr>
           </tbody>
-          </table>
+          </Table>
     );
   }
   

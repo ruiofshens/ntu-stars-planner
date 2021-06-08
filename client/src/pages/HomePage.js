@@ -1,27 +1,33 @@
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 import Timetable from '../components/Timetable';
 import CourseOverview from '../components/CourseOverview';
 
 function HomePage() {
   return (
-    <div className="px-3">
-      <div className="container-fluid">
+    <Container fluid className="px-4">
         <Timetable/>
-      </div>
       <hr/>
-      <div className="row">
-        <div className="col-10">
+      <Row>
+        <Col xs={10}>
           <h5>Courses Overview</h5>
           <CourseOverview/>
-        </div>
-        <div className="col-2 d-grid gap-3">
-          <button type="button" className="btn btn-outline-primary">Reselect Modules</button>
+        </Col>
+        <Col xs={2}>
+          <LinkContainer to="/courses">
+            <Button variant="outline-primary">Reselect Modules</Button>
+          </LinkContainer>
           <hr/>
-          <button type="button" className="btn btn-outline-primary">Download Timetable</button>
-        </div>
-      </div>
-    </div>
+          <Button variant="outline-primary">Download Timetable</Button>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

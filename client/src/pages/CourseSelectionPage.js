@@ -1,29 +1,43 @@
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import CourseInputGroup from '../components/CourseInputGroup'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 function CourseSelectionPage() {
   return (
-    <div className="row vh-100">
-      <div className="col-md-2 d-none d-md-block bg-light">
-        <h4>Enter Course Codes!</h4>
+    
+    <Row className="px-3">
+      <Col xs={3}>
+        <h5>Select Course Codes</h5>
         <hr/>
         <CourseInputGroup/>
-        <input type="checkbox" className="form-check-input" id="exampleCheck1"></input>
-        <label className="form-check-label" htmlFor="exampleCheck1">Consider Vacancies</label>
-        <hr/>
-        <button type="button" className="btn btn-primary">Plan Timetable!</button>
-        
-      </div>
 
-      <div className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 bg-white">
-      <h2>The courses retrieved should be inserted here!</h2>
-      <hr/>
-      <hr/>
-      <button type="button" className="btn btn-primary">Retrieve Courses!</button>
+        <Form>
+          <Form.Check
+            type="checkbox"
+            id={`includeVacancy`}
+            label={`Consider Vacancies`}
+          />
+        </Form>
+
+        <hr/>
         
-      </div>
-    </div>
+        <LinkContainer to="/">
+          <Button variant="outline-primary m-1">Plan Timetable</Button>
+        </LinkContainer>
+        <Button variant="outline-primary m-1">Undo All</Button>
+      </Col>
+      <Col xs={9}>
+      <h2>The courses retrieved should be inserted here!</h2>
+        <hr/>
+        <hr/>
+        <Button variant="outline-primary">Retrieve Courses</Button>
+      </Col>
+    </Row>
   );
 }
 
