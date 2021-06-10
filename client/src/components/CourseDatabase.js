@@ -6,9 +6,9 @@ import Button from 'react-bootstrap/Button';
 
 function CourseDatabase() {
     return (
-        <Card className="retrievedCourses">
+        <Card className="retrievedCourses" style={{height: "30rem"}}>
         <Card.Header className="bg-secondary text-center font-weight-bold">Courses Available</Card.Header>
-          <ListGroup variant="flush">
+          <ListGroup variant="flush" className="overflow-auto">
             <ListGroup.Item>
               <Button variant="outline-primary" className="mx-1">+</Button>
               CZ1103 Intro To Comput Thinking & Pro (3AU)

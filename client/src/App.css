@@ -15,7 +15,6 @@
 .retrievedCourses {
   width: 80%;
   height: 65%;
-  overflow-y: scroll;
 }
 
 .align-text {

@@ -16,33 +16,32 @@ function CourseSelectionPage() {
     <Container fluid className="px-4">
       <Row>
         <Col xs={3}>
-        <h5 className="text-center">Select Course Codes</h5>
-        <hr/>
-        <CourseInputGroup/>
+          <h5 className="text-center">Select Course Codes</h5>
+          <hr/>
+          <CourseInputGroup/>
 
-        <Form>
-          <Form.Check
-            type="checkbox"
-            id={`includeVacancy`}
-            label={`Consider Vacancies`}
-          />
-        </Form>
+          <Form>
+            <Form.Check
+              type="checkbox"
+              id={`includeVacancy`}
+              label={`Consider Vacancies`}
+            />
+          </Form>
 
-        <hr/>
-        
-        <LinkContainer to="/">
-          <Button variant="outline-primary m-1">Plan Timetable</Button>
-        </LinkContainer>
-        <Button variant="outline-primary m-1">Undo All</Button>
-      </Col>
+          <hr/>
+          
+          <LinkContainer to="/">
+            <Button variant="outline-primary m-1">Plan Timetable</Button>
+          </LinkContainer>
+          <Button variant="outline-primary m-1">Undo All</Button>
+        </Col>
         <Col xs={9} className="d-flex flex-column align-items-center">
-        <CourseDatabase/>
-        <hr/>
-        <Form className="d-flex" style={{width: "35%"}}>
-          <Form.Control placeholder="Enter course code/name"/>
-          <Button variant="outline-primary">Search</Button>
-        </Form>
-      </Col>
+          <CourseDatabase/>
+          <Form className="d-flex my-2" style={{width: "35%"}}>
+            <Form.Control placeholder="Enter course code/name"/>
+            <Button variant="outline-primary">Search</Button>
+          </Form>
+        </Col>
       </Row>
     </Container>
   );
