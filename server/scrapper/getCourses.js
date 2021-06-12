@@ -2,6 +2,8 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import fs from 'fs';
 
+import CourseModel from '../models/courseDetails.js';
+
 const getCourses = async () => {
   /**
    * Writes to data/courses in JSON, an array of Course objects. 
@@ -21,15 +23,18 @@ const getCourses = async () => {
    *          type: "LEC/STUDIO",
    *          group: "L1",
    *          day: "WED",
-   *          time: "1130-1420",
    *          venue: "NIE7-02-07",
    *          teachingWeeks: "Teaching Wk1-12", // if empty, assume weeks 1-13
+   *          startTime: Date object,
+   *          endTime: Date object, // NOTE: possible to have no startTime and endTime
    *        }
    *      ]
    *    }
    *  ]
    * }
    */
+
+  console.log("Retrieving courses from NTU...");
 
   const acadSem = await getAcadSem();
 
@@ -55,7 +60,7 @@ const getCourses = async () => {
         const courseCode = $(element).find('td[width="100"] > b > font[color="#0000FF"]').text();
         const courseName = $(element).find('td[width="500"] > b > font[color="#0000FF"]').text();
         const courseAUs = $(element).find('td[width="50"] > b > font[color="#0000FF"]').text().trim();
-        console.log(courseCode, courseName, courseAUs);
+        // console.log(courseCode, courseName, courseAUs);
         course = {
           courseCode,
           courseName,
@@ -78,9 +83,23 @@ const getCourses = async () => {
           const type = info[1];
           const group = info[2];
           const day = info[3];
-          const time = info[4];
+          const time = info[4].split("-");
           const venue = info[5];
           const teachingWeeks = info[6];
+
+          // split time into start and end times
+          let startTime = null;
+          let endTime = null;
+          try {
+            let startTimeStr = `${time[0].substring(0,2)}:${time[0].substring(2)}:00`;
+            startTime = new Date(`Januaray 1 2021 ${startTimeStr}`);
+
+            let endTimeStr = `${time[1].substring(0,2)}:${time[1].substring(2)}:00`;
+            endTime = new Date(`Januaray 1 2021 ${endTimeStr}`);
+          } catch (err) { // index has no time
+            let errorMsg = `Failed to get startTime and endTime for Course ${course.courseCode} Index ${indexNo}. Time retrieved is ${info[4]}`;
+            console.log(errorMsg);
+          }
 
           if (indexNo) { // new index
             if (index) {
@@ -97,10 +116,16 @@ const getCourses = async () => {
             type,
             group,
             day,
-            time,
             venue,
             teachingWeeks,
           };
+          if (startTime !== null && endTime !== null) {
+            lesson = {
+              ...lesson,
+              startTime,
+              endTime,
+            }
+          }
           index.lessons.push(lesson); 
         });
 
@@ -111,13 +136,15 @@ const getCourses = async () => {
       }
     });
 
-    const coursesJSON = JSON.stringify(courses);
+    // const coursesJSON = JSON.stringify(courses);
     
-    const fileName = `data/courses/${acadSem}_courses.json`
-    fs.writeFile(fileName, coursesJSON, (err) => {
-      if (err) console.log(err);
-    });
-    console.log("Done")
+    // const fileName = `data/courses/${acadSem}_courses.json`
+    // fs.writeFile(fileName, coursesJSON, (err) => {
+    //   if (err) console.log(err);
+    // });
+    console.log("Retrieved courses");
+
+    return courses;
   } catch (error) {
     console.log(error);
   }
@@ -135,4 +162,16 @@ const getAcadSem = async () => {
   }
 }
 
-getCourses();
+export const addCoursesToDB = async () => {
+  const courses = await getCourses();
+  
+  for (let i = 0; i < courses.length; i++) {
+    let course = new CourseModel(courses[i]);
+    await course.save((err) => {
+      if (err) console.log(err);
+      else console.log(`Added Course ${courses[i].courseCode} to database.`)
+    })
+  }  
+}
+
+// getCourses();

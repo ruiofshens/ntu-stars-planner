@@ -26,3 +26,9 @@ mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedT
 .catch((error) => console.log(error.message));
 
 mongoose.set('useFindAndModify', false);
+
+// temp solution
+// import { addCoursesToDB } from './scrapper/getCourses.js';
+// import { addExamsToDB } from './scrapper/getExams.js';
+// await addCoursesToDB();
+// await addExamsToDB();
