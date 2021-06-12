@@ -16,7 +16,7 @@ import Form from 'react-bootstrap/Form';
 
 function TimetablePage() {
   return (
-    <Container fluid className="px-4">
+    <Container fluid className="px-0">
       <Timetable/>
       <Container fluid className ="pt-2">
           <Tabs defaultActiveKey="choose-plan" id="toggle-course-overview" className="mb-3">

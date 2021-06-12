@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 
+import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 
 // TODO: Static data for now, to make dynamic
-function CourseOverview() {
+function IndexEditOverview() {
+
+    //Consume context for currently selected courses
+    const { selectedCourses } = useContext(SelectedCoursesContext);
+
+  //TODO: Update list with context 
     return (
         <Table striped hover size="sm">
-          <thead>
+            <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Index/Waitlist/Vacancy</th>
                 <th scope="col">Course Code and Name</th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr>
                 <th scope="row">1</th>
                 <td>
@@ -42,9 +48,9 @@ function CourseOverview() {
                 </td>
                 <td>CZ2002 Intro To Object-Oriented Programming</td>
             </tr>
-          </tbody>
+            </tbody>
         </Table>
     );
-  }
+}
   
-  export default CourseOverview;
+  export default IndexEditOverview;

@@ -4,6 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 
+import Lesson from '../components/Lesson';
+
 //TODO:  reduce code repetition
 function Timetable() {
     return (
@@ -25,27 +27,27 @@ function Timetable() {
           <time className="col-sm">21:00</time>
           <time className="col-sm">22:00</time>
         </Row>
-        <ListGroup horizontal>
+        <ListGroup horizontal className="timetableRow">
           <ListGroup.Item className="dayCell px-2">Mon</ListGroup.Item>
           <TimetableRow/>
         </ListGroup>
-        <ListGroup horizontal>
+        <ListGroup horizontal className="timetableRow">
           <ListGroup.Item className="dayCell px-2">Tue</ListGroup.Item>
           <TimetableRow/>
         </ListGroup>
-        <ListGroup horizontal>
+        <ListGroup horizontal className="timetableRow">
           <ListGroup.Item className="dayCell px-2">Wed</ListGroup.Item>
           <TimetableRow/>
         </ListGroup>
-        <ListGroup horizontal>
+        <ListGroup horizontal className="timetableRow">
           <ListGroup.Item className="dayCell px-2">Thu</ListGroup.Item>
           <TimetableRow/>
         </ListGroup>
-        <ListGroup horizontal>
+        <ListGroup horizontal className="timetableRow">
           <ListGroup.Item className="dayCell px-2">Fri</ListGroup.Item>
           <TimetableRow/>
         </ListGroup>
-        <ListGroup horizontal>
+        <ListGroup horizontal className="timetableRow">
           <ListGroup.Item className="dayCell px-2">Sat</ListGroup.Item>
           <TimetableRow/>
         </ListGroup>
@@ -57,7 +59,9 @@ function Timetable() {
   function TimetableRow() {
     return (
       <>
-        <ListGroup.Item className="flex-fill"/>
+        <ListGroup.Item className="flex-fill">
+          <Lesson/>
+        </ListGroup.Item>
         <ListGroup.Item className="altColor flex-fill"/>
         <ListGroup.Item className="flex-fill"/>
         <ListGroup.Item className="altColor flex-fill"/>

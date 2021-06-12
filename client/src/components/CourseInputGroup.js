@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button';
 
+import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
+
 function CourseInputGroup() {
+
+    //Consume context for currently selected courses
+    const { selectedCourses } = useContext(SelectedCoursesContext);
+
     return (
         <Container className="w-75">
             <InputGroup className="mb-3">
@@ -57,6 +63,17 @@ function CourseInputGroup() {
                     aria-describedby="selection-7"
                 />
             </InputGroup>
+            
+            {/* Temp code to check if context passing has worked*/}
+
+            {/* {selectedCourses.map(selectedCourse => {
+              return (
+                    <h3>
+                    {selectedCourse.courseCode}
+                    </h3> 
+              )
+            })} */}
+
         </Container>
     );
   }
