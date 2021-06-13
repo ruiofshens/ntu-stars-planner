@@ -5,7 +5,7 @@ import { getVacancies } from '../scrapper/getVacancies.js';
 
 /* Import models */
 import CourseModel from '../models/courseDetails.js';
-
+import ExamModel from '../models/examDetails.js';
 
 export const getCourses = async (req, res) => {
     try {
@@ -35,6 +35,22 @@ export const getVacanciesAndWaitlist = async (req, res) => {
         const vacanciesAndWaitlist = await getVacancies(courseCode);
 
         res.json(vacanciesAndWaitlist);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+}
+
+export const getExamDetails = async (req, res) => {
+    // courseCodes must be sent as a query params separated by comma
+    try {
+        const courseCodes = req.query.courseCodes.split(",");
+        const exams = []
+        for (let courseCode of courseCodes) {
+            const examDoc = await ExamModel.findOne({ courseCode });
+            exams.push(examDoc);
+        }
+
+        res.json(exams);
     } catch (error) {
         res.status(500).json({ error });
     }
