@@ -1,6 +1,7 @@
 /* Handlers for the routes
 Keep the code for the routes shorter by shifting the handlers to this seperate file */
 import TimetableGenerator from '../timetables/generator.js';
+import { getVacancies } from '../scrapper/getVacancies.js';
 
 /* Import models */
 import CourseModel from '../models/courseDetails.js';
@@ -26,4 +27,15 @@ export const getTimetables = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error });
     }
-  }
+}
+
+export const getVacanciesAndWaitlist = async (req, res) => {
+    try {
+        const courseCode = req.query.courseCode;
+        const vacanciesAndWaitlist = await getVacancies(courseCode);
+
+        res.json(vacanciesAndWaitlist);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+}
