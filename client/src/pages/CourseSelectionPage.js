@@ -1,8 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-
-import CourseInputGroup from '../components/CourseInputGroup';
-import CourseDatabase from '../components/CourseDatabase';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,9 +7,34 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import CourseInputGroup from '../components/CourseInputGroup';
+import CourseDatabase from '../components/CourseDatabase';
+
+import { fetchTimetablePlans } from '../api/DataRetriever';
+
+import { TimetablePlansContext } from '../contexts/TimetablePlansContext';
+import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
+import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
+
 function CourseSelectionPage() {
+
+  /* selectedCourses -> List of selected courses by user to generate timetable plans  
+  setTimetablePlans -> For Button to call and generate timetables based on selectedCourses
+  setCurrentPlan -> Intialise first timetable plan as current plan  */
+  const { selectedCourses } = useContext(SelectedCoursesContext);
+  const { setTimetablePlans } = useContext(TimetablePlansContext);
+  const { setCurrentPlan } = useContext(CurrentPlanContext);
+
+  async function retrieveTimetablePlans() {
+    let plansJSON = await fetchTimetablePlans(selectedCourses);
+    setTimetablePlans(plansJSON.data.timetables);
+    // console.log(plansJSON.data.timetables[0]);
+    // console.log(timetablePlans[0]);
+    setCurrentPlan(plansJSON.data.timetables[0]);
+    // setTimeout(() => console.log(currentPlan), 100);
+  }
+
   return (
-    
     <Container fluid className="px-4">
       <Row>
         <Col xs={3}>
@@ -31,7 +53,11 @@ function CourseSelectionPage() {
           <hr/>
           
           <LinkContainer to="/">
-            <Button variant="outline-primary m-1">Plan Timetable</Button>
+            <Button 
+              variant="outline-primary m-1"
+              onClick={() => retrieveTimetablePlans()}>
+              Plan Timetable
+            </Button>
           </LinkContainer>
           <Button variant="outline-primary m-1">Undo All</Button>
         </Col>

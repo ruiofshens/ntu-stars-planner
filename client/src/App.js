@@ -14,54 +14,59 @@ import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 
 import SelectedCoursesContextProvider from './contexts/SelectedCoursesContext';
+import TimetablePlansContextProvider from './contexts/TimetablePlansContext';
+import CurrentPlanContextProvider from './contexts/CurrentPlanContext';
 
 
 function App() {
   return (
     <Router>
       <SelectedCoursesContextProvider>
-        <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="sticky-nav">
+        <TimetablePlansContextProvider>
+          <CurrentPlanContextProvider>
+            <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="sticky-nav">
 
-          <LinkContainer to="/">
-            <Navbar.Brand>
-              <img
-                src={logo}
-                width="30"
-                height="30"
-                className="d-inline-block align-top"
-                alt="NTU Stars logo"
-              />{' '}
-              NTU Stars V2
-            </Navbar.Brand>
-          </LinkContainer>
-          <Form className="d-flex">
-            <Form.Control size="sm" as="select">
-              <option>Plan 1</option>
-              <option>Plan 2</option>
-              <option>Plan 3</option>
-            </Form.Control>
-          </Form>
-          <Nav activeKey={window.location.pathname} className="ml-auto">
-            <LinkContainer to="/">
-              <Nav.Link>Timetable</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/courses">
-              <Nav.Link>Courses</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/settings">
-              <Nav.Link>Settings</Nav.Link>
-            </LinkContainer>
-          </Nav>
-        </Navbar>
+              <LinkContainer to="/">
+                <Navbar.Brand>
+                  <img
+                    src={logo}
+                    width="30"
+                    height="30"
+                    className="d-inline-block align-top"
+                    alt="NTU Stars logo"
+                  />{' '}
+                  NTU Stars V2
+                </Navbar.Brand>
+              </LinkContainer>
+              <Form className="d-flex">
+                <Form.Control size="sm" as="select">
+                  <option>Plan 1</option>
+                  <option>Plan 2</option>
+                  <option>Plan 3</option>
+                </Form.Control>
+              </Form>
+              <Nav activeKey={window.location.pathname} className="ml-auto">
+                <LinkContainer to="/">
+                  <Nav.Link>Timetable</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/courses">
+                  <Nav.Link>Courses</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/settings">
+                  <Nav.Link>Settings</Nav.Link>
+                </LinkContainer>
+              </Nav>
+            </Navbar>
 
-        <br />
+            <br />
 
-        <Switch>
-          <Route exact path="/" component={TimetablePage}/>
-          <Route path="/courses" component={CourseSelectionPage}/>
-          <Route path="/settings" component={SettingsPage}/>
-        </Switch>
-
+            <Switch>
+              <Route exact path="/" component={TimetablePage}/>
+              <Route path="/courses" component={CourseSelectionPage}/>
+              <Route path="/settings" component={SettingsPage}/>
+            </Switch>
+          </CurrentPlanContextProvider>
+        </TimetablePlansContextProvider>
       </SelectedCoursesContextProvider>
     </Router>
   );

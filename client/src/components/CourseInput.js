@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button';
 
+import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
+
 function CourseInput(props) {
     
-    const [input, setInput] = useState (props.course);
+    /* input -> Variable accessible by both Button and FormControl components
+    setInput -> For Button  to delete entered course code in FormControl
+    removeSelection -> For Button to remove course from list of selected courses  */
+    const [input, setInput] = useState(props.course);
+    const { removeSelection } = useContext(SelectedCoursesContext);
 
     console.log(props[0]);
 

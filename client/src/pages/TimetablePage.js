@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
-
-import Timetable from '../components/Timetable';
-import CourseOverview from '../components/CourseOverview';
-import IndexEditOverview from '../components/IndexEditOverview';
-
+import React from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+
+import Timetable from '../components/Timetable';
+import CourseOverview from '../components/CourseOverview';
+import IndexEditOverview from '../components/IndexEditOverview';
 
 
 function TimetablePage() {
@@ -22,18 +20,7 @@ function TimetablePage() {
       <Container fluid className ="pt-2">
           <Tabs defaultActiveKey="choose-plan" id="toggle-course-overview" className="mb-3">
             <Tab eventKey="choose-plan" title="Step 1: Choose Plan">
-              <Row>
-                <Col xs={2}>
-                  <Row className="px-3 my-1">
-                    <Button variant="outline-primary mx-2 my-1" size="sm">{'<'}</Button>
-                    <h6 className="font-italic align-text">Plan 1 of 64</h6>
-                    <Button variant="outline-primary mx-2 my-1" size="sm">{'>'}</Button>
-                  </Row>
-                </Col>
-                <Col xs={10}>
-                  <CourseOverview/>
-                </Col>
-              </Row>
+              <CourseOverview/>
             </Tab>
             <Tab eventKey="edit-plan" title="Step 2: Edit Plan">
               <IndexEditOverview/>

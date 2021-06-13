@@ -9,22 +9,14 @@ import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 
 function CourseDatabase() {
 
-  const [courses, setCourses] = useState ([
-    // {courseCode: "CZ1103", courseName:"Intro To Comput Thinking & Pro", AUs: 3},
-    // {courseCode: "CZ1104", courseName:"Linear Algebra for Computing", AUs: 3},
-    // {courseCode: "CZ1105", courseName:"Digital Logic", AUs: 3},
-    // {courseCode: "CZ1106", courseName:"Computer Organisation & Archit", AUs: 3},
-    // {courseCode: "CZ1107", courseName:"Data Structures & Algorithms", AUs: 3},
-    // {courseCode: "CZ1113", courseName:"Physics For Computing", AUs: 2},
-    // {courseCode: "CZ1120", courseName:"Intro To Digital Comm & Netwk", AUs: 3},
-    // {courseCode: "CZ2100", courseName:"Prob & Stat For Computing", AUs: 3},
-    // {courseCode: "CZ2101", courseName:"Algorithm Design & Analysis", AUs: 3},
-  ]);
-
-  //Consume context for currently selected courses
+  /* courses -> List of ALL courses in NTU, retrieved from server
+    setCourses -> For Button to retrieve list of ALL courses from server
+    selectedCourses -> List of selected courses by user for timetable planning
+    addSelection -> For ListGroup.Item to add course to list of selected courses by user  */
+  const [courses, setCourses] = useState ([]);
   const { selectedCourses, addSelection } = useContext(SelectedCoursesContext);
 
-  async function retrieveFromBack() {
+  async function retrieveAllCourses() {
     let coursesJSON = await fetchCourses();
     setCourses(coursesJSON.data);
   }
@@ -36,8 +28,7 @@ function CourseDatabase() {
 
             {courses.map(course => {
               return (
-                <ListGroup.Item
-                key ={course.courseCode} >
+                <ListGroup.Item key ={course.courseCode}>
                   <Button 
                     variant="outline-primary" 
                     className="mx-1"
@@ -53,16 +44,16 @@ function CourseDatabase() {
 
           {/* Temp for checking if SelectedCoursesContext works */}
           {selectedCourses.map(selectedCourse => {
-                        return (
-                              <h3
-                              key = "{selectedCourse.courseCode}">
-                              {selectedCourse.courseCode}
-                              </h3> 
-                        )
-                      })}
+            return (
+              <h3
+                key = "{selectedCourse.courseCode}">
+                {selectedCourse}
+              </h3> 
+            )
+          })}
 
           <Button
-            onClick={() => retrieveFromBack()}>
+            onClick={() => retrieveAllCourses()}>
             Retrieve Courses!
           </Button>
 

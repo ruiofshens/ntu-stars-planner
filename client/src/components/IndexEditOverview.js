@@ -1,15 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 
-import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
-
 // TODO: Static data for now, to make dynamic
 function IndexEditOverview() {
 
-    //Consume context for currently selected courses
-    const { selectedCourses } = useContext(SelectedCoursesContext);
 
   //TODO: Update list with context 
     return (
