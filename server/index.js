@@ -34,6 +34,6 @@ mongoose.set('useFindAndModify', false);
 // await addCoursesToDB();
 // await addExamsToDB();
 
-// import { getTimetables, getCourseFromDB } from './scheduler.js';
-// let courses = ["CZ2003", "CZ2004"];
+// import { getTimetables } from './timetables/generator.js';
+// let courses = ["CY1308", "EE8084"];
 // getTimetables(courses);

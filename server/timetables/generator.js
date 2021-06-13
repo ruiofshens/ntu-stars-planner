@@ -1,27 +1,35 @@
-import CourseModel from "./models/courseDetails.js";
+import CourseModel from "../models/courseDetails.js";
+import ExamModel from "../models/examDetails.js";
+import { checkTimeClash, checkExamClash } from "./clashLogic.js";
 
-const DaysEnum = {
-  MON: 1,
-  TUE: 2,
-  WED: 3,
-  THU: 4,
-  FRI: 5,
-  SAT: 6,
-  SUN: 7,
-}
-
-export const getTimetables = async (courseCodes) => {
-  // retrieve courses from db
-  let courses = []
+const getTimetables = async (courseCodes) => {
+  // retrieve courses and exams from db
+  let courses = [];
+  let exams = []
   for (let courseCode of courseCodes) {
     let courseDoc = await getCourseFromDB(courseCode);
     courses.push(courseDoc);
+    let examDoc = await getExamFromDB(courseCode);
+    exams.push(examDoc);
+  }
+
+  // check for exam clash first
+  let examClashResult = checkExamClash(courseCodes);
+  if (examClashResult.clash) {
+    console.log("Clashed exams:", examClashResult.clashed);
+    return {
+      canGenerate: false,
+      timetables: examClashResult.clashed,
+    };
   }
 
   // create non-clashing timetables
   let timetables = [];
   generateTimetables(courses, 0, [], timetables);
-  console.log(timetables);
+  return {
+    canGenerate: true,
+    timetables,
+  };
 }
 
 const generateTimetables = (courses, i, timetable, timetables) => {
@@ -31,7 +39,7 @@ const generateTimetables = (courses, i, timetable, timetables) => {
     console.log(`${currentModule.courseCode}: ${index.indexNo}`);
     let clash = false;
     for (let lesson of index.lessons) {
-      if (checkClash(lesson, timetable)) {
+      if (checkTimeClash(lesson, timetable)) {
         clash = true;
         break;
       }
@@ -48,7 +56,6 @@ const generateTimetables = (courses, i, timetable, timetables) => {
       courseName: currentModule.courseName,
       courseAUs: currentModule.courseAUs,
       index,
-      indexNo: index.indexNo, // temp
     }
     timetable.push(toAdd);
 
@@ -64,32 +71,7 @@ const generateTimetables = (courses, i, timetable, timetables) => {
   } 
 }
 
-const checkClash = (lesson, timetable) => {
-  const lessonStart = lesson.startTime;
-  const lessonEnd = lesson.endTime;
-  for (let module of timetable) {
-    for (let currLesson of module.index.lessons) {
-      let currStart = currLesson.startTime;
-      let currEnd = currLesson.endTime;
-      
-      // check timing clash: Start of new lesson < End of old lesson && End of new lesson > Start of old lesson
-      // but only if both lessons are on the same day
-      if (DaysEnum[lesson.day] === DaysEnum[currLesson.day]) {
-        if (lessonStart < currEnd && lessonEnd > currStart) { 
-          console.log(`new lesson starts ${lessonStart.toLocaleTimeString()} but this lesson ends ${currEnd.toLocaleTimeString()}`);
-          console.log(`new lesson ends ${lessonEnd.toLocaleTimeString()} but this lesson starts ${currStart.toLocaleTimeString()}`);
-          return true;
-        }
-      }
-
-      // check exam
-      // check teaching weeks
-    }
-  }
-  return false;
-}
-
-export const getCourseFromDB = async (courseCode) => {
+const getCourseFromDB = async (courseCode) => {
   console.log(`Retrieving ${courseCode} from database...`);
   try {
     const courseDoc = await CourseModel.findOne({ courseCode });
@@ -99,3 +81,16 @@ export const getCourseFromDB = async (courseCode) => {
     console.log(error.message);
   }
 }
+
+const getExamFromDB = async (courseCode) => {
+  console.log(`Retrieving exam details for ${courseCode} from database...`);
+  try {
+    const examDoc = await ExamModel.findOne({ courseCode });
+    console.log(`Retrieved exam details for ${courseCode}`);
+    return examDoc;
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export default getTimetables;
