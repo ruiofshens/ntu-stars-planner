@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Timetable from '../components/Timetable';
 import CourseOverview from '../components/CourseOverview';
@@ -15,6 +15,7 @@ import Form from 'react-bootstrap/Form';
 
 
 function TimetablePage() {
+
   return (
     <Container fluid className="px-0">
       <Timetable/>

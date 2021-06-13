@@ -4,13 +4,18 @@ import React, { createContext, useState } from 'react';
 export const SelectedCoursesContext = createContext();
 
 const SelectedCoursesContextProvider = (props) => {
-    const [selectedCourses, setSelectedCourses] = useState([
-        {courseCode: "CZ1103", courseName:"Intro To Comput Thinking & Pro", AUs: 3},
-        {courseCode: "CZ1104", courseName:"Linear Algebra for Computing", AUs: 3},
-        {courseCode: "CZ1105", courseName:"Digital Logic", AUs: 3},
-    ]);
+    const [selectedCourses, setSelectedCourses] = useState([]);
+
+    const addSelection = (courseCode, courseName, AUs) => {
+        setSelectedCourses([...selectedCourses, {courseCode, courseName, AUs}]);
+    };
+
+    const removeSelection = (courseCode) => {
+        setSelectedCourses(selectedCourses.filter(course => course.courseCode !== courseCode));
+    };
+
     return (
-        <SelectedCoursesContext.Provider value={{selectedCourses}}>
+        <SelectedCoursesContext.Provider value={{selectedCourses, addSelection, removeSelection}}>
             {props.children}
         </SelectedCoursesContext.Provider>
     );
