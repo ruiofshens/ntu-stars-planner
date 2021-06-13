@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const url="http://localhost:5000/courses/";
+const url = "http://localhost:5000/courses/";
 
-export const fetchCourses = async() => {
+export const fetchCourses = async () => {
      
     try {
         return await axios.get(url);
@@ -14,13 +14,21 @@ export const fetchCourses = async() => {
  }
 
 
-export const fetchTimetablePlans = async(courses) => {
+export const fetchTimetablePlans = async (courseCodes) => {
 
     try {
-        // return await axios.get(url + "generate/" + courses.join(','))
+        return await axios.get(url + "generate?courseCodes=" + courseCodes.join(','));
     }
     catch(error) {
         console.log(error.message);
     }
 
+}
+
+export const fetchVacanciesAndWaitlist = async (courseCode) => {
+    try {
+        return await axios.get(url + "vacancies?courseCode=" + courseCode);
+    } catch (error) {
+        console.log(error.message);
+    }
 }

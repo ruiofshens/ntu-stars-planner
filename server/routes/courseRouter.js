@@ -9,7 +9,7 @@ const router = express.Router();
 //Add routes
 //Prefix of /posts added
 router.get('/', getCourses);
-router.get('generate/', getTimetables);
-router.get('vacancies/', getVacanciesAndWaitlist);
+router.get('/generate/', getTimetables);
+router.get('/vacancies/', getVacanciesAndWaitlist);
 
 export default router;
