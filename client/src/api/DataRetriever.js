@@ -17,6 +17,7 @@ export const fetchCourses = async () => {
 export const fetchTimetablePlans = async (courseCodes) => {
 
     try {
+        courseCodes = courseCodes.filter(courseCode => courseCode);
         return await axios.get(url + "generate?courseCodes=" + courseCodes.join(','));
     }
     catch(error) {

@@ -5,11 +5,13 @@ import React, { createContext, useState } from 'react';
 export const SelectedCoursesContext = createContext();
 
 const SelectedCoursesContextProvider = (props) => {
-    const [selectedCourses, setSelectedCourses] = useState([]);
+    const [selectedCourses, setSelectedCourses] = useState(Array(7).fill(""));
 
     //Add selected course to current array of selected courses
     const addSelection = (courseCode) => {
-        setSelectedCourses([...selectedCourses, courseCode]);
+        // setSelectedCourses([...selectedCourses, courseCode]);
+        let emptySlot = selectedCourses.indexOf("");
+        setSelectedCourses([...selectedCourses.slice(0, emptySlot), courseCode, ...selectedCourses.slice(emptySlot+1)]);
     };
 
     /* const addSelection = (courseCode, courseName, AUs) => {
@@ -17,8 +19,9 @@ const SelectedCoursesContextProvider = (props) => {
     }; */
 
     //REmove selected course to current array of selected courses
-    const removeSelection = (courseCode) => {
-        setSelectedCourses(selectedCourses.filter(course => course !== courseCode));
+    const removeSelection = (index) => {
+        // setSelectedCourses(selectedCourses.filter(course => course !== courseCode));
+        setSelectedCourses([...selectedCourses.slice(0, index), "", ...selectedCourses.slice(index+1)]);
     };
 
     return (

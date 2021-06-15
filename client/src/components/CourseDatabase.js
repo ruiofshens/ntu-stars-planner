@@ -21,44 +21,44 @@ function CourseDatabase() {
     setCourses(coursesJSON.data);
   }
   
-    return (
-        <Card className="retrievedCourses" style={{height: "30rem"}}>
-        <Card.Header className="bg-secondary text-center font-weight-bold">Courses Available</Card.Header>
-          <ListGroup variant="flush" className="overflow-auto">
+  return (
+    <Card className="retrievedCourses" style={{height: "30rem"}}>
+    <Card.Header className="bg-secondary text-center font-weight-bold">Courses Available</Card.Header>
+      <ListGroup variant="flush" className="overflow-auto">
 
-            {courses.map(course => {
-              return (
-                <ListGroup.Item key ={course.courseCode}>
-                  <Button 
-                    variant="outline-primary" 
-                    className="mx-1"
-                    onClick= {() => addSelection(course.courseCode)}
-                    >+
-                  </Button>
-                  {course.courseCode} {course.courseName} ({course.AUs}AUs)
-                </ListGroup.Item>
-              )
-            })}
+        {courses.map(course => {
+          return (
+            <ListGroup.Item key ={course.courseCode}>
+              <Button 
+                variant="outline-primary" 
+                className="mx-1"
+                onClick= {() => addSelection(course.courseCode)}
+                >+
+              </Button>
+              {course.courseCode} {course.courseName} ({course.AUs}AUs)
+            </ListGroup.Item>
+          )
+        })}
 
-          </ListGroup>
+      </ListGroup>
 
-          {/* Temp for checking if SelectedCoursesContext works */}
-          {selectedCourses.map(selectedCourse => {
-            return (
-              <h3
-                key = "{selectedCourse.courseCode}">
-                {selectedCourse}
-              </h3> 
-            )
-          })}
+      {/* Temp for checking if SelectedCoursesContext works
+      {selectedCourses.map(selectedCourse => {
+        return (
+          <h3
+            key = "{selectedCourse.courseCode}">
+            {selectedCourse}
+          </h3> 
+        )
+      })} */}
 
-          <Button
-            onClick={() => retrieveAllCourses()}>
-            Retrieve Courses!
-          </Button>
+      <Button
+        onClick={() => retrieveAllCourses()}>
+        Retrieve Courses!
+      </Button>
 
-        </Card>
-    );
-  }
+    </Card>
+  );
+}
   
-  export default CourseDatabase;
+export default CourseDatabase;
