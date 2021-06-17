@@ -13,7 +13,7 @@ export const getVacancies = async (courseCode) => {
 
     let indexes = [];
     $('tr').each((i, row) => {
-      if (i == 0) { // skip header row
+      if (i === 0) { // skip header row
         return;
       }
 
@@ -35,6 +35,3 @@ export const getVacancies = async (courseCode) => {
     console.log(err);
   }
 }
-
-// TODO - loop through course codes
-getVacancies("CZ2004");
