@@ -10,7 +10,8 @@ import Button from 'react-bootstrap/Button';
 import CourseInputGroup from '../components/CourseInputGroup';
 import CourseDatabase from '../components/CourseDatabase';
 
-import { fetchTimetablePlans } from '../api/DataRetriever';
+// import { fetchTimetablePlans } from '../services/DataRetriever';
+import TimetablesGenerator from '../services/timetables/timetablesGenerator';
 
 import { TimetablePlansContext } from '../contexts/TimetablePlansContext';
 import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
@@ -26,11 +27,11 @@ function CourseSelectionPage() {
   const { setCurrentPlan } = useContext(CurrentPlanContext);
 
   async function retrieveTimetablePlans() {
-    let plansJSON = await fetchTimetablePlans(selectedCourses);
-    setTimetablePlans(plansJSON.data.timetables);
+    let { timetables } = await TimetablesGenerator.generateAll(selectedCourses);
+    setTimetablePlans(timetables);
     // console.log(plansJSON.data.timetables[0]);
     // console.log(timetablePlans[0]);
-    setCurrentPlan(plansJSON.data.timetables[0]);
+    setCurrentPlan(timetables[0]);
     // setTimeout(() => console.log(currentPlan), 100);
   }
 

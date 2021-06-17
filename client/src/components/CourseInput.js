@@ -14,7 +14,6 @@ function CourseInput(props) {
     const { removeSelection } = useContext(SelectedCoursesContext);
     const [input, setInput] = useState("");
 
-    console.log(props.course);
     if (input !== props.course) {
         setInput(props.course);
     }

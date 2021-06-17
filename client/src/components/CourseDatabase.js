@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 
-import { fetchCourses } from '../api/DataRetriever';
+import { fetchAllCourses } from '../services/DataRetriever';
 import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 
 function CourseDatabase() {
@@ -17,7 +17,7 @@ function CourseDatabase() {
   const { selectedCourses, addSelection } = useContext(SelectedCoursesContext);
 
   async function retrieveAllCourses() {
-    let coursesJSON = await fetchCourses();
+    let coursesJSON = await fetchAllCourses();
     setCourses(coursesJSON.data);
   }
   
