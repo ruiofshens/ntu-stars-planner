@@ -28,7 +28,7 @@ function CourseSelectionPage() {
 
   async function retrieveTimetablePlans() {
     let { timetables } = await TimetablesGenerator.generateAll(selectedCourses);
-    setTimetablePlans(timetables);
+    setTimetablePlans({timetables: timetables, currentIndex: 0});
     // console.log(plansJSON.data.timetables[0]);
     // console.log(timetablePlans[0]);
     setCurrentPlan(timetables[0]);

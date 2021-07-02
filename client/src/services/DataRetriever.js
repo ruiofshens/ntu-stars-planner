@@ -5,7 +5,7 @@ const url = "http://localhost:5000/courses/";
 export const fetchAllCourses = async () => {
      
     try {
-        const { data } = await axios.get(url).data
+        const { data } = await axios.get(url)
         return data;
     }
     catch (error) {

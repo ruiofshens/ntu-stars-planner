@@ -14,11 +14,11 @@ function CourseOverview() {
   /* timetablePlans -> to have access to all the plans for toggling between them
   currentPlan -> to display plan details
   setCurrentPlan -> to change the active plan when user choose the previous/next plan */
-  const { timetablePlans } = useContext(TimetablePlansContext);
+  const { timetablePlans, setTimetablePlans } = useContext(TimetablePlansContext);
   const { currentPlan, setCurrentPlan } = useContext(CurrentPlanContext);
+
   
-  /* TODO: Variable for current plan number
-  Update "Plan x of y" */
+  /* TODO: Error handling for pressing buttons causing index to go out of bounds */
   return (
     <Row>
       <Col xs={2}>
@@ -26,11 +26,25 @@ function CourseOverview() {
           <Button 
             variant="outline-primary mx-2 my-1" 
             size="sm"
-            onClick={() => console.log("temp")}>
+            onClick={() => {
+              setCurrentPlan(timetablePlans.timetables[timetablePlans.currentIndex - 1]);
+              setTimetablePlans({...timetablePlans, currentIndex: timetablePlans.currentIndex - 1});
+            }}>
             {'<'}
           </Button>
-          <h6 className="font-italic align-text">{`Plan 1 of ${timetablePlans.length}`}</h6>
-          <Button variant="outline-primary mx-2 my-1" size="sm">{'>'}</Button>
+          <h6 className="font-italic align-text">
+            {(Object.entries(timetablePlans).length === 0) ? "Select Courses" : 
+            `Plan ${timetablePlans.currentIndex + 1} of ${timetablePlans.timetables.length}`}
+          </h6>
+          <Button 
+            variant="outline-primary mx-2 my-1" 
+            size="sm"
+            onClick={() => {
+              setCurrentPlan(timetablePlans.timetables[timetablePlans.currentIndex + 1]);
+              setTimetablePlans({...timetablePlans, currentIndex: timetablePlans.currentIndex + 1});
+            }}>
+            {'>'}
+          </Button>
         </Row>
       </Col>
       <Col xs={10}>

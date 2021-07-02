@@ -35,10 +35,12 @@ class ClashChecker {
       let examA = examDocs[i];
       for (let j = i+1; j < examDocs.length; j++) {
         let examB = examDocs[j];
-        if (examA.examDate < examB.endTime && examA.endTime > examB.examDate) {
-          result.clash = true;
-          result.clashed = [examA, examB];
-          return result;
+        if (examA !== null && examB !== null){
+          if (examA.examDate < examB.endTime && examA.endTime > examB.examDate) {
+            result.clash = true;
+            result.clashed = [examA, examB];
+            return result;
+          }
         }
       }
     }

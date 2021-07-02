@@ -18,7 +18,7 @@ function CourseDatabase() {
 
   async function retrieveAllCourses() {
     let coursesJSON = await fetchAllCourses();
-    setCourses(coursesJSON.data);
+    setCourses(coursesJSON);
   }
   
   return (
@@ -54,6 +54,7 @@ function CourseDatabase() {
 
       <Button
         onClick={() => retrieveAllCourses()}>
+        {/* onClick={() => console.log("hello")}> */}
         Retrieve Courses!
       </Button>
 
