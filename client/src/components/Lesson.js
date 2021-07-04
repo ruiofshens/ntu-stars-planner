@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Lesson() {
+function Lesson(props) {
     return (
-        <div className="lessonText">
-            CZ3002 TUT TS8 SWLAB3 Wk2,4,6,8,10,12
+        <div className="lessonStyle" style = {{marginLeft: props.marginLeft, width: props.width }}>
+            {`${props.courseCode} ${props.type} ${props.group} ${props.venue} ${props.teachingWeeks}`}
         </div>     
     );
   }
