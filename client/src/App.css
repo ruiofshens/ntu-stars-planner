@@ -4,7 +4,7 @@
 
 .dayCell {
   background-color: #d47c7c;
-  width: 5%;
+  width: 4vw;
 }
 
 .sticky-nav {
@@ -36,10 +36,24 @@
   padding-top: 3px;
   /* margin-left: 50%; */
   background-color: navajowhite;
-  height: 100%;
-  width: 150%;
+  /* height: 100%;
+  width: 150%; */
+  /* width: 10%; */
+  transform: translateX(4vw);
 }
 
 .timetableRow {
   height: 12vh;
+}
+
+.timeRow {
+  height: 6vh;
+}
+
+.timeCell {
+  transform: translateX(-50%);
+}
+
+.timeSlot {
+  width: 6.2vw;
 }
