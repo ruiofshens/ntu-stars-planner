@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
 
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 
@@ -62,16 +61,11 @@ function TimetableRow(props) {
   //Need to calculate offset from earliest time in timetable
   function generateOffset(startTime){
     const start = new Date(startTime).getTime();
+    //12am in UTC translates to 8am locally, which is the start of the timetable 
+    const earliestTime = new Date("2021-01-01T00:00:00.000Z").getTime();
 
-    // const earliestTime = new Date("2021-01-01T08:30:00.000Z").getTime();
-    // const noOfHours = (start - earliestTime) / 3600000;
-    // return ((noOfHours * 6.05) + 2.35).toString() + "vw";
-
-    //Temp randomiser for offset to check if function works
-    const min = Math.ceil(1);
-    const max = Math.floor(11);
-    return (((Math.floor(Math.random() * (max - min + 1)) + min) * 6.05) + 2.35).toString() + "vw";
-
+    const noOfHours = (start - earliestTime) / 3600000;
+    return ((noOfHours * 6.05) + 2.35).toString() + "vw";
   }
 
   return (
@@ -99,6 +93,7 @@ function TimetableRow(props) {
             {
               module.index.lessons.map(lesson => {
                 console.log(lesson.startTime);
+                console.log(typeof(lesson.startTime));
                 if (lesson.day === props.day){
                   return(
                     <Lesson
