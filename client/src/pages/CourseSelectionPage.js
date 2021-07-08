@@ -64,10 +64,10 @@ function CourseSelectionPage() {
         </Col>
         <Col xs={9} className="d-flex flex-column align-items-center">
           <CourseDatabase/>
-          <Form className="d-flex my-2" style={{width: "35%"}}>
+          {/* <Form className="d-flex my-2" style={{width: "35%"}}>
             <Form.Control placeholder="Enter course code/name"/>
             <Button variant="outline-primary">Search</Button>
-          </Form>
+          </Form> */}
         </Col>
       </Row>
     </Container>

@@ -28,9 +28,8 @@ function App() {
       let coursesJSON = await fetchAllCourses();
       setCourses(coursesJSON);
     }
-
     retrieveAllCourses();
-  }, [])
+  })
 
   return (
     <Router>

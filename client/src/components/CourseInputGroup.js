@@ -11,7 +11,7 @@ function CourseInputGroup() {
     return (
         <Container className="w-75">
             {[...Array(7)].map((value, index) => (
-                <CourseInput index={index} course={selectedCourses[index]}/>
+                <CourseInput index={index} course={selectedCourses[index]} key={`course-input-${index}`}/>
             ))}
         </Container>
     );

@@ -4,8 +4,8 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import Form from 'react-bootstrap/Form';
 
-import { fetchAllCourses } from '../services/DataRetriever';
 import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { CoursesContext } from '../contexts/CoursesContext';
 
@@ -16,10 +16,20 @@ function CourseDatabase() {
     selectedCourses -> List of selected courses by user for timetable planning
     addSelection -> For ListGroup.Item to add course to list of selected courses by user  */
   // const [courses, setCourses] = useState ([]);
-  const { selectedCourses, addSelection } = useContext(SelectedCoursesContext);
+  const { addSelection } = useContext(SelectedCoursesContext);
   const { courses } = useContext(CoursesContext);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleInput = (e) => {
+    setSearchTerm(e.target.value);
+  }
+
+  const dynamicSearch = () => {
+    return courses.filter(course => course.courseName.toLowerCase().includes(searchTerm.toLowerCase()) || course.courseCode.toLowerCase().includes(searchTerm.toLowerCase()));
+  }
   
   return (
+    <>
     <Card className="retrievedCourses" style={{height: "30rem"}}>
     <Card.Header className="bg-secondary text-center font-weight-bold">Courses Available</Card.Header>
       {courses.length === 0 ? 
@@ -28,7 +38,7 @@ function CourseDatabase() {
         </Spinner> :
 
         <ListGroup variant="flush" className="overflow-auto">
-          {courses.map(course => {
+          {dynamicSearch().map(course => {
             return (
               <ListGroup.Item key ={course.courseCode}>
                 <Button 
@@ -43,6 +53,12 @@ function CourseDatabase() {
           })}
         </ListGroup> 
       }
+    </Card>
+
+    <Form className="d-flex my-2" style={{width: "35%"}}>
+      <Form.Control placeholder="Enter course code/name" onChange={handleInput} />
+      <Button variant="outline-primary">Search</Button>
+    </Form>
 
       {/* Temp for checking if SelectedCoursesContext works
       {selectedCourses.map(selectedCourse => {
@@ -60,7 +76,8 @@ function CourseDatabase() {
         {/* Retrieve Courses!
       </Button> */}
 
-    </Card>
+      
+    </>
   );
 }
   
