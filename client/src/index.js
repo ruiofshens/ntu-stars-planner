@@ -7,9 +7,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import CoursesContextProvider from './contexts/CoursesContext';
+
 ReactDOM.render(
     <React.StrictMode>
-      <App />
+      <CoursesContextProvider>
+        <App />
+      </CoursesContextProvider>
     </React.StrictMode>,
   document.getElementById('root')
 );

@@ -17,8 +17,20 @@ import SelectedCoursesContextProvider from './contexts/SelectedCoursesContext';
 import TimetablePlansContextProvider from './contexts/TimetablePlansContext';
 import CurrentPlanContextProvider from './contexts/CurrentPlanContext';
 
+import { CoursesContext } from './contexts/CoursesContext';
+import { fetchAllCourses } from './services/DataRetriever';
 
 function App() {
+  const { setCourses } = React.useContext(CoursesContext)
+
+  React.useEffect(() => {
+    async function retrieveAllCourses() {
+      let coursesJSON = await fetchAllCourses();
+      setCourses(coursesJSON);
+    }
+    retrieveAllCourses();
+  })
+
   return (
     <Router>
       <SelectedCoursesContextProvider>

@@ -34,6 +34,7 @@ function CourseInput(props) {
                 aria-describedby="selection-1"
                 // inputRef={ref => { this.myInput = ref; }}
                 value={input}
+                readOnly
             />
         </InputGroup>
     );
