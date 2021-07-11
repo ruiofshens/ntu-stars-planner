@@ -34,6 +34,10 @@ const FreeHours = () => {
     }
   }
 
+  const handleDelete = (e) => {
+    setFreeHours(freeHours.filter((hours, i) => i !== parseInt(e.target.id)));
+  }
+
   return (
     <>
     <Form onSubmit={handleSubmit}>
@@ -88,10 +92,15 @@ const FreeHours = () => {
         </tr>
       </thead>
       <tbody>
-        {freeHours.map(hours => (
+        {freeHours.map((hours, i) => (
           <tr>
             <td>{hours.day}</td>
             <td>{hours.hours}</td>
+            <td>
+              <Button variant="danger" type="button" className="bi bi-x-circle-fill" id={i} onClick={handleDelete}>
+                Delete
+              </Button>
+            </td>
           </tr>
         ))}
       </tbody>
