@@ -29,7 +29,7 @@ function App() {
       setCourses(coursesJSON);
     }
     retrieveAllCourses();
-  })
+  }, [])
 
   return (
     <Router>
