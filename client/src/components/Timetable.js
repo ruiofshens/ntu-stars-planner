@@ -48,6 +48,17 @@ function TimetableRow({ day }) {
     return (offsetInMin * ratio + 4) + "vw";
   }
 
+  //https://flatuicolors.com/palette/tr
+  const colorArray = [
+    "#17c0eb", //Spiro Disco Ball
+    "#cd84f1", //Bright Lilac
+    "#ffaf40", //Mandarin Sorbet
+    "#3ae374", //Weird Green
+    "#67e6dc", //Hammam Blue
+    "#ffb8b8", //Young Salmon
+    "#ff4d4d", //Light Red
+  ]
+
   return (
     <ListGroup horizontal className="timetableRow position-relative">
       <ListGroup.Item className="dayCell">{day}</ListGroup.Item>
@@ -60,7 +71,7 @@ function TimetableRow({ day }) {
       })}
       {/* <Lesson /> */}
       
-      {currentPlan.map(mod => {
+      {currentPlan.map((mod,index) => {
         return (
           <>
             {mod.index.lessons.map(lesson => {
@@ -70,6 +81,7 @@ function TimetableRow({ day }) {
                   <Lesson 
                     width={calculateLessonWidth(lesson.startTime, lesson.endTime)}
                     offset={calculateLessonOffset(lesson.startTime)}
+                    color={colorArray[index]}
                     courseCode={mod.courseCode}
                     type={lesson.type}
                     group={lesson.group}
