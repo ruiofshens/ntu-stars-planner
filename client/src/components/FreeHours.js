@@ -24,9 +24,9 @@ const FreeHours = () => {
     if (entireDay) {
       setFreeHours([...freeHours, { day, hours: "Entire Day" }]);
     } else {
-      const fromObj = new Date(`January 1 ${from}`);
-      const toObj = new Date(`January 1 ${to}`);
-      if (from > to) {
+      const fromObj = new Date(`January 1 2021, ${from}`);
+      const toObj = new Date(`January 1 2021, ${to}`);
+      if (fromObj > toObj) {
         console.log("Temporary error log - to cannot be before from");
         return;
       }
