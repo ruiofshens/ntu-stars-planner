@@ -64,9 +64,9 @@ function TimetableRow({ day }) {
       <ListGroup.Item className="dayCell">{day}</ListGroup.Item>
       {Array(15).fill().map((e, i) => {
         if (i%2 === 0) {
-          return <ListGroup.Item className="timeSlot" />
+          return <ListGroup.Item key={i} className="timeSlot" />
         } else {
-          return <ListGroup.Item className="timeSlot altColor" />
+          return <ListGroup.Item key={i} className="timeSlot altColor" />
         }
       })}
       {/* <Lesson /> */}
@@ -104,7 +104,7 @@ function TimeRow() {
       <ListGroup horizontal className="timeRow">
         <ListGroup.Item className="dayCell border-0" style={{backgroundColor: 'white'}}></ListGroup.Item>
         {Array(15).fill("").map((e, i) => (
-          <ListGroup.Item className="timeSlot timeCell border-0 text-center">
+          <ListGroup.Item key={i} className="timeSlot timeCell border-0 text-center">
             <time>{i+8 < 10 ? "0"+(i+8) : i+8}:00</time>
           </ListGroup.Item>
         ))}

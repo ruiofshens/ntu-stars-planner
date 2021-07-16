@@ -17,8 +17,20 @@ function CourseOverview() {
   const { timetablePlans, setTimetablePlans } = useContext(TimetablePlansContext);
   const { currentPlan, setCurrentPlan } = useContext(CurrentPlanContext);
 
-  
-  /* TODO: Error handling for pressing buttons causing index to go out of bounds */
+  const decreasePlanIndex = () => {
+    if ( timetablePlans.length !== 0 && timetablePlans.currentIndex !== 0){
+      setCurrentPlan(timetablePlans.timetables[timetablePlans.currentIndex - 1]);
+      setTimetablePlans({...timetablePlans, currentIndex: timetablePlans.currentIndex - 1});
+    }
+  }
+
+  const increasePlanIndex = () => {
+    if (timetablePlans.length !== 0 && timetablePlans.currentIndex !== (timetablePlans.timetables.length - 1)){
+      setCurrentPlan(timetablePlans.timetables[timetablePlans.currentIndex + 1]);
+      setTimetablePlans({...timetablePlans, currentIndex: timetablePlans.currentIndex + 1});
+    }
+  }
+
   return (
     <Row>
       <Col xs={2}>
@@ -26,10 +38,7 @@ function CourseOverview() {
           <Button 
             variant="outline-primary mx-2 my-1" 
             size="sm"
-            onClick={() => {
-              setCurrentPlan(timetablePlans.timetables[timetablePlans.currentIndex - 1]);
-              setTimetablePlans({...timetablePlans, currentIndex: timetablePlans.currentIndex - 1});
-            }}>
+            onClick={decreasePlanIndex}>
             {'<'}
           </Button>
           <h6 className="font-italic align-text">
@@ -39,10 +48,7 @@ function CourseOverview() {
           <Button 
             variant="outline-primary mx-2 my-1" 
             size="sm"
-            onClick={() => {
-              setCurrentPlan(timetablePlans.timetables[timetablePlans.currentIndex + 1]);
-              setTimetablePlans({...timetablePlans, currentIndex: timetablePlans.currentIndex + 1});
-            }}>
+            onClick={increasePlanIndex}>
             {'>'}
           </Button>
         </Row>

@@ -1,52 +1,56 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Table from 'react-bootstrap/Table';
-import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
-// TODO: Static data for now, to make dynamic
+import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
+
 function IndexEditOverview() {
 
-
-  //TODO: Update list with context 
+    /* currentPlan -> to display plan details */
+    const { currentPlan } = useContext(CurrentPlanContext);
+  
     return (
+      <Row>
         <Table striped hover size="sm">
-            <thead>
+        <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Index/Waitlist/Vacancy</th>
                 <th scope="col">Course Code and Name</th>
+                <th scope="col">AUs</th>
+                <th scope="col">Exam Timing</th>
             </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>
-                    <Form className="d-flex">
-                        <Form.Control size="sm" as="select">
-                            <option>10118/0/12</option>
-                            <option>10119/0/8</option>
-                            <option>10120/1/0</option>
-                        </Form.Control>
-                    </Form>
-                </td>
-                <td>CZ2001 Algorithms</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>
-                    <Form className="d-flex">
-                        <Form.Control size="sm" as="select">
-                            <option>10482/1/0</option>
-                            <option>10482/0/0</option>
-                            <option>10482/2/1</option>
-                        </Form.Control>
-                    </Form>
-                </td>
-                <td>CZ2002 Intro To Object-Oriented Programming</td>
-            </tr>
-            </tbody>
+        </thead>
+        <tbody>
+            {currentPlan.map((course, number) => {
+                return (
+                    <CourseRow
+                    rowNo={number+1}
+                    courseCodeName={`${course.courseCode} ${course.courseName}`}
+                    index={course.index.indexNo}
+                    AUs={course.courseAUs}
+                    examStart={course.examStart}
+                    examEnd={course.examEnd}
+                    />
+                )
+            })}
+        </tbody>
         </Table>
+      </Row>
     );
-}
+  }
+  
+  function CourseRow(props) {
+    return (
+      <tr>
+        <th scope="row">{props.rowNo}</th>
+        <td>{props.index}/need this/need this</td>
+        <td>{props.courseCodeName}</td>
+        <td>{props.AUs}</td>
+        <td>{props.examStart} - {props.examEnd}</td>
+      </tr>
+    )
+  }
   
   export default IndexEditOverview;

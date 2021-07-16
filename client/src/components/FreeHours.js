@@ -62,7 +62,7 @@ const FreeHours = () => {
         </Form.Label>
         <Col sm="8">
           <Form.Control as={"select"} onChange={(e) => setFrom(e.target.value)} disabled={entireDay}>
-            {generateTimeSlots().slice(0, -1).map(slot => <option value={slot}>{slot}</option>)}
+            {generateTimeSlots().slice(0, -1).map((slot,i) => <option key={i} value={slot}>{slot}</option>)}
           </Form.Control>
         </Col>
       </Form.Group>
@@ -72,7 +72,7 @@ const FreeHours = () => {
         </Form.Label>
         <Col sm="8">
           <Form.Control as={"select"} onChange={(e) => setTo(e.target.value)} disabled={entireDay}>
-            {generateTimeSlots().slice(1).map(slot => <option value={slot}>{slot}</option>)}
+            {generateTimeSlots().slice(1).map((slot,i) => <option key={i} value={slot}>{slot}</option>)}
           </Form.Control>
         </Col>
       </Form.Group>
