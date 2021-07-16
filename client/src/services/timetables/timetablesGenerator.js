@@ -29,15 +29,16 @@ class TimetablesGenerator {
 
     // create non-clashing timetables
     let timetables = [];
-    this.#generateTimetables(courses, 0, [], timetables);
+    this.#generateTimetables(courses, exams, 0, [], timetables);
     return {
       canGenerate: true,
       timetables,
     };
   }
 
-  #generateTimetables(courses, i, timetable, timetables) {
+  #generateTimetables(courses, exams, i, timetable, timetables) {
     let currentModule = courses[i];
+    let currentModuleExam = exams[i];
   
     for (let index of currentModule.indexes) {
       console.log(`${currentModule.courseCode}: ${index.indexNo}`);
@@ -59,13 +60,15 @@ class TimetablesGenerator {
         courseCode: currentModule.courseCode,
         courseName: currentModule.courseName,
         courseAUs: currentModule.courseAUs,
+        examStart: currentModuleExam !== null ? new Date(currentModuleExam.examDate).toLocaleString() : null,
+        examEnd: currentModuleExam !== null ? new Date(currentModuleExam.endTime).toLocaleTimeString() : null,
         index,
       }
       timetable.push(toAdd);
 
       // add next module
       if (i !== courses.length-1) {
-        this.#generateTimetables(courses, i+1, timetable, timetables);
+        this.#generateTimetables(courses, exams, i+1, timetable, timetables);
       } else {
         timetables.push([...timetable]);
       }

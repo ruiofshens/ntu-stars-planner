@@ -67,6 +67,8 @@ function CourseOverview() {
                       courseCodeName={`${course.courseCode} ${course.courseName}`}
                       index={course.index.indexNo}
                       AUs={course.courseAUs}
+                      examStart={course.examStart}
+                      examEnd={course.examEnd}
                     />
                   )
                 })}
@@ -85,7 +87,7 @@ function CourseRow(props) {
       <td>{props.index}/need this/need this</td>
       <td>{props.courseCodeName}</td>
       <td>{props.AUs}</td>
-      <td>need this</td>
+      <td>{props.examStart} - {props.examEnd}</td>
     </tr>
   )
 }
