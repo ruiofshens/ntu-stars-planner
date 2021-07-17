@@ -37,13 +37,14 @@ export const fetchAllCourses = async () => {
 
 // }
 
-// export const fetchVacanciesAndWaitlist = async (courseCode) => {
-//     try {
-//         return await axios.get(url + "vacancies?courseCode=" + courseCode);
-//     } catch (error) {
-//         console.log(error.message);
-//     }
-// }
+export const fetchVacanciesAndWaitlist = async (courseCode) => {
+    try {
+        const { data } = await axios.get(url + "vacancies?courseCode=" + courseCode);
+        return data;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
 export const fetchExams = async (courseCodes) => {
     //courseCodes: array

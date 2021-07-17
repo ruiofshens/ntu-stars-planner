@@ -1,7 +1,7 @@
 import express from 'express';
 
 //Named imports instead of default imports used
-import { getAllCourses, getCourses, getExamDetails } from '../controllers/starsController.js';
+import { getAllCourses, getCourses, getExamDetails, getVacanciesAndWaitlist } from '../controllers/starsController.js';
 
 //Setup router
 const router = express.Router();
@@ -11,7 +11,7 @@ const router = express.Router();
 router.get('/', getAllCourses);
 router.get('/courses/', getCourses);
 // router.get('/generate/', getTimetables);
-// router.get('/vacancies/', getVacanciesAndWaitlist);
+router.get('/vacancies/', getVacanciesAndWaitlist);
 router.get('/exams/', getExamDetails);
 
 export default router;

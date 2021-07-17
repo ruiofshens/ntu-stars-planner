@@ -1,5 +1,5 @@
 import ClashChecker from "./clashChecker.js";
-import { fetchCourses, fetchExams } from "../DataRetriever.js";
+import { fetchCourses, fetchExams, fetchVacanciesAndWaitlist } from "../DataRetriever.js";
 
 class TimetablesGenerator {
 
