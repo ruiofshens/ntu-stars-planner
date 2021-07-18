@@ -8,14 +8,6 @@ class TimetablesGenerator {
     // retrieve courses and exams from db
     let courses = await fetchCourses(courseCodes);
     let exams = await fetchExams(courseCodes);
-    // let courses = [];
-    // let exams = []
-    // for (let courseCode of courseCodes) {
-    //   let courseDoc = await getCourseFromDB(courseCode);
-    //   courses.push(courseDoc);
-    //   let examDoc = await getExamFromDB(courseCode);
-    //   exams.push(examDoc);
-    // }
 
     // check for exam clash first
     let examClashResult = ClashChecker.checkExamClash(exams);
@@ -27,6 +19,17 @@ class TimetablesGenerator {
       };
     }
 
+    // fetch vacancies (and waitlist) and add to courses
+    for (let courseCode of courseCodes) {
+      const indexes = await fetchVacanciesAndWaitlist(courseCode);
+      let module = courses.filter(module => module.courseCode === courseCode)[0];
+      for (let index of module.indexes) {
+        let vacanciesAndWaitlist = indexes.filter(currIndex => currIndex.indexNo === index.indexNo)[0];
+        index.vacancies = vacanciesAndWaitlist.vacancies;
+        index.waitlistLength = vacanciesAndWaitlist.waitlistLength;
+      }
+    }
+    
     // create non-clashing timetables
     let timetables = [];
     this.#generateTimetables(courses, exams, 0, [], timetables);

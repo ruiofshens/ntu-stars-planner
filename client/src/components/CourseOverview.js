@@ -72,6 +72,8 @@ function CourseOverview() {
                       rowNo={number+1}
                       courseCodeName={`${course.courseCode} ${course.courseName}`}
                       index={course.index.indexNo}
+                      vacancies={course.index.vacancies}
+                      waitlistLength={course.index.waitlistLength}
                       AUs={course.courseAUs}
                       examStart={course.examStart}
                       examEnd={course.examEnd}
@@ -90,7 +92,7 @@ function CourseRow(props) {
   return (
     <tr>
       <th scope="row">{props.rowNo}</th>
-      <td>{props.index}/need this/need this</td>
+      <td>{`${props.index}/${props.vacancies}/${props.waitlistLength}`}</td>
       <td>{props.courseCodeName}</td>
       <td>{props.AUs}</td>
       <td>{props.examStart} - {props.examEnd}</td>
