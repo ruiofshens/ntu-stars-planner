@@ -26,6 +26,7 @@ function Timetable() {
 // Contains the cells for each day as a row, excluding the day itself
 function TimetableRow({ day }) {
   const { currentPlan } = useContext(CurrentPlanContext);
+  const lessonsArray = [];
 
   // each time slot is 6.4vw, i.e. 60min == 6.4vw ==> 1min = 8/75vw
   const ratio = 6.2/60;
@@ -46,6 +47,35 @@ function TimetableRow({ day }) {
     const startingHour = new Date("January 1 2021 8:00"); // 8am
     let offsetInMin = (startTime - startingHour) / (1000*60);
     return (offsetInMin * ratio + 4) + "vw";
+  }
+
+  //Kinda hack-ish way to fix overlap of lessons, should consider refactoring into clashChecker.js
+  const handleOverlap = (newLessonWidth, newLessonStart) => {
+    const newLessonEnd = newLessonStart + newLessonWidth;
+    let newLesson;
+    for (let lesson of lessonsArray) {
+      if (newLessonStart < lesson.endTime && newLessonEnd > lesson.startTime){
+          newLesson = {
+            startTime: newLessonStart, 
+            endTime: newLessonEnd, 
+            //If lesson that it clashed with is not offset, add offset to the new lesson and vice versa
+            verticalOffset: (lesson.verticalOffset === "6vh") ? "0vh" : "6vh",
+            height: "50%"
+          };
+          lessonsArray.push(newLesson);
+          return newLesson;
+      }
+    }
+
+    //Lesson does not overlap
+    newLesson = {
+      startTime: newLessonStart, 
+      endTime: newLessonEnd, 
+      verticalOffset: "0vh",
+      height: "100%"
+    };
+    lessonsArray.push(newLesson);
+    return newLesson;
   }
 
   //https://flatuicolors.com/palette/tr
@@ -76,11 +106,15 @@ function TimetableRow({ day }) {
           <>
             {mod.index.lessons.map(lesson => {
               if (lesson.day === day.toUpperCase()) {
-                console.log(lesson)
+                const lessonWidth = calculateLessonWidth(lesson.startTime, lesson.endTime);
+                const lessonOffset = calculateLessonOffset(lesson.startTime);
+                const overlapStyle = handleOverlap(lessonWidth, lessonOffset);
                 return (
                   <Lesson 
-                    width={calculateLessonWidth(lesson.startTime, lesson.endTime)}
-                    offset={calculateLessonOffset(lesson.startTime)}
+                    width={lessonWidth}
+                    height={overlapStyle.height}
+                    offset={lessonOffset}
+                    verticalOffset={overlapStyle.verticalOffset}
                     color={colorArray[index]}
                     courseCode={mod.courseCode}
                     type={lesson.type}
