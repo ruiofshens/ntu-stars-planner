@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import { Container } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -27,8 +27,9 @@ function Timetable() {
 function TimetableRow({ day }) {
   const { currentPlan } = useContext(CurrentPlanContext);
   const lessonsArray = [];
+  const [maxHeight, setMaxHeight] = useState(0);
 
-  // each time slot is 6.4vw, i.e. 60min == 6.4vw ==> 1min = 8/75vw
+  // each time slot is 6.2vw, i.e. 60min == 6.4vw ==> 1min = 8/75vw
   const ratio = 6.2/60;
 
   const calculateLessonWidth = (startTime, endTime) => {
@@ -90,17 +91,7 @@ function TimetableRow({ day }) {
   ]
 
   return (
-    <ListGroup horizontal className="timetableRow position-relative">
-      <ListGroup.Item className="dayCell">{day}</ListGroup.Item>
-      {Array(15).fill().map((e, i) => {
-        if (i%2 === 0) {
-          return <ListGroup.Item key={i} className="timeSlot" />
-        } else {
-          return <ListGroup.Item key={i} className="timeSlot altColor" />
-        }
-      })}
-      {/* <Lesson /> */}
-      
+    <ListGroup horizontal className="position-relative timetableRow">
       {currentPlan.map((mod,index) => {
         return (
           <>
@@ -112,7 +103,7 @@ function TimetableRow({ day }) {
                 return (
                   <Lesson 
                     width={lessonWidth}
-                    height={overlapStyle.height}
+                    // height={overlapStyle.height}
                     offset={lessonOffset}
                     verticalOffset={overlapStyle.verticalOffset}
                     color={colorArray[index]}
@@ -121,6 +112,8 @@ function TimetableRow({ day }) {
                     group={lesson.group}
                     venue={lesson.venue}
                     teachingWeeks={lesson.teachingWeeks}
+                    maxHeight={maxHeight}
+                    setMaxHeight={setMaxHeight}
                   />
                 )
               }
@@ -128,6 +121,18 @@ function TimetableRow({ day }) {
           </>
         )
       })}
+      
+      <ListGroup.Item className="dayCell timetableRow" style={{height: `${maxHeight}px`}}>
+        {day}
+      </ListGroup.Item>
+      {Array(15).fill().map((e, i) => {
+        if (i%2 === 0) {
+          return <ListGroup.Item key={i} className="timeSlot timetableRow" style={{height: `${maxHeight}px`}}/>
+        } else {
+          return <ListGroup.Item key={i} className="timeSlot altColor timetableRow" style={{height: `${maxHeight}px`}}/>
+        }
+      })}
+      
     </ListGroup>
   );
 }
