@@ -23,19 +23,13 @@ class TimetablesGenerator {
     for (let courseCode of courseCodes) {
       const indexes = await fetchVacanciesAndWaitlist(courseCode);
       let module = courses.filter(module => module.courseCode === courseCode)[0];
-      console.log(module);
       for (let index of module.indexes) {
         let vacanciesAndWaitlist = indexes.filter(currIndex => currIndex.indexNo === index.indexNo)[0];
-        if (vacanciesAndWaitlist) { // temp solution for if mismatch between db indexes and ntu server indexes
-          index.vacancies = vacanciesAndWaitlist.vacancies;
-          index.waitlistLength = vacanciesAndWaitlist.waitlistLength;
-        } else {
-          index.vacancies = "X"
-          index.waitlistLength = "X";
-        }
+        index.vacancies = vacanciesAndWaitlist.vacancies;
+        index.waitlistLength = vacanciesAndWaitlist.waitlistLength;
       }
     }
-
+    
     // create non-clashing timetables
     let timetables = [];
     this.#generateTimetables(courses, exams, 0, [], timetables);
