@@ -21,12 +21,19 @@ class TimetablesGenerator {
 
     // fetch vacancies (and waitlist) and add to courses
     for (let courseCode of courseCodes) {
-      const indexes = await fetchVacanciesAndWaitlist(courseCode);
       let module = courses.filter(module => module.courseCode === courseCode)[0];
-      for (let index of module.indexes) {
-        let vacanciesAndWaitlist = indexes.filter(currIndex => currIndex.indexNo === index.indexNo)[0];
-        index.vacancies = vacanciesAndWaitlist.vacancies;
-        index.waitlistLength = vacanciesAndWaitlist.waitlistLength;
+      const indexes = await fetchVacanciesAndWaitlist(courseCode);
+      if (indexes.length !== 0) { 
+        for (let index of module.indexes) {
+          let vacanciesAndWaitlist = indexes.filter(currIndex => currIndex.indexNo === index.indexNo)[0];
+          index.vacancies = vacanciesAndWaitlist.vacancies;
+          index.waitlistLength = vacanciesAndWaitlist.waitlistLength;
+        }
+      } else {
+        for (let index of module.indexes) {
+          index.vacancies = "NA";
+          index.waitlistLength = "NA";
+        }
       }
     }
     
@@ -44,7 +51,6 @@ class TimetablesGenerator {
     let currentModuleExam = exams[i];
   
     for (let index of currentModule.indexes) {
-      console.log(`${currentModule.courseCode}: ${index.indexNo}`);
       let clash = false;
       for (let lesson of index.lessons) {
         if (ClashChecker.checkLessonClash(lesson, timetable)) {
@@ -53,12 +59,10 @@ class TimetablesGenerator {
         }
       }
       if (clash) {
-        console.log("Clashed - continuing to next index");
         continue;
       }
       
       // no clash - add course with this index to timetable
-      console.log("No clash!");
       let toAdd = {
         courseCode: currentModule.courseCode,
         courseName: currentModule.courseName,
