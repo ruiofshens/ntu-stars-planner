@@ -1,23 +1,30 @@
 import React from 'react';
 
-import { Row, Col } from 'react-bootstrap';
-import FreeHours from './FreeHours';
+import { Row, Col, Accordion } from 'react-bootstrap';
+import FreeTimes from './FreeTimes';
+import ConstraintRules from './ConstraintRules';
 
+/*
+Change to accordions (see react-bootstrap) - one for each category
+
+*/
 const AdjustRules = (props) => {
   
   return (
-    <Row>
-      <Col>
-        <span><b>Free Hours</b></span>
-        <FreeHours />
-      </Col>
-      <Col>
-        <span><b>Use Specific Indexes</b></span>
-      </Col>
-      <Col>
-        <span><b>Options</b></span>
-      </Col>
-    </Row>
+    <Accordion defaultActiveKey="constraints">
+      <Accordion.Item eventKey="free-times">
+        <Accordion.Header><b>Free Times</b></Accordion.Header>
+        <Accordion.Body>
+          <FreeTimes />
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="constraints">
+        <Accordion.Header><b>Constraints</b></Accordion.Header>
+        <Accordion.Body>
+          <ConstraintRules />
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
   )
 }
 
