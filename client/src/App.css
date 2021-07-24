@@ -28,7 +28,7 @@
 
 .lessonText {
   font-size: 14px;
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   left: 0;
   z-index: 1;
@@ -43,7 +43,7 @@
 }
 
 .timetableRow {
-  height: 12vh;
+  min-height: 12vh;
 }
 
 .timeRow {
@@ -55,5 +55,6 @@
 }
 
 .timeSlot {
+  /* 4vw for day, 1.5vw each side for horizontal padding, remaining 92vw split among 15 cells*/
   width: 6.2vw;
 }

@@ -1,33 +1,83 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Container } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 
-import Lesson from '../components/Lesson';
+import Lesson from './Lesson';
+import OverlappedLessons from './OverlappedLessons';
 
-//TODO:  reduce code repetition
+//https://flatuicolors.com/palette/tr
+const COLORS = [
+  "#17c0eb", //Spiro Disco Ball
+  "#cd84f1", //Bright Lilac
+  "#ffaf40", //Mandarin Sorbet
+  "#3ae374", //Weird Green
+  "#67e6dc", //Hammam Blue
+  "#ffb8b8", //Young Salmon
+  "#ff4d4d", //Light Red
+]
+
 function Timetable() {
+  const { currentPlan } = useContext(CurrentPlanContext);
+  const allLessons = {
+    MON: [],
+    TUE: [],
+    WED: [],
+    THU: [],
+    FRI: [],
+    SAT: [],
+  };
+  currentPlan.forEach((mod, i) => mod.index.lessons.forEach(lesson => {
+    lesson.courseCode = mod.courseCode;
+    lesson.color = COLORS[i];
+    allLessons[lesson.day].push(lesson);
+  }));
+  // identify all overlapping lessons
+  Object.values(allLessons).forEach(lessons => {
+    for (let i=0; i<lessons.length-1; i++) {
+      let overlapped = [];
+      for (let j=i+1; j<lessons.length; j++) {
+        if (lessons[i].startTime < lessons[j].endTime && lessons[i].endTime > lessons[j].startTime) {
+          overlapped.push(lessons[j]);
+          lessons.splice(j, 1);
+        }
+      }
+      if (overlapped.length !== 0) {
+        overlapped.push(lessons[i]);
+        lessons.splice(i, 1);
+        i--;
+        lessons.push(overlapped);
+      }
+    }
+  });
 
   return (
-      <Container fluid style={{padding: "0 1vw"}}>
+      <Container fluid style={{padding: "0 1.5vw"}}>
         <TimeRow />
-        <TimetableRow day="Mon" />
-        <TimetableRow day="Tue" />
-        <TimetableRow day="Wed" />
-        <TimetableRow day="Thu" />
-        <TimetableRow day="Fri" />
-        <TimetableRow day="Sat" />
+        <TimetableRow day="Mon" lessons={allLessons.MON}/>
+        <TimetableRow day="Tue" lessons={allLessons.TUE}/>
+        <TimetableRow day="Wed" lessons={allLessons.WED}/>
+        <TimetableRow day="Thu" lessons={allLessons.THU}/>
+        <TimetableRow day="Fri" lessons={allLessons.FRI}/>
+        <TimetableRow day="Sat" lessons={allLessons.SAT}/>
       </Container>
   );
 }
 
 // Contains the cells for each day as a row, excluding the day itself
-function TimetableRow({ day }) {
-  const { currentPlan } = useContext(CurrentPlanContext);
+function TimetableRow({ day, lessons }) {
+  // const { currentPlan } = useContext(CurrentPlanContext);
+  // const lessonsArray = [];
+  let maxOverlapped = 0;
+  lessons.forEach(lesson => {
+    if (lesson instanceof Array && lesson.length > maxOverlapped) {
+      maxOverlapped = lesson.length;
+    }
+  });
 
-  // each time slot is 6.4vw, i.e. 60min == 6.4vw ==> 1min = 8/75vw
+  // each time slot is 6.2vw, i.e. 60min == 6.2vw ==> 1min = 8/75vw
   const ratio = 6.2/60;
 
   const calculateLessonWidth = (startTime, endTime) => {
@@ -47,21 +97,43 @@ function TimetableRow({ day }) {
     let offsetInMin = (startTime - startingHour) / (1000*60);
     return (offsetInMin * ratio + 4) + "vw";
   }
-
-  //https://flatuicolors.com/palette/tr
-  const colorArray = [
-    "#17c0eb", //Spiro Disco Ball
-    "#cd84f1", //Bright Lilac
-    "#ffaf40", //Mandarin Sorbet
-    "#3ae374", //Weird Green
-    "#67e6dc", //Hammam Blue
-    "#ffb8b8", //Young Salmon
-    "#ff4d4d", //Light Red
-  ]
-
+  
   return (
-    <ListGroup horizontal className="timetableRow position-relative">
-      <ListGroup.Item className="dayCell">{day}</ListGroup.Item>
+    <ListGroup horizontal className="position-relative">
+      {lessons.map(lesson => {
+        if (!(lesson instanceof Array)) {
+          const width = calculateLessonWidth(lesson.startTime, lesson.endTime);
+          const offset = calculateLessonOffset(lesson.startTime);
+          return (
+            <Lesson
+              position={"absolute"}
+              width={width}
+              offset={offset}
+              color={lesson.color}
+              courseCode={lesson.courseCode}
+              type={lesson.type}
+              group={lesson.group}
+              venue={lesson.venue}
+              teachingWeeks={lesson.teachingWeeks}
+            />
+          )
+        } else {
+          return (
+            <OverlappedLessons
+              lessons={lesson}
+              calculateLessonWidth={calculateLessonWidth}
+              calculateLessonOffset={calculateLessonOffset}
+            />
+          )
+        }
+      })}
+
+      <ListGroup.Item 
+        className="dayCell timetableRow" 
+        style={ maxOverlapped > 1 ? {height: `${maxOverlapped*12}vh`} : {}}
+      >
+        {day}
+      </ListGroup.Item>
       {Array(15).fill().map((e, i) => {
         if (i%2 === 0) {
           return <ListGroup.Item key={i} className="timeSlot" />
@@ -71,16 +143,20 @@ function TimetableRow({ day }) {
       })}
       {/* <Lesson /> */}
       
-      {currentPlan.map((mod,index) => {
+      {/* {currentPlan.map((mod,index) => {
         return (
           <>
             {mod.index.lessons.map(lesson => {
               if (lesson.day === day.toUpperCase()) {
-                console.log(lesson)
+                const lessonWidth = calculateLessonWidth(lesson.startTime, lesson.endTime);
+                const lessonOffset = calculateLessonOffset(lesson.startTime);
+                const overlapStyle = handleOverlap(lessonWidth, lessonOffset);
                 return (
                   <Lesson 
-                    width={calculateLessonWidth(lesson.startTime, lesson.endTime)}
-                    offset={calculateLessonOffset(lesson.startTime)}
+                    width={lessonWidth}
+                    height={overlapStyle.height}
+                    offset={lessonOffset}
+                    verticalOffset={overlapStyle.verticalOffset}
                     color={colorArray[index]}
                     courseCode={mod.courseCode}
                     type={lesson.type}
@@ -93,7 +169,7 @@ function TimetableRow({ day }) {
             })}
           </>
         )
-      })}
+      })} */}
     </ListGroup>
   );
 }
@@ -114,13 +190,3 @@ function TimeRow() {
 }
 
 export default Timetable;
-
-/*
-Some thoughts:
-- will probably need to explicitly define height: need a min. height that scales with text
-- lessons must follow the same height, and for rows (days) with height > min.height the lesson must somehow know of the new height as well
-- rather than fitting the lesson in the cells it's prob better to just place it in front: makes it easier to pass in lesson data and fewer code reptition as well
-- to do so will need to also set a fix width
-- the cells will have to be a component
-- then the lesson must be placed in front of that component
-*/
