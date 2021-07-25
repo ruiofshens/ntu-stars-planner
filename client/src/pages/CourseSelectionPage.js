@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import Container from 'react-bootstrap/Container';
@@ -6,11 +6,16 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+import Accordion from 'react-bootstrap/Accordion';
 
 import CourseInputGroup from '../components/CourseInputGroup';
 import CourseDatabase from '../components/CourseDatabase';
+import FreeTimes from '../components/FreeTimes';
+import UseIndexes from '../components/UseIndexes';
+import MiscConstraints from '../components/MiscConstraints';
 
-// import { fetchTimetablePlans } from '../services/DataRetriever';
 import TimetablesGenerator from '../services/timetables/timetablesGenerator';
 
 import { TimetablePlansContext } from '../contexts/TimetablePlansContext';
@@ -26,13 +31,18 @@ function CourseSelectionPage() {
   const { setTimetablePlans } = useContext(TimetablePlansContext);
   const { setCurrentPlan } = useContext(CurrentPlanContext);
 
+  // states for advanced settings
+  const [chosenIndexes, setChosenIndexes] = useState({});
+  const [freeTimes, setFreeTimes] = useState([]);
+  const [miscConstraints, setMiscConstraints] = useState({
+    noBackToBack: false,
+    avoidLunchHours: false,
+  });
+
   async function retrieveTimetablePlans() {
     let { timetables } = await TimetablesGenerator.generateAll(selectedCourses);
     setTimetablePlans({timetables: timetables, currentIndex: 0});
-    // console.log(plansJSON.data.timetables[0]);
-    // console.log(timetablePlans[0]);
     setCurrentPlan(timetables[0]);
-    // setTimeout(() => console.log(currentPlan), 100);
   }
 
   return (
@@ -64,11 +74,37 @@ function CourseSelectionPage() {
         </Col>
         <Col xs={9} className="d-flex flex-column align-items-center">
           <CourseDatabase/>
-          {/* <Form className="d-flex my-2" style={{width: "35%"}}>
-            <Form.Control placeholder="Enter course code/name"/>
-            <Button variant="outline-primary">Search</Button>
-          </Form> */}
         </Col>
+      </Row>
+
+      <Row className="mt-5">
+        <Accordion>
+          <Accordion.Item eventKey="advanced-settings">
+            <Accordion.Header><strong>Advanced Settings</strong></Accordion.Header>
+            <Accordion.Body>
+              <Tabs defaultActiveKey="use-indexes" id="adjust-rules" className="mb-3">
+                <Tab eventKey="use-indexes" title="Use Indexes">
+                  <UseIndexes 
+                    chosenIndexes={chosenIndexes}
+                    setChosenIndexes={setChosenIndexes}
+                  />
+                </Tab>
+                <Tab eventKey="free-times" title="Free Times">
+                  <FreeTimes 
+                    freeTimes={freeTimes}
+                    setFreeTimes={setFreeTimes}
+                  />
+                </Tab>
+                <Tab eventKey="misc-constraints" title="Misc.">
+                  <MiscConstraints 
+                    miscConstraints={miscConstraints}
+                    setMiscConstraints={setMiscConstraints}
+                  />
+                </Tab>
+              </Tabs>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
       </Row>
     </Container>
   );

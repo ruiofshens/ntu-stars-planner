@@ -10,7 +10,6 @@ import Form from 'react-bootstrap/Form';
 import Timetable from '../components/Timetable';
 import CourseOverview from '../components/CourseOverview';
 import IndexEditOverview from '../components/IndexEditOverview';
-import AdjustRules from '../components/AdjustRules';
 
 
 function TimetablePage() {
@@ -20,9 +19,6 @@ function TimetablePage() {
       <Timetable/>
       <Container fluid className ="pt-2">
           <Tabs defaultActiveKey="choose-plan" id="toggle-course-overview" className="mb-3">
-            <Tab eventKey="adjust-rules" title="Adjust Rules">
-              <AdjustRules/>
-            </Tab>
             <Tab eventKey="choose-plan" title="Choose Plan">
               <CourseOverview/>
             </Tab>

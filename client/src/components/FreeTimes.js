@@ -13,8 +13,10 @@ const generateTimeSlots = () => {
 
 // - Free hours probably a table of hours vs days and have checkboxes in each cell
 // - That's a rough implementation, subsequently to touch up can consider having a range bar-like thing where users can select a range and add a new range (kind of like timelines in video editing i guess)
-const FreeTimes = () => {
-  const [freeTimes, setFreeTimes] = useState([]);
+const FreeTimes = ({ freeTimes, setFreeTimes }) => {
+  // const [freeTimes, setFreeTimes] = useState([]);
+  const [freeDay, setFreeDay] = useState(Array(6).fill(false));
+  const [oldFreeTimes, setOldFreeTimes] = useState([]); // save checked free times in case user wants to uncheck free day
 
   const handleChecked = (e) => {
     if (e.target.checked) {
@@ -25,7 +27,17 @@ const FreeTimes = () => {
         freeTimes.splice(index, 1);
       }
     }
-    console.log(freeTimes);
+  }
+
+  const handleFreeDayChecked = (e) => {
+    let index = parseInt(e.target.value[0]);
+    freeDay[index] = !freeDay[index];
+    if (e.target.checked) {
+      setOldFreeTimes(freeTimes);
+      setFreeTimes([e.target.value]);
+    } else {
+      setFreeTimes(oldFreeTimes);
+    }
   }
   
   return (
@@ -44,10 +56,21 @@ const FreeTimes = () => {
       <tbody>
         {generateTimeSlots().map((timeSlot, i) => (
           <tr>
-            <td>{i !== 0 ? timeSlot : "Free Day!"}</td>
-            {Array(6).fill().map((val, j) => (
-              <td><input type="checkbox" id={`${j}-${timeSlot}`} value={`${j}-${timeSlot}`} onChange={handleChecked}/></td>
-            ))}
+            {i !== 0 ?
+              <>
+                <td>{timeSlot}</td>
+                {Array(6).fill().map((val, j) => (
+                  <td><input type="checkbox" id={`${j}-${timeSlot}`} value={`${j}-${timeSlot}`} onChange={handleChecked} disabled={freeDay[j]}/></td>
+                ))}
+              </>
+            :
+              <>
+                <td>Free Day!</td>
+                {Array(6).fill().map((val, j) => (
+                  <td><input type="checkbox" id={`${j}-free-day`} value={`${j}-free-day`} onChange={handleFreeDayChecked}/></td>
+                ))}
+              </>
+            }
           </tr>
         ))}
       </tbody>
