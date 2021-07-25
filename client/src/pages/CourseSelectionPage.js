@@ -40,7 +40,7 @@ function CourseSelectionPage() {
   });
 
   async function retrieveTimetablePlans() {
-    let { timetables } = await TimetablesGenerator.generateAll(selectedCourses);
+    let { timetables } = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
     setTimetablePlans({timetables: timetables, currentIndex: 0});
     setCurrentPlan(timetables[0]);
   }

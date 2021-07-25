@@ -31,8 +31,8 @@ const UseIndexes = ({ chosenIndexes, setChosenIndexes }) => {
     getIndexes();
 
     // create object of courseCodes, each courseCode having an array of selected indexes
-    courseIndexes.forEach(course => {
-      chosenIndexes[course.courseCode] = [];
+    selectedCourses.forEach(course => {
+      chosenIndexes[course] = [];
     })
   }, [selectedCourses]);
 

@@ -15,7 +15,7 @@ const generateTimeSlots = () => {
 // - That's a rough implementation, subsequently to touch up can consider having a range bar-like thing where users can select a range and add a new range (kind of like timelines in video editing i guess)
 const FreeTimes = ({ freeTimes, setFreeTimes }) => {
   // const [freeTimes, setFreeTimes] = useState([]);
-  const [freeDay, setFreeDay] = useState(Array(6).fill(false));
+  const [freeDays, setFreeDays] = useState(Array(6).fill(false)); // used to enable/disable checkboxes
   const [oldFreeTimes, setOldFreeTimes] = useState([]); // save checked free times in case user wants to uncheck free day
 
   const handleChecked = (e) => {
@@ -31,10 +31,13 @@ const FreeTimes = ({ freeTimes, setFreeTimes }) => {
 
   const handleFreeDayChecked = (e) => {
     let index = parseInt(e.target.value[0]);
-    freeDay[index] = !freeDay[index];
+    freeDays[index] = !freeDays[index];
     if (e.target.checked) {
       setOldFreeTimes(freeTimes);
-      setFreeTimes([e.target.value]);
+      // remove all timeslots from checked day
+      const newFreeTimes = freeTimes.filter(timeSlots => timeSlots.slice(0, 2) !== e.target.value.slice(0, 2))
+      newFreeTimes.push(e.target.value);
+      setFreeTimes(newFreeTimes);
     } else {
       setFreeTimes(oldFreeTimes);
     }
@@ -60,7 +63,7 @@ const FreeTimes = ({ freeTimes, setFreeTimes }) => {
               <>
                 <td>{timeSlot}</td>
                 {Array(6).fill().map((val, j) => (
-                  <td><input type="checkbox" id={`${j}-${timeSlot}`} value={`${j}-${timeSlot}`} onChange={handleChecked} disabled={freeDay[j]}/></td>
+                  <td><input type="checkbox" id={`${j}-${timeSlot}`} value={`${j}-${timeSlot}`} onChange={handleChecked} disabled={freeDays[j]}/></td>
                 ))}
               </>
             :
