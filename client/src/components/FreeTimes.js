@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-
-import { Row, Col, Form, Button, Table } from 'react-bootstrap';
+import React, { useState, useContext } from 'react';
+import { Table } from 'react-bootstrap';
+import { ConstraintsContext } from '../contexts/ConstraintsContext';
 
 const generateTimeSlots = () => {
   const timeslots = ["freeDay"]
@@ -13,10 +13,12 @@ const generateTimeSlots = () => {
 
 // - Free hours probably a table of hours vs days and have checkboxes in each cell
 // - That's a rough implementation, subsequently to touch up can consider having a range bar-like thing where users can select a range and add a new range (kind of like timelines in video editing i guess)
-const FreeTimes = ({ freeTimes, setFreeTimes }) => {
-  // const [freeTimes, setFreeTimes] = useState([]);
+const FreeTimes = () => {
   const [freeDays, setFreeDays] = useState(Array(6).fill(false)); // used to enable/disable checkboxes
   const [oldFreeTimes, setOldFreeTimes] = useState([]); // save checked free times in case user wants to uncheck free day
+
+  // states for advanced settings
+  const { freeTimes, setFreeTimes } = useContext(ConstraintsContext);
 
   const handleChecked = (e) => {
     if (e.target.checked) {

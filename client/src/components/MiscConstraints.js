@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Form, Col } from 'react-bootstrap';
+import { ConstraintsContext } from '../contexts/ConstraintsContext';
 
-const MiscConstraints = ({ miscConstraints, setMiscConstraints }) => {
-  // const [noBackToBack, setNoBackToBack] = useState(false);
+const MiscConstraints = () => {
+  const { miscConstraints, setMiscConstraints } = useContext(ConstraintsContext);
 
   return (
     <Form.Group as={Col} className="position-relative mb-3">

@@ -21,6 +21,7 @@ import TimetablesGenerator from '../services/timetables/timetablesGenerator';
 import { TimetablePlansContext } from '../contexts/TimetablePlansContext';
 import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
+import { ConstraintsContext } from '../contexts/ConstraintsContext';
 
 function CourseSelectionPage() {
 
@@ -30,14 +31,7 @@ function CourseSelectionPage() {
   const { selectedCourses } = useContext(SelectedCoursesContext);
   const { setTimetablePlans } = useContext(TimetablePlansContext);
   const { setCurrentPlan } = useContext(CurrentPlanContext);
-
-  // states for advanced settings
-  const [chosenIndexes, setChosenIndexes] = useState({});
-  const [freeTimes, setFreeTimes] = useState([]);
-  const [miscConstraints, setMiscConstraints] = useState({
-    noBackToBack: false,
-    avoidLunchHours: false,
-  });
+  const { chosenIndexes, freeTimes, miscConstraints } = useContext(ConstraintsContext);
 
   async function retrieveTimetablePlans() {
     let { timetables } = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
@@ -84,22 +78,13 @@ function CourseSelectionPage() {
             <Accordion.Body>
               <Tabs defaultActiveKey="use-indexes" id="adjust-rules" className="mb-3">
                 <Tab eventKey="use-indexes" title="Use Indexes">
-                  <UseIndexes 
-                    chosenIndexes={chosenIndexes}
-                    setChosenIndexes={setChosenIndexes}
-                  />
+                  <UseIndexes />
                 </Tab>
                 <Tab eventKey="free-times" title="Free Times">
-                  <FreeTimes 
-                    freeTimes={freeTimes}
-                    setFreeTimes={setFreeTimes}
-                  />
+                  <FreeTimes />
                 </Tab>
                 <Tab eventKey="misc-constraints" title="Misc.">
-                  <MiscConstraints 
-                    miscConstraints={miscConstraints}
-                    setMiscConstraints={setMiscConstraints}
-                  />
+                  <MiscConstraints />
                 </Tab>
               </Tabs>
             </Accordion.Body>

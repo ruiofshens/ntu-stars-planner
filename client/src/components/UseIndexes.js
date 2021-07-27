@@ -6,13 +6,15 @@ import makeAnimated from 'react-select/animated'
 
 import { fetchCourses } from '../services/DataRetriever';
 import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
+import { ConstraintsContext } from '../contexts/ConstraintsContext';
 
 const animatedComponents = makeAnimated();
 
-const UseIndexes = ({ chosenIndexes, setChosenIndexes }) => {
+const UseIndexes = () => {
   const { selectedCourses } = useContext(SelectedCoursesContext);
   const [courseIndexes, setCourseIndexes] = useState([]);
-  // const [chosenIndexes, setChosenIndexes] = useState({});
+  
+  const { chosenIndexes, setChosenIndexes } = useContext(ConstraintsContext);
 
   useEffect(() => {
     async function getIndexes() {
@@ -31,8 +33,9 @@ const UseIndexes = ({ chosenIndexes, setChosenIndexes }) => {
     getIndexes();
 
     // create object of courseCodes, each courseCode having an array of selected indexes
+    // if it hasn't been created already
     selectedCourses.forEach(course => {
-      chosenIndexes[course] = [];
+      if (course && !chosenIndexes[course]) chosenIndexes[course] = [];
     })
   }, [selectedCourses]);
 
@@ -53,6 +56,8 @@ const UseIndexes = ({ chosenIndexes, setChosenIndexes }) => {
 const SelectForm = ({ course, chosenIndexes, setChosenIndexes }) => {
   const options = [];
   course.indexNos.forEach(indexNo => options.push({ label: indexNo, value: indexNo }));
+  
+  const pastSelected = options.filter(option => chosenIndexes[course.courseCode].includes(option.value));
 
   const handleSelectChange = (selected) => {
     // selected is an array of objects { label, value }
@@ -60,7 +65,7 @@ const SelectForm = ({ course, chosenIndexes, setChosenIndexes }) => {
     selected.forEach(obj => indexes.push(Object.values(obj)[0])); // Object.values returns an array even if there's only one value in the object
     const temp = {...chosenIndexes};
     temp[course.courseCode] = indexes;
-    setChosenIndexes(temp);
+    setChosenIndexes(temp); 
   }
 
   return (
@@ -71,6 +76,7 @@ const SelectForm = ({ course, chosenIndexes, setChosenIndexes }) => {
         components={animatedComponents}
         isMulti
         options={options}
+        // defaultValue={pastSelected} <-- doesn't work whyyy
         onChange={handleSelectChange}
       />
     </Form.Group>
