@@ -11,7 +11,6 @@ import SettingsPage from './pages/SettingsPage.js';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
 
 import SelectedCoursesContextProvider from './contexts/SelectedCoursesContext';
 import TimetablePlansContextProvider from './contexts/TimetablePlansContext';
@@ -50,13 +49,6 @@ function App() {
                   NTU Stars V2
                 </Navbar.Brand>
               </LinkContainer>
-              <Form className="d-flex">
-                <Form.Control size="sm" as="select">
-                  <option>Plan 1</option>
-                  <option>Plan 2</option>
-                  <option>Plan 3</option>
-                </Form.Control>
-              </Form>
               <Nav activeKey={window.location.pathname} className="ml-auto">
                 <LinkContainer to="/">
                   <Nav.Link>Timetable</Nav.Link>
