@@ -72,7 +72,7 @@ function CourseSelectionPage() {
       </Row>
 
       <Row className="mt-4 mb-2">
-        <Accordion>
+        <Accordion defaultActiveKey="advanced-settings">
           <Accordion.Item eventKey="advanced-settings">
             <Accordion.Header><strong>Advanced Settings</strong></Accordion.Header>
             <Accordion.Body>

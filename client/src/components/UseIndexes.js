@@ -76,7 +76,7 @@ const SelectForm = ({ course, chosenIndexes, setChosenIndexes }) => {
         components={animatedComponents}
         isMulti
         options={options}
-        // defaultValue={pastSelected} <-- doesn't work whyyy
+        defaultValue={pastSelected}
         onChange={handleSelectChange}
       />
     </Form.Group>
