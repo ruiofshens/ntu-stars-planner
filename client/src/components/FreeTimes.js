@@ -64,16 +64,30 @@ const FreeTimes = () => {
             {i !== 0 ?
               <>
                 <td>{timeSlot}</td>
-                {Array(6).fill().map((val, j) => (
-                  <td><input type="checkbox" id={`${j}-${timeSlot}`} value={`${j}-${timeSlot}`} onChange={handleChecked} disabled={freeDays[j]}/></td>
-                ))}
+                {Array(6).fill().map((val, j) => {
+                  let id = `${j}-${timeSlot}`;
+                  return (
+                    <td>
+                      <input type="checkbox" id={id} value={id} onChange={handleChecked} disabled={freeDays[j]} defaultChecked={freeTimes.includes(id)}/>
+                    </td>
+                  )
+                })}
               </>
             :
               <>
                 <td>Free Day!</td>
-                {Array(6).fill().map((val, j) => (
-                  <td><input type="checkbox" id={`${j}-free-day`} value={`${j}-free-day`} onChange={handleFreeDayChecked}/></td>
-                ))}
+                {Array(6).fill().map((val, j) => {
+                  let id = `${j}-free-day`;
+                  let freeDayChecked = freeTimes.includes(id);
+                  if (freeDayChecked) {
+                    freeDays[j] = !freeDays[j];
+                  }
+                  return (
+                    <td>
+                      <input type="checkbox" id={id} value={id} onChange={handleFreeDayChecked} defaultChecked={freeDayChecked} />
+                    </td>
+                  )
+                })}
               </>
             }
           </tr>

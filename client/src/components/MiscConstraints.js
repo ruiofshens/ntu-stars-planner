@@ -13,13 +13,7 @@ const MiscConstraints = () => {
         label="No back-to-back lessons"
         onChange={() => setMiscConstraints({...miscConstraints, noBackToBack: !miscConstraints.noBackToBack})}
         id="no-b2b"
-      />
-      <Form.Check
-        className="mb-3"
-        name="avoid-lunch-hours"
-        label="Avoid lunch hours? LOL (not implemented yet)"
-        onChange={() => setMiscConstraints({...miscConstraints, avoidLunchHours: !miscConstraints.avoidLunchHours})}
-        id="avoid-lunch-hours"
+        defaultChecked={miscConstraints.noBackToBack}
       />
     </Form.Group>
   )

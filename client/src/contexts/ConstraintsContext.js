@@ -7,7 +7,6 @@ const ConstraintsContextProvider = (props) => {
     const [freeTimes, setFreeTimes] = useState([]);
     const [miscConstraints, setMiscConstraints] = useState({
         noBackToBack: false,
-        avoidLunchHours: false,
       });
 
     return (
