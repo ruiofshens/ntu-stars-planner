@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useHistory } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -9,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Accordion from 'react-bootstrap/Accordion';
+import Alert from 'react-bootstrap/Alert';
 
 import CourseInputGroup from '../components/CourseInputGroup';
 import CourseDatabase from '../components/CourseDatabase';
@@ -32,15 +34,57 @@ function CourseSelectionPage() {
   const { setTimetablePlans } = useContext(TimetablePlansContext);
   const { setCurrentPlan } = useContext(CurrentPlanContext);
   const { chosenIndexes, freeTimes, miscConstraints } = useContext(ConstraintsContext);
+  const [canGenerate, setCanGenerate] = useState(false);
+  const [errorMessage, setErrorMessage] = useState({ header: null, details: null }); // for displaying why timetable could not be generated
+  const [showError, setShowError] = useState(false);
+
+  const history = useHistory();
 
   async function retrieveTimetablePlans() {
-    let { timetables } = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
-    setTimetablePlans({timetables: timetables, currentIndex: 0});
-    setCurrentPlan(timetables[0]);
+    let generated = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
+    if (generated.canGenerate && generated.timetables.length !== 0) {
+      setCanGenerate(true);
+      setTimetablePlans({timetables: generated.timetables, currentIndex: 0});
+      setCurrentPlan(generated.timetables[0]);
+      history.push('/')
+    } else {
+      setCanGenerate(false);
+      setShowError(true);
+      if (generated.clashed) { // exam clash
+        let clashed = "";
+        generated.clashed.forEach(exam => {
+          let examStart = new Date(exam.examDate).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false});
+          let examEnd = new Date(exam.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+          clashed += `${exam.courseCode}\t${examStart} - ${examEnd}\n`;
+        })
+        setErrorMessage({
+          header: `${generated.clashed.length} courses have clashing examination timings:`,
+          details: clashed,
+        })
+      } else if (generated.timetables.length === 0) { 
+        setErrorMessage({
+          header: "No non-clashing timetables can be generated with the given specifications.",
+          details: null,
+        })
+      }
+    }
   }
 
   return (
     <Container fluid className="px-4">
+      {!canGenerate && showError && 
+        <Row>
+          <Alert variant="danger" onClose={() => setShowError(false)} dismissible>
+            <span>{errorMessage.header}</span>
+            {errorMessage.details &&
+              <>
+                <hr />
+                <span style={{whiteSpace: "pre-wrap"}}>{errorMessage.details}</span>
+              </>
+            }
+          </Alert>
+        </Row>
+      }
       <Row>
         <Col xs={3}>
           <h5 className="text-center">Select Course Codes</h5>
@@ -57,13 +101,11 @@ function CourseSelectionPage() {
 
           <hr/>
           
-          <LinkContainer to="/">
-            <Button 
-              variant="outline-primary m-1"
-              onClick={() => retrieveTimetablePlans()}>
-              Plan Timetable
-            </Button>
-          </LinkContainer>
+          <Button 
+            variant="outline-primary m-1"
+            onClick={() => retrieveTimetablePlans()}>
+            Plan Timetable
+          </Button>
           <Button variant="outline-primary m-1">Undo All</Button>
         </Col>
         <Col xs={9} className="d-flex flex-column align-items-center">

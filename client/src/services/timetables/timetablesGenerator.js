@@ -20,10 +20,10 @@ class TimetablesGenerator {
     // check for exam clash first
     let examClashResult = ClashChecker.checkExamClash(exams);
     if (examClashResult.clash) {
-      console.log("Clashed exams:", examClashResult.clashed);
+      console.log("exam clashed:", examClashResult.clashed)
       return {
         canGenerate: false,
-        timetables: examClashResult.clashed,
+        clashed: examClashResult.clashed,
       };
     }
 
