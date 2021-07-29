@@ -62,3 +62,21 @@
   /* 4vw for day, 1.5vw each side for horizontal padding, remaining 92vw split among 15 cells*/
   width: 6.2vw;
 }
+
+/* ============= For light mode and dark mode customisation ============= */
+
+.lightModeBg {
+  background-color:#fefefe;
+}
+
+.lightModeText {
+  color: #121212;
+}
+
+.darkModeBg {
+background-color:#121212;
+}
+
+.darkModeText {
+  color: #fefefe;
+}
