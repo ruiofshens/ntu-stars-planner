@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import Container from 'react-bootstrap/Container';
@@ -40,7 +40,7 @@ function CourseSelectionPage() {
   }
 
   return (
-    <Container fluid className="px-4">
+    <Container fluid className="px-4 pt-3">
       <Row>
         <Col xs={3}>
           <h5 className="text-center">Select Course Codes</h5>

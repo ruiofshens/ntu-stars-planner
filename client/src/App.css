@@ -5,6 +5,10 @@
 .dayCell {
   background-color: #d47c7c;
   width: 4vw;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content:center;
 }
 
 .sticky-nav {

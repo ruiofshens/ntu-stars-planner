@@ -81,8 +81,9 @@ class TimetablesGenerator {
         courseCode: currentModule.courseCode,
         courseName: currentModule.courseName,
         courseAUs: currentModule.courseAUs,
-        examStart: currentModuleExam !== null ? new Date(currentModuleExam.examDate).toLocaleString() : null,
-        examEnd: currentModuleExam !== null ? new Date(currentModuleExam.endTime).toLocaleTimeString() : null,
+        examStart: currentModuleExam !== null ? 
+          new Date(currentModuleExam.examDate).toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'short', hour: '2-digit', minute: '2-digit'}) : null,
+        examEnd: currentModuleExam !== null ? new Date(currentModuleExam.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : null,
         index,
       }
       timetable.push(toAdd);

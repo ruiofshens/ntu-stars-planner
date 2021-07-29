@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 
 function SettingsPage() {
   return (
-    <Container fluid className="px-4">
+    <Container fluid className="px-4 pt-3">
       <Form>
         <Form.Check 
           type="switch"

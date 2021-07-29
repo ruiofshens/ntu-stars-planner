@@ -66,7 +66,7 @@ function App() {
                   </Nav>
                 </Navbar>
 
-                <br />
+                {/* <br /> */}
 
                 <Switch>
                   <Route exact path="/" component={TimetablePage}/>

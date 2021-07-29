@@ -55,7 +55,7 @@ function CourseOverview() {
           </Col>
           <Col xs={6} className="font-italic align-text">
               {(Object.entries(timetablePlans).length === 0) ? "Select Courses" : 
-              `Plan ${timetablePlans.currentIndex + 1} of ${timetablePlans.timetables.length}`}
+              `Plan ${timetablePlans.currentIndex + 1}/${timetablePlans.timetables.length}`}
           </Col>
           <Col xs={3}>
             <Button 
@@ -66,7 +66,7 @@ function CourseOverview() {
             </Button>
           </Col>
         </Row>
-        <Row className="px-1 my-1">
+        <Row className="px-1 my-1 align-items-center">
         <Col xs={7}>
           <Button 
               variant="outline-primary my-1" 
