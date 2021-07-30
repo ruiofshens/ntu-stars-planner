@@ -136,12 +136,11 @@ const getCourses = async () => {
       }
     });
 
-    // const coursesJSON = JSON.stringify(courses);
-    
-    // const fileName = `data/courses/${acadSem}_courses.json`
-    // fs.writeFile(fileName, coursesJSON, (err) => {
-    //   if (err) console.log(err);
-    // });
+    const coursesJSON = JSON.stringify(courses);
+    const fileName = `scrapper/data/courses/${acadSem}_courses_${Date.now()}.json`
+    fs.writeFile(fileName, coursesJSON, (err) => {
+      if (err) console.log(err);
+    });
     console.log("Retrieved courses");
 
     return courses;
@@ -164,14 +163,22 @@ const getAcadSem = async () => {
 
 export const addCoursesToDB = async () => {
   const courses = await getCourses();
+
+  const dropped = await CourseModel.collection.drop();
+  if (dropped) {
+    console.log("CourseModel dropped")
+  }
   
   for (let i = 0; i < courses.length; i++) {
     let course = new CourseModel(courses[i]);
     await course.save((err) => {
       if (err) console.log(err);
       else console.log(`Added Course ${courses[i].courseCode} to database.`)
+
+      if (i === courses.length-1) console.log("All courses added successfully.")
     })
-  }  
+  }
+  
 }
 
-// getCourses();
+// addCoursesToDB();

@@ -27,13 +27,11 @@ mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedT
 
 mongoose.set('useFindAndModify', false);
 
-// temp solution
-
+/* temp solution */
 // import { addCoursesToDB } from './scrapper/getCourses.js';
-// import { addExamsToDB } from './scrapper/getExams.js';
 // await addCoursesToDB();
+// import { addExamsToDB } from './scrapper/getExams.js';
 // await addExamsToDB();
 
-// import { getTimetables } from './timetables/generator.js';
-// let courses = ["CY1308", "EE8084"];
-// getTimetables(courses);
+
+

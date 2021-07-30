@@ -82,12 +82,11 @@ const getExamDetails = async (sem, acadYear, planNo, examYear) => {
       }
     });
 
-    // const examsJSON = JSON.stringify(exams);
-    
-    // const fileName = `data/exams/${acadYear.split("-")[0]};${sem}_exams.json`; // e.g. of file name: 2021;1 (same as courses)
-    // fs.writeFile(fileName, examsJSON, (err) => {
-    //   if (err) console.log(err);
-    // });
+    const examsJSON = JSON.stringify(exams);
+    const fileName = `scrapper/data/exams/${acadYear.split("-")[0]};${sem}_exams_${Date.now()}.json`; // e.g. of file name: 2021;1 (same as courses)
+    fs.writeFile(fileName, examsJSON, (err) => {
+      if (err) console.log(err);
+    });
 
     console.log("Exams retrieved.")
     return exams;
@@ -98,12 +97,19 @@ const getExamDetails = async (sem, acadYear, planNo, examYear) => {
 
 export const addExamsToDB = async () => {
   const exams = await getExamDetails("1", "2021-2022", "105", "2021");
+
+  const dropped = await ExamModel.collection.drop();
+  if (dropped) {
+    console.log("ExamModel dropped")
+  }
   
   for (let i = 0; i < exams.length; i++) {
     let exam = new ExamModel(exams[i]);
     await exam.save((err) => {
       if (err) console.log(err);
       else console.log(`Added Exam for ${exams[i].courseCode} to database.`)
+
+      if (i === exams.length-1) console.log("All exams added successfully")
     })
   }  
 }
