@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
 import { useHistory } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container';
@@ -7,16 +6,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
-import Accordion from 'react-bootstrap/Accordion';
 import Alert from 'react-bootstrap/Alert';
 
 import CourseInputGroup from '../components/CourseInputGroup';
 import CourseDatabase from '../components/CourseDatabase';
-import FreeTimes from '../components/FreeTimes';
-import UseIndexes from '../components/UseIndexes';
-import MiscConstraints from '../components/MiscConstraints';
+import TimetablePlanConstraints from '../components/TimetablePlanConstraints';
 
 import TimetablesGenerator from '../services/timetables/timetablesGenerator';
 
@@ -71,7 +65,7 @@ function CourseSelectionPage() {
   }
 
   return (
-    <Container fluid className="px-4">
+    <Container fluid className="px-4 pt-3">
       {!canGenerate && showError && 
         <Row>
           <Alert variant="danger" onClose={() => setShowError(false)} dismissible>
@@ -114,24 +108,7 @@ function CourseSelectionPage() {
       </Row>
 
       <Row className="mt-4 mb-2">
-        <Accordion defaultActiveKey="advanced-settings">
-          <Accordion.Item eventKey="advanced-settings">
-            <Accordion.Header><strong>Advanced Settings</strong></Accordion.Header>
-            <Accordion.Body>
-              <Tabs defaultActiveKey="use-indexes" id="adjust-rules" className="mb-3">
-                <Tab eventKey="use-indexes" title="Use Indexes">
-                  <UseIndexes />
-                </Tab>
-                <Tab eventKey="free-times" title="Free Times">
-                  <FreeTimes />
-                </Tab>
-                <Tab eventKey="misc-constraints" title="Misc.">
-                  <MiscConstraints />
-                </Tab>
-              </Tabs>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
+        <TimetablePlanConstraints />
       </Row>
     </Container>
   );

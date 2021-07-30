@@ -60,14 +60,14 @@ const FreeTimes = () => {
       </thead>
       <tbody>
         {generateTimeSlots().map((timeSlot, i) => (
-          <tr>
+          <tr key={i}>
             {i !== 0 ?
               <>
                 <td>{timeSlot}</td>
                 {Array(6).fill().map((val, j) => {
                   let id = `${j}-${timeSlot}`;
                   return (
-                    <td>
+                    <td key={j}>
                       <input type="checkbox" id={id} value={id} onChange={handleChecked} disabled={freeDays[j]} defaultChecked={freeTimes.includes(id)}/>
                     </td>
                   )
@@ -83,7 +83,7 @@ const FreeTimes = () => {
                     freeDays[j] = !freeDays[j];
                   }
                   return (
-                    <td>
+                    <td key={j}>
                       <input type="checkbox" id={id} value={id} onChange={handleFreeDayChecked} defaultChecked={freeDayChecked} />
                     </td>
                   )

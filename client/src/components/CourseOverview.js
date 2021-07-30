@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,14 +14,14 @@ import PlanDetails from './PlanDetails';
 function CourseOverview() {
 
   /* timetablePlans -> to have access to all the plans for toggling between them
-  setCurrentPlan -> to change the active plan when user choose the previous/next plan 
   setTimetablePlans -> to update currently active plan
-  setSavedPlans -> to save currently active plan */
+  currentPlan -> to check if currentPlan has been defined already
+  setCurrentPlan -> to change the active plan when user choose the previous/next plan 
+  savedPlans ->  to clone array of saved plans, used while saving currently active plan
+  setSavedPlans -> to update array of saved plans */
   const { timetablePlans, setTimetablePlans } = useContext(TimetablePlansContext);
-  const { setCurrentPlan } = useContext(CurrentPlanContext);
-  const { setSavedPlans } = useContext(SavedPlansContext);
-
-  const [ planToSave, setPlanToSave ] = useState(1);
+  const { currentPlan, setCurrentPlan } = useContext(CurrentPlanContext);
+  const { savedPlans, setSavedPlans } = useContext(SavedPlansContext);
 
   const decreasePlanIndex = () => {
     if ( timetablePlans.length !== 0 && timetablePlans.currentIndex !== 0){
@@ -37,8 +37,15 @@ function CourseOverview() {
     }
   }
 
-  const saveToPlan = () => {
-    
+  //Save the currently active generated timetable to the selected plan
+  //First check if currentPlan is already defined
+  const saveToPlan = (value) => {
+    if (value !== "-1" && currentPlan.length !== 0) {
+      let tempSavedPlans = savedPlans;
+      tempSavedPlans.plans[value] = [...currentPlan];
+      setSavedPlans({...tempSavedPlans, currentIndex: tempSavedPlans.currentIndex});
+      alert(`Saved to Plan ${+value+1}!`); //Unary plus operator converts value to number in string literal
+    }
   }
 
   return (
@@ -55,7 +62,7 @@ function CourseOverview() {
           </Col>
           <Col xs={6} className="font-italic align-text">
               {(Object.entries(timetablePlans).length === 0) ? "Select Courses" : 
-              `Plan ${timetablePlans.currentIndex + 1} of ${timetablePlans.timetables.length}`}
+              `Plan ${timetablePlans.currentIndex + 1}/${timetablePlans.timetables.length}`}
           </Col>
           <Col xs={3}>
             <Button 
@@ -66,22 +73,13 @@ function CourseOverview() {
             </Button>
           </Col>
         </Row>
-        <Row className="px-1 my-1">
-        <Col xs={7}>
-          <Button 
-              variant="outline-primary my-1" 
-              size="sm"
-              onClick={saveToPlan}>
-              {'Save To:'}
-          </Button>
-          </Col>
-          <Col xs={5}>
-          <Form.Control size="sm" as="select" onChange={choice => setPlanToSave(choice.target.value)}>
-              <option value = {1}>Plan 1</option>
-              <option value = {2}>Plan 2</option>
-              <option value = {3}>Plan 3</option>
+        <Row className="px-1 my-1 align-items-center">
+          <Form.Control size="sm" as="select" onChange={choice => saveToPlan(choice.target.value)}>
+              <option value = {-1}>Select Plan to Save Into</option>
+              <option value = {0}>Save to Plan 1</option>
+              <option value = {1}>Save to Plan 2</option>
+              <option value = {2}>Save to Plan 3</option>
           </Form.Control>
-          </Col>
         </Row>
       </Col>
       <Col xs={10}>
