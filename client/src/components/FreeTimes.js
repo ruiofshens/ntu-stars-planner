@@ -19,6 +19,7 @@ const FreeTimes = () => {
 
   // states for advanced settings
   const { freeTimes, setFreeTimes } = useContext(ConstraintsContext);
+  console.log(freeTimes);
 
   const handleChecked = (e) => {
     if (e.target.checked) {
@@ -35,13 +36,17 @@ const FreeTimes = () => {
     let index = parseInt(e.target.value[0]);
     freeDays[index] = !freeDays[index];
     if (e.target.checked) {
+      freeTimes.push(e.target.value); // without this oldFreeTimes will not have a record of this free day, and unchecking another free day will remove this free day
       setOldFreeTimes(freeTimes);
       // remove all timeslots from checked day
       const newFreeTimes = freeTimes.filter(timeSlots => timeSlots.slice(0, 2) !== e.target.value.slice(0, 2))
       newFreeTimes.push(e.target.value);
       setFreeTimes(newFreeTimes);
     } else {
-      setFreeTimes(oldFreeTimes);
+      let temp = (oldFreeTimes.filter(timeSlot => timeSlot !== e.target.value)); // oldFreeTimes have record of this day, so need to remove from the array
+      // need to use temp because setting state has a delay
+      setOldFreeTimes(temp) 
+      setFreeTimes(temp); 
     }
   }
   
