@@ -10,8 +10,10 @@ const SelectedCoursesContextProvider = (props) => {
     //Add selected course to current array of selected courses
     const addSelection = (courseCode) => {
         // setSelectedCourses([...selectedCourses, courseCode]);
-        let emptySlot = selectedCourses.indexOf("");
-        setSelectedCourses([...selectedCourses.slice(0, emptySlot), courseCode, ...selectedCourses.slice(emptySlot+1)]);
+        if (!selectedCourses.includes(courseCode)){
+            let emptySlot = selectedCourses.indexOf("");
+            setSelectedCourses([...selectedCourses.slice(0, emptySlot), courseCode, ...selectedCourses.slice(emptySlot+1)]);
+        }
     };
 
     /* const addSelection = (courseCode, courseName, AUs) => {
@@ -25,7 +27,7 @@ const SelectedCoursesContextProvider = (props) => {
     };
 
     return (
-        <SelectedCoursesContext.Provider value={{selectedCourses, addSelection, removeSelection}}>
+        <SelectedCoursesContext.Provider value={{selectedCourses, setSelectedCourses, addSelection, removeSelection}}>
             {props.children}
         </SelectedCoursesContext.Provider>
     );

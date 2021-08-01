@@ -24,7 +24,7 @@ function CourseSelectionPage() {
   /* selectedCourses -> List of selected courses by user to generate timetable plans  
   setTimetablePlans -> For Button to call and generate timetables based on selectedCourses
   setCurrentPlan -> Intialise first timetable plan as current plan  */
-  const { selectedCourses } = useContext(SelectedCoursesContext);
+  const { selectedCourses, setSelectedCourses } = useContext(SelectedCoursesContext);
   const { setTimetablePlans } = useContext(TimetablePlansContext);
   const { setCurrentPlan } = useContext(CurrentPlanContext);
   const { chosenIndexes, freeTimes, miscConstraints } = useContext(ConstraintsContext);
@@ -35,31 +35,33 @@ function CourseSelectionPage() {
   const history = useHistory();
 
   async function retrieveTimetablePlans() {
-    let generated = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
-    if (generated.canGenerate && generated.timetables.length !== 0) {
-      setCanGenerate(true);
-      setTimetablePlans({timetables: generated.timetables, currentIndex: 0});
-      setCurrentPlan(generated.timetables[0]);
-      history.push('/')
-    } else {
-      setCanGenerate(false);
-      setShowError(true);
-      if (generated.clashed) { // exam clash
-        let clashed = "";
-        generated.clashed.forEach(exam => {
-          let examStart = new Date(exam.examDate).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false});
-          let examEnd = new Date(exam.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-          clashed += `${exam.courseCode}\t${examStart} - ${examEnd}\n`;
-        })
-        setErrorMessage({
-          header: `${generated.clashed.length} courses have clashing examination timings:`,
-          details: clashed,
-        })
-      } else if (generated.timetables.length === 0) { 
-        setErrorMessage({
-          header: "No non-clashing timetables can be generated with the given specifications.",
-          details: null,
-        })
+    if (selectedCourses.some(selectedCourse => selectedCourse !== "")){
+      let generated = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
+      if (generated.canGenerate && generated.timetables.length !== 0) {
+        setCanGenerate(true);
+        setTimetablePlans({timetables: generated.timetables, currentIndex: 0});
+        setCurrentPlan(generated.timetables[0]);
+        history.push('/')
+      } else {
+        setCanGenerate(false);
+        setShowError(true);
+        if (generated.clashed) { // exam clash
+          let clashed = "";
+          generated.clashed.forEach(exam => {
+            let examStart = new Date(exam.examDate).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false});
+            let examEnd = new Date(exam.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+            clashed += `${exam.courseCode}\t${examStart} - ${examEnd}\n`;
+          })
+          setErrorMessage({
+            header: `${generated.clashed.length} courses have clashing examination timings:`,
+            details: clashed,
+          })
+        } else if (generated.timetables.length === 0) { 
+          setErrorMessage({
+            header: "No non-clashing timetables can be generated with the given specifications.",
+            details: null,
+          })
+        }
       }
     }
   }
@@ -85,22 +87,16 @@ function CourseSelectionPage() {
           <hr/>
           <CourseInputGroup/>
 
-          <Form>
-            <Form.Check
-              type="checkbox"
-              id={`includeVacancy`}
-              label={`Consider Vacancies`}
-            />
-          </Form>
-
           <hr/>
           
           <Button 
             variant="outline-primary m-1"
             onClick={() => retrieveTimetablePlans()}>
-            Plan Timetable
+            Generate Plans!
           </Button>
-          <Button variant="outline-primary m-1">Undo All</Button>
+          <Button 
+            variant="outline-primary m-1"
+            onClick={() => setSelectedCourses(Array(7).fill(""))}>Clear All</Button>
         </Col>
         <Col xs={9} className="d-flex flex-column align-items-center">
           <CourseDatabase/>

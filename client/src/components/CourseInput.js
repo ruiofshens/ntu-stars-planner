@@ -23,6 +23,7 @@ function CourseInput(props) {
             <Button 
                 variant="outline-secondary" 
                 id="selection1"
+                size="sm"
                 onClick={()=> {
                     removeSelection(props.index);
                 }}
@@ -32,6 +33,7 @@ function CourseInput(props) {
             <FormControl
                 aria-label="selection-1"
                 aria-describedby="selection-1"
+                size="sm"
                 // inputRef={ref => { this.myInput = ref; }}
                 value={input}
                 readOnly

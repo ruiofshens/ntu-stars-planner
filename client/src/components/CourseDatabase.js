@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
@@ -31,7 +33,21 @@ function CourseDatabase() {
   return (
     <>
     <Card className="retrievedCourses" style={{height: "30rem"}}>
-    <Card.Header className="bg-secondary text-center font-weight-bold">Courses Available</Card.Header>
+    <Card.Header className="bg-primary font-weight-bold">
+      <Row className="align-items-center">
+        <Col sm={8}>
+          Courses Available
+        </Col>
+        <Col sm={4}>
+          <Form className="d-flex ml-auto">
+            <Form.Control 
+            placeholder="Search course code/name" 
+            size="sm"
+            onChange={handleInput} />
+          </Form>
+        </Col>
+      </Row>
+    </Card.Header>
       {courses.length === 0 ? 
         <Spinner animation="border" role="status" variant="secondary" style={{ margin: 'auto' }}>
           <span className="sr-only">Loading...</span>
@@ -44,6 +60,7 @@ function CourseDatabase() {
                 <Button 
                   variant="outline-primary" 
                   className="mx-1"
+                  size="sm"
                   onClick= {() => addSelection(course.courseCode)}
                   >+
                 </Button>
@@ -54,11 +71,6 @@ function CourseDatabase() {
         </ListGroup> 
       }
     </Card>
-
-    <Form className="d-flex my-2" style={{width: "35%"}}>
-      <Form.Control placeholder="Enter course code/name" onChange={handleInput} />
-      <Button variant="outline-primary">Search</Button>
-    </Form>
 
       {/* Temp for checking if SelectedCoursesContext works
       {selectedCourses.map(selectedCourse => {
