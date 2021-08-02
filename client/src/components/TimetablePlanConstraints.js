@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
@@ -8,11 +8,15 @@ import FreeTimes from '../components/FreeTimes';
 import UseIndexes from '../components/UseIndexes';
 import MiscConstraints from '../components/MiscConstraints';
 
+import { CustomisationContext } from '../contexts/CustomisationContext';
+
 function TimetablePlanConstraints() {
+
+  const { customOptions } = useContext(CustomisationContext);
 
     return (
         <Accordion defaultActiveKey="advanced-settings">
-          <Accordion.Item eventKey="advanced-settings">
+          <Accordion.Item eventKey="advanced-settings" className={customOptions.displaySetting}>
             <Accordion.Header><strong>Advanced Settings</strong></Accordion.Header>
             <Accordion.Body>
               <Tabs defaultActiveKey="use-indexes" id="adjust-rules" className="mb-3">

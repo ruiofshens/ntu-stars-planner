@@ -1,6 +1,9 @@
 import React, { useState, useContext } from 'react';
+
 import { Table } from 'react-bootstrap';
+
 import { ConstraintsContext } from '../contexts/ConstraintsContext';
+import { CustomisationContext } from '../contexts/CustomisationContext';
 
 const generateTimeSlots = () => {
   const timeslots = ["freeDay"]
@@ -16,6 +19,7 @@ const generateTimeSlots = () => {
 const FreeTimes = () => {
   const [freeDays, setFreeDays] = useState(Array(6).fill(false)); // used to enable/disable checkboxes
   const [oldFreeTimes, setOldFreeTimes] = useState([]); // save checked free times in case user wants to uncheck free day
+  const { customOptions } = useContext(CustomisationContext);
 
   // states for advanced settings
   const { freeTimes, setFreeTimes } = useContext(ConstraintsContext);
@@ -51,7 +55,9 @@ const FreeTimes = () => {
   }
   
   return (
-    <Table striped bordered hover className="text-center align-middle"> 
+    <Table striped bordered hover 
+    className="text-center align-middle"
+    variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}> 
       <thead>
         <tr>
           <th>Time</th>

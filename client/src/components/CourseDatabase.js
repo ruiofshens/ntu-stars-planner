@@ -36,7 +36,7 @@ function CourseDatabase() {
   return (
     <>
     <Card className="retrievedCourses" style={{height: "30rem"}}>
-    <Card.Header className="bg-primary font-weight-bold">
+    <Card.Header className="database-title font-weight-bold">
       <Row className="align-items-center">
         <Col sm={8}>
           Courses Available
@@ -59,7 +59,9 @@ function CourseDatabase() {
         <ListGroup variant="flush" className="overflow-auto">
           {dynamicSearch().map(course => {
             return (
-              <ListGroup.Item key ={course.courseCode} className={customOptions.displaySetting}>
+              <ListGroup.Item 
+              key ={course.courseCode} 
+              variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}>
                 <Button 
                   variant="outline-primary" 
                   className="mx-1"

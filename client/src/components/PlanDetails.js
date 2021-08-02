@@ -13,7 +13,7 @@ function PlanDetails() {
     const { customOptions } = useContext(CustomisationContext);
 
     return (
-        <Table striped hover size="sm" className={customOptions.displaySetting}>
+        <Table striped hover size="sm" variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}>
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -45,15 +45,14 @@ function PlanDetails() {
 }
 
 function CourseRow(props) {
-    const { customOptions } = useContext(CustomisationContext);
 
     return (
       <tr>
-        <th className={customOptions.displaySetting} scope="row">{props.rowNo}</th>
-        <td className={customOptions.displaySetting}>{`${props.index}/${props.vacancies}/${props.waitlistLength}`}</td>
-        <td className={customOptions.displaySetting}>{props.courseCodeName}</td>
-        <td className={customOptions.displaySetting}>{props.AUs}</td>
-        <td className={customOptions.displaySetting}>{props.examStart} - {props.examEnd}</td>
+        <th scope="row">{props.rowNo}</th>
+        <td>{`${props.index}/${props.vacancies}/${props.waitlistLength}`}</td>
+        <td>{props.courseCodeName}</td>
+        <td>{props.AUs}</td>
+        <td>{props.examStart} - {props.examEnd}</td>
       </tr>
     )
   }

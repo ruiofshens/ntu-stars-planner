@@ -23,6 +23,10 @@
   font-weight: bold;
 }
 
+.database-title {
+  background-color: #0b77a2;
+}
+
 .retrievedCourses {
   width: 80%;
   height: 65%;
@@ -74,7 +78,7 @@
 
 .darkMode {
   background-color:#121212;
-  color: #fefefe;
+  color: #c9c7c7;
 }
 
 .lightMode {
