@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react';
 export const CustomisationContext = createContext();
 
 const CustomisationContextProvider = (props) => {
-    const [customOptions, setCustomOptions] = useState({timetableOrientation: "landscape", displaySetting: "light"});
+    const [customOptions, setCustomOptions] = useState({timetableOrientation: "landscape", displaySetting: "lightMode"});
 
     return (
         <CustomisationContext.Provider value={{customOptions, setCustomOptions}}>

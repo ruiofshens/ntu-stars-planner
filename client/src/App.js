@@ -4,7 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import logo from './icons/logo.png';
+import logo from './icons/icons8-pixel-star-48.png';
 import TimetablePage from './pages/TimetablePage.js';
 import CourseSelectionPage from './pages/CourseSelectionPage.js';
 import SettingsPage from './pages/SettingsPage.js';
@@ -23,7 +23,7 @@ import { CoursesContext } from './contexts/CoursesContext';
 import { fetchAllCourses } from './services/DataRetriever';
 
 function App() {
-  const { setCourses } = React.useContext(CoursesContext)
+  const { setCourses } = React.useContext(CoursesContext);
 
   React.useEffect(() => {
     async function retrieveAllCourses() {
@@ -41,7 +41,7 @@ function App() {
             <CurrentPlanContextProvider>
               <ConstraintsContextProvider>
                 <CustomisationContextProvider>
-                  <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="sticky-nav">
+                  <Navbar variant="light" expand="lg" fixed="top" className="sticky-nav">
                     <LinkContainer to="/">
                       <Navbar.Brand>
                         <img

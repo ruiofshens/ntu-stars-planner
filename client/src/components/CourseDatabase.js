@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 
 import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { CoursesContext } from '../contexts/CoursesContext';
+import { CustomisationContext } from '../contexts/CustomisationContext';
 
 function CourseDatabase() {
 
@@ -20,6 +21,8 @@ function CourseDatabase() {
   // const [courses, setCourses] = useState ([]);
   const { addSelection } = useContext(SelectedCoursesContext);
   const { courses } = useContext(CoursesContext);
+  const { customOptions } = useContext(CustomisationContext);
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleInput = (e) => {
@@ -56,7 +59,7 @@ function CourseDatabase() {
         <ListGroup variant="flush" className="overflow-auto">
           {dynamicSearch().map(course => {
             return (
-              <ListGroup.Item key ={course.courseCode}>
+              <ListGroup.Item key ={course.courseCode} className={customOptions.displaySetting}>
                 <Button 
                   variant="outline-primary" 
                   className="mx-1"

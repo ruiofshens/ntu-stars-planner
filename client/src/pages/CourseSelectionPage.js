@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
@@ -18,6 +17,7 @@ import { TimetablePlansContext } from '../contexts/TimetablePlansContext';
 import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 import { ConstraintsContext } from '../contexts/ConstraintsContext';
+import { CustomisationContext } from '../contexts/CustomisationContext';
 
 function CourseSelectionPage() {
 
@@ -28,6 +28,8 @@ function CourseSelectionPage() {
   const { setTimetablePlans } = useContext(TimetablePlansContext);
   const { setCurrentPlan } = useContext(CurrentPlanContext);
   const { chosenIndexes, freeTimes, miscConstraints } = useContext(ConstraintsContext);
+  const { customOptions } = useContext(CustomisationContext);
+
   const [canGenerate, setCanGenerate] = useState(false);
   const [errorMessage, setErrorMessage] = useState({ header: null, details: null }); // for displaying why timetable could not be generated
   const [showError, setShowError] = useState(false);
@@ -67,7 +69,7 @@ function CourseSelectionPage() {
   }
 
   return (
-    <Container fluid className="px-4 pt-3">
+    <Container fluid className={`px-4 pt-3 main ${customOptions.displaySetting}`}>
       {!canGenerate && showError && 
         <Row>
           <Alert variant="danger" onClose={() => setShowError(false)} dismissible>

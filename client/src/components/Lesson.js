@@ -13,7 +13,7 @@ function Lesson(props) {
         //     {`${props.courseCode} ${props.type} ${props.group} ${props.venue} ${props.teachingWeeks}`}
         // </div>  
         <div className="border border-dark lessonText timetableRow" 
-             style={{backgroundColor: props.color, width: props.width, fontSize: "0.80vw",
+             style={{backgroundColor: props.color, width: props.width, fontSize: "0.80vw", color: "black",
                      transform: `translate(${props.offset}`, position: props.position }}>
             {`${props.courseCode} ${props.type} ${props.group} ${props.venue} ${props.teachingWeeks}`}
         </div>

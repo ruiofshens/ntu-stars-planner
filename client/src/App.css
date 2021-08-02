@@ -1,3 +1,7 @@
+.main {
+  font-family: 'Nunito', sans-serif;
+}
+
 .altColor {
   background-color: #c9c9c9;
 }
@@ -14,6 +18,9 @@
 .sticky-nav {
   position: sticky;
   top: 0;
+  background-color: #0b77a2;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold;
 }
 
 .retrievedCourses {
@@ -65,18 +72,12 @@
 
 /* ============= For light mode and dark mode customisation ============= */
 
-.lightModeBg {
-  background-color:#fefefe;
-}
-
-.lightModeText {
-  color: #121212;
-}
-
-.darkModeBg {
-background-color:#121212;
-}
-
-.darkModeText {
+.darkMode {
+  background-color:#121212;
   color: #fefefe;
+}
+
+.lightMode {
+  background-color:#fefefe;
+  color: #121212;
 }

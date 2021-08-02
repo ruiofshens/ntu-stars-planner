@@ -3,15 +3,17 @@ import React, { useContext } from 'react';
 import Table from 'react-bootstrap/Table';
 
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
+import { CustomisationContext } from '../contexts/CustomisationContext';
 
 
 function PlanDetails() {
 
     /* currentPlan -> to display plan details */
     const { currentPlan } = useContext(CurrentPlanContext);
+    const { customOptions } = useContext(CustomisationContext);
 
     return (
-        <Table striped hover size="sm">
+        <Table striped hover size="sm" className={customOptions.displaySetting}>
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -43,13 +45,15 @@ function PlanDetails() {
 }
 
 function CourseRow(props) {
+    const { customOptions } = useContext(CustomisationContext);
+
     return (
       <tr>
-        <th scope="row">{props.rowNo}</th>
-        <td>{`${props.index}/${props.vacancies}/${props.waitlistLength}`}</td>
-        <td>{props.courseCodeName}</td>
-        <td>{props.AUs}</td>
-        <td>{props.examStart} - {props.examEnd}</td>
+        <th className={customOptions.displaySetting} scope="row">{props.rowNo}</th>
+        <td className={customOptions.displaySetting}>{`${props.index}/${props.vacancies}/${props.waitlistLength}`}</td>
+        <td className={customOptions.displaySetting}>{props.courseCodeName}</td>
+        <td className={customOptions.displaySetting}>{props.AUs}</td>
+        <td className={customOptions.displaySetting}>{props.examStart} - {props.examEnd}</td>
       </tr>
     )
   }
