@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup'
 
@@ -69,8 +70,14 @@ function SettingsPage() {
       </Row>
 
       <hr/>
-      <Row className={(customOptions.displaySetting) === "light" ? "d-flex justify-content-center font-italic py-4 lightModeText" : "d-flex justify-content-center font-italic py-4 darkModeText"}>~ Build V1.0.0 ~</Row>
-
+      <Row className={(customOptions.displaySetting) === "light" ? "d-flex justify-content-center font-italic pt-4 lightModeText" : "d-flex justify-content-center font-italic pt-4 darkModeText"}>
+        ~ Build V1.0.0 ~
+      </Row>
+      <Col className={(customOptions.displaySetting) === "light" ? "d-flex justify-content-center font-italic pb-4 lightModeText" : "d-flex justify-content-center font-italic pb-4 darkModeText"}>
+        <a target="_blank" href="https://icons8.com/icon/121624/pixel-star">Pixel Star</a>
+        &nbsp;icon by&nbsp;
+        <a target="_blank" href="https://icons8.com">Icons8</a>
+      </Col>
     </Container>
   );
 }
