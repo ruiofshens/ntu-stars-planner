@@ -181,7 +181,7 @@ function TimeRow() {
   return (
     <>
       <ListGroup horizontal className="timeRow">
-        <ListGroup.Item className="dayCell border-0" style={{backgroundColor: 'white'}}></ListGroup.Item>
+        <ListGroup.Item className={`dayCell border-0 ${customOptions.displaySetting}`}></ListGroup.Item>
         {Array(15).fill("").map((e, i) => (
           <ListGroup.Item key={i} className={`timeSlot timeCell border-0 text-center ${customOptions.displaySetting}`}>
             <time>{i+8 < 10 ? "0"+(i+8) : i+8}:00</time>
