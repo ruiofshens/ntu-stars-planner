@@ -1,4 +1,5 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
 
 function Lesson(props) {
 
@@ -12,11 +13,11 @@ function Lesson(props) {
         //              transform: `translate(${props.offset}, ${props.verticalOffset})` }}>
         //     {`${props.courseCode} ${props.type} ${props.group} ${props.venue} ${props.teachingWeeks}`}
         // </div>  
-        <div className="border border-dark lessonText timetableRow" 
+        <Container className="border border-dark lessonText timetableRow px-1" 
              style={{backgroundColor: props.color, width: props.width, fontSize: "0.80vw", color: "black",
                      transform: `translate(${props.offset}`, position: props.position }}>
             {`${props.courseCode} ${props.type} ${props.group} ${props.venue} ${props.teachingWeeks}`}
-        </div>
+        </Container>
     );
   }
   export default Lesson;

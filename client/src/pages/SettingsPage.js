@@ -52,7 +52,7 @@ function SettingsPage() {
         <ListGroup.Item className={customOptions.displaySetting}>Improved Summary of Timetable Details</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Fixing of Specific Indexes</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Advanced Options such as Free Times, No Back To Back Lessons</ListGroup.Item>
-        <ListGroup.Item className={customOptions.displaySetting}>Saving of Plans</ListGroup.Item>
+        <ListGroup.Item className={customOptions.displaySetting}>Saving and Downloading of Plans</ListGroup.Item>
       </ListGroup>
 
       <hr/>
