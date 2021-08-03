@@ -69,8 +69,12 @@ function Timetable() {
 
 // Contains the cells for each day as a row, excluding the day itself
 function TimetableRow({ day, lessons }) {
+
   // const { currentPlan } = useContext(CurrentPlanContext);
   // const lessonsArray = [];
+
+  const { customOptions } = useContext(CustomisationContext);
+
   let maxOverlapped = 0;
   lessons.forEach(lesson => {
     if (lesson instanceof Array && lesson.length > maxOverlapped) {
@@ -137,9 +141,11 @@ function TimetableRow({ day, lessons }) {
       </ListGroup.Item>
       {Array(15).fill().map((e, i) => {
         if (i%2 === 0) {
-          return <ListGroup.Item key={i} className="timeSlot" />
+          return <ListGroup.Item key={i} 
+          className={customOptions.displaySetting === "lightMode" ? "timeSlot" : "timeSlot darkModeCell"} />
         } else {
-          return <ListGroup.Item key={i} className="timeSlot altColor" />
+          return <ListGroup.Item key={i} 
+          className={customOptions.displaySetting === "lightMode" ? "timeSlot altColor" : "timeSlot darkModeAltCell"} />
         }
       })}
       {/* <Lesson /> */}
