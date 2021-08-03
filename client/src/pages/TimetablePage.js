@@ -3,6 +3,9 @@ import React, { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 import Timetable from '../components/Timetable';
 import CourseOverview from '../components/CourseOverview';
@@ -21,7 +24,7 @@ function TimetablePage() {
   currentPlan -> to check if currentPlan has been defined already
   setCurrentPlan -> to have access to current plan of timetablePlans when toggling to "Choose Plan"/"Edit Plan"
   savedPlans ->  to have access to array of savedPlans to display when toggling to "Save Plan" */
-  const { timetablePlans } = useContext(TimetablePlansContext);
+  const { timetablePlans, setTimetablePlans } = useContext(TimetablePlansContext);
   const { savedPlans } = useContext(SavedPlansContext);
   const { currentPlan, setCurrentPlan } = useContext(CurrentPlanContext);
   const { customOptions } = useContext(CustomisationContext);
@@ -44,8 +47,46 @@ function TimetablePage() {
     }
   }
 
+  const decreasePlanIndex = () => {
+    if ( timetablePlans.length !== 0 && timetablePlans.currentIndex !== 0){
+      setCurrentPlan(timetablePlans.timetables[timetablePlans.currentIndex - 1]);
+      setTimetablePlans({...timetablePlans, currentIndex: timetablePlans.currentIndex - 1});
+    }
+  }
+
+  const increasePlanIndex = () => {
+    if (timetablePlans.length !== 0 && timetablePlans.currentIndex !== (timetablePlans.timetables.length - 1)){
+      setCurrentPlan(timetablePlans.timetables[timetablePlans.currentIndex + 1]);
+      setTimetablePlans({...timetablePlans, currentIndex: timetablePlans.currentIndex + 1});
+    }
+  }
+
   return (
     <Container fluid className={`px-0 main ${customOptions.displaySetting}`}>
+      
+        <Row className="px-1">
+          <Col xs ={5} className="d-flex justify-content-end">
+            <Button 
+              variant="outline-primary my-1" 
+              size="sm"
+              onClick={decreasePlanIndex}>
+              {'<'}
+            </Button>
+          </Col>
+          <Col xs ={2} className="d-flex justify-content-center font-italic align-text">
+              {(Object.entries(timetablePlans).length === 0) ? "Select Courses" : 
+              `Plan ${timetablePlans.currentIndex + 1}/${timetablePlans.timetables.length}`}
+          </Col>
+          <Col xs ={5} className="d-flex justify-content-start">
+            <Button 
+              variant="outline-primary my-1" 
+              size="sm"
+              onClick={increasePlanIndex}>
+              {'>'}
+            </Button>
+          </Col>
+        </Row>
+
       <Timetable/>
       <Container fluid className ="pt-2">
           <Tabs 

@@ -51,31 +51,9 @@ function CourseOverview() {
   return (
     <Row>
       <Col xs={2}>
-        <Row className="px-1 my-1">
-          <Col xs={3}>
-            <Button 
-              variant="outline-primary my-1" 
-              size="sm"
-              onClick={decreasePlanIndex}>
-              {'<'}
-            </Button>
-          </Col>
-          <Col xs={6} className="font-italic align-text">
-              {(Object.entries(timetablePlans).length === 0) ? "Select Courses" : 
-              `Plan ${timetablePlans.currentIndex + 1}/${timetablePlans.timetables.length}`}
-          </Col>
-          <Col xs={3}>
-            <Button 
-              variant="outline-primary my-1" 
-              size="sm"
-              onClick={increasePlanIndex}>
-              {'>'}
-            </Button>
-          </Col>
-        </Row>
         <Row className="px-1 my-1 align-items-center">
           <Form.Control size="sm" as="select" onChange={choice => saveToPlan(choice.target.value)}>
-              <option value = {-1}>Select Plan to Save Into</option>
+              <option value = {-1}>Save to Plan!</option>
               <option value = {0}>Save to Plan 1</option>
               <option value = {1}>Save to Plan 2</option>
               <option value = {2}>Save to Plan 3</option>
