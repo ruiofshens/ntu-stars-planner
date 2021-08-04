@@ -175,7 +175,7 @@ export const addCoursesToDB = async () => {
       if (err) console.log(err);
       else console.log(`Added Course ${courses[i].courseCode} to database.`)
 
-      if (i === courses.length-1) console.log("All courses added successfully.")
+      if (i === courses.length-1) console.log("All courses added successfully.\n")
     })
   }
   

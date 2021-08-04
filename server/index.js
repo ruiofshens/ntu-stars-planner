@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 
 import courseRoutes from './routes/courseRouter.js'
 
+import doPeriodicRefresh from './refreshDatabase.js';
+
 //General Setup
 const app = express();
 dotenv.config(); //Allow use of env variables
@@ -32,6 +34,7 @@ mongoose.set('useFindAndModify', false);
 // await addCoursesToDB();
 // import { addExamsToDB } from './scrapper/getExams.js';
 // await addExamsToDB();
+doPeriodicRefresh();
 
 
 

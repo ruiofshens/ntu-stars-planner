@@ -109,7 +109,7 @@ export const addExamsToDB = async () => {
       if (err) console.log(err);
       else console.log(`Added Exam for ${exams[i].courseCode} to database.`)
 
-      if (i === exams.length-1) console.log("All exams added successfully")
+      if (i === exams.length-1) console.log("All exams added successfully\n")
     })
   }  
 }
