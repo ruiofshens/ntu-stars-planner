@@ -18,7 +18,7 @@ class ClashChecker {
         // 2) if clash, check if teaching weeks overlap
         if (DaysEnum[lesson.day] === DaysEnum[currLesson.day]) {
           if (lesson.startTime < currLesson.endTime && lesson.endTime > currLesson.startTime) { 
-            if (this.#checkTeachingweeksClash(lesson.teachingWeeks, currLesson.teachingWeeks)) {
+            if (this.checkTeachingweeksClash(lesson.teachingWeeks, currLesson.teachingWeeks)) {
               return true;
             }
           }
@@ -48,7 +48,7 @@ class ClashChecker {
     return result;
   }
 
-  #checkTeachingweeksClash(teachingWeeksA, teachingWeeksB) {
+  checkTeachingweeksClash(teachingWeeksA, teachingWeeksB) {
     /**
      * Possible teaching weeks:
      * 1) Teaching Wk2-13 (or any other 2 numbers)
