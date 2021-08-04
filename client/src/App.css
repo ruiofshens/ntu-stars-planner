@@ -77,13 +77,18 @@
 
 /* ============= For light mode and dark mode customisation ============= */
 
+:root {
+  --dark: #181818;
+  --light: #fefefe
+}
+
 .darkMode {
-  background-color:#181818;
+  background-color:var(--dark);
   color: #c9c7c7;
 }
 
 .lightMode {
-  background-color:#fefefe;
+  background-color:var(--light);
   color: #121212;
 }
 
@@ -94,3 +99,4 @@
 .darkModeAltCell {
   background-color:#494949;
 }
+

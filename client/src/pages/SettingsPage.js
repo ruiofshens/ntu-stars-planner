@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -11,15 +11,22 @@ import { CustomisationContext } from '../contexts/CustomisationContext';
 function SettingsPage() {
 
   const { customOptions, setCustomOptions } = useContext(CustomisationContext);
+  const [ darkModeToggled, setDarkModeToggled ] = useState(customOptions.displaySetting === "darkMode");
 
   const toggleLightDarkMode = () => {
     const tempCustomOptions = {...customOptions};
     switch (tempCustomOptions.displaySetting) {
       case "lightMode":
         tempCustomOptions.displaySetting = "darkMode";
+        document.body.style.backgroundColor = "var(--dark)";
+        setDarkModeToggled(true);
         break;
       case "darkMode":
         tempCustomOptions.displaySetting = "lightMode";
+        document.body.style.backgroundColor = "var(--light)";
+        setDarkModeToggled(false);
+        break;
+      default:
         break;
     }
     setCustomOptions(tempCustomOptions);
@@ -40,6 +47,7 @@ function SettingsPage() {
           id="scheme-switch"
           label={customOptions.displaySetting === "lightMode" ? "Toggle to dark mode" : "Toggle to light mode"}
           onChange={() => toggleLightDarkMode()}
+          defaultChecked={darkModeToggled}
         />
       </Form>
 

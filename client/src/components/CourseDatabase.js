@@ -34,23 +34,22 @@ function CourseDatabase() {
   }
   
   return (
-    <>
-    <Card className="retrievedCourses" style={{height: "30rem"}}>
-    <Card.Header className="database-title font-weight-bold">
-      <Row className="align-items-center">
-        <Col sm={8}>
-          Courses Available
-        </Col>
-        <Col sm={4}>
-          <Form className="d-flex ml-auto">
-            <Form.Control 
-            placeholder="Search course code/name" 
-            size="sm"
-            onChange={handleInput} />
-          </Form>
-        </Col>
-      </Row>
-    </Card.Header>
+    <Card className={`retrievedCourses ${customOptions.displaySetting}`} style={{height: "30rem"}} border={customOptions.displaySetting === "lightMode" ? "" : "secondary"}>
+      <Card.Header className="database-title font-weight-bold">
+        <Row className="align-items-center">
+          <Col sm={8}>
+            Courses Available
+          </Col>
+          <Col sm={4}>
+            <Form className="d-flex ml-auto">
+              <Form.Control 
+              placeholder="Search course code/name" 
+              size="sm"
+              onChange={handleInput} />
+            </Form>
+          </Col>
+        </Row>
+      </Card.Header>
       {courses.length === 0 ? 
         <Spinner animation="border" role="status" variant="secondary" style={{ margin: 'auto' }}>
           <span className="sr-only">Loading...</span>
@@ -76,25 +75,6 @@ function CourseDatabase() {
         </ListGroup> 
       }
     </Card>
-
-      {/* Temp for checking if SelectedCoursesContext works
-      {selectedCourses.map(selectedCourse => {
-        return (
-          <h3
-            key = "{selectedCourse.courseCode}">
-            {selectedCourse}
-          </h3> 
-        )
-      })} */}
-
-      {/* <Button
-        onClick={() => retrieveAllCourses()}> */}
-        {/* onClick={() => console.log("hello")}> */}
-        {/* Retrieve Courses!
-      </Button> */}
-
-      
-    </>
   );
 }
   

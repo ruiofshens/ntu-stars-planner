@@ -7,6 +7,7 @@ import makeAnimated from 'react-select/animated'
 import { fetchCourses } from '../services/DataRetriever';
 import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { ConstraintsContext } from '../contexts/ConstraintsContext';
+import { CustomisationContext } from '../contexts/CustomisationContext';
 
 const animatedComponents = makeAnimated();
 
@@ -15,6 +16,7 @@ const UseIndexes = () => {
   const [courseIndexes, setCourseIndexes] = useState([]);
   
   const { chosenIndexes, setChosenIndexes } = useContext(ConstraintsContext);
+  const { customOptions } = useContext(CustomisationContext);
 
   useEffect(() => {
     async function getIndexes() {
@@ -43,7 +45,7 @@ const UseIndexes = () => {
     <Form>
       {courseIndexes && courseIndexes.length !== 0 ? courseIndexes.map(course => {
         return (
-          <SelectForm course={course} chosenIndexes={chosenIndexes} setChosenIndexes={setChosenIndexes}/>
+          <SelectForm course={course} chosenIndexes={chosenIndexes} setChosenIndexes={setChosenIndexes} customOptions={customOptions}/>
         )
       })
       :
@@ -53,7 +55,7 @@ const UseIndexes = () => {
   )
 }
 
-const SelectForm = ({ course, chosenIndexes, setChosenIndexes }) => {
+const SelectForm = ({ course, chosenIndexes, setChosenIndexes, customOptions }) => {
   const options = [];
   course.indexNos.forEach(indexNo => options.push({ label: indexNo, value: indexNo }));
   
@@ -68,6 +70,27 @@ const SelectForm = ({ course, chosenIndexes, setChosenIndexes }) => {
     setChosenIndexes(temp); 
   }
 
+  // styling for Select
+  let backgroundColor = customOptions.displaySetting === "lightMode" ? "white": "#e9ecef";
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      color: "black",
+    }),
+    menu: (provided, state) => ({
+      ...provided,
+      backgroundColor,
+    }),
+    valueContainer: (provided, state) => ({
+      ...provided,
+      backgroundColor,
+    }),
+    indicatorsContainer: (provided, state) => ({
+      ...provided,
+      backgroundColor,
+    })
+  }
+
   return (
     <Form.Group as={Col} className="mb-3" controlId={course.courseCode}>
       <Form.Label>Use the following indexes for <strong>{course.courseCode}</strong>:</Form.Label>
@@ -78,6 +101,7 @@ const SelectForm = ({ course, chosenIndexes, setChosenIndexes }) => {
         options={options}
         defaultValue={pastSelected}
         onChange={handleSelectChange}
+        styles={customStyles}
       />
     </Form.Group>
   )
