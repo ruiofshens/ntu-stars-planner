@@ -9,7 +9,7 @@ import Alert from 'react-bootstrap/Alert';
 
 import CourseInputGroup from '../components/CourseInputGroup';
 import CourseDatabase from '../components/CourseDatabase';
-import TimetablePlanConstraints from '../components/TimetablePlanConstraints';
+import TimetablePlanConstraints from '../components/advanced-settings/TimetablePlanConstraints';
 
 import TimetablesGenerator from '../services/timetables/timetablesGenerator';
 

@@ -4,13 +4,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 
-import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
-import { CustomisationContext } from '../contexts/CustomisationContext';
-import { CoursesContext } from '../contexts/CoursesContext';
-import { SavedPlansContext } from '../contexts/SavedPlansContext';
+import { CurrentPlanContext } from '../../contexts/CurrentPlanContext';
+import { CustomisationContext } from '../../contexts/CustomisationContext';
+import { CoursesContext } from '../../contexts/CoursesContext';
+import { SavedPlansContext } from '../../contexts/SavedPlansContext';
 
 import { Form } from 'react-bootstrap';
-import { fetchVacanciesAndWaitlist } from '../services/DataRetriever';
+import { fetchVacanciesAndWaitlist } from '../../services/DataRetriever';
 
 function IndexEditOverview() {
   const { setCurrentPlan } = useContext(CurrentPlanContext);

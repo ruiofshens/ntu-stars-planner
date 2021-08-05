@@ -4,10 +4,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
-import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
-import { SavedPlansContext } from '../contexts/SavedPlansContext';
+import { CurrentPlanContext } from '../../contexts/CurrentPlanContext';
+import { SavedPlansContext } from '../../contexts/SavedPlansContext';
 
-import PlanDetails from './PlanDetails';
+import PlanDetails from '../PlanDetails';
 
 
 function CourseOverview() {

@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import { Container } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
-import { CustomisationContext } from '../contexts/CustomisationContext';
+import { CurrentPlanContext } from '../../contexts/CurrentPlanContext';
+import { CustomisationContext } from '../../contexts/CustomisationContext';
 
 import Lesson from './Lesson';
 import OverlappedLessons from './OverlappedLessons';

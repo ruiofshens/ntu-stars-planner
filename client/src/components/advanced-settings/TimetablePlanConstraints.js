@@ -4,11 +4,11 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Accordion from 'react-bootstrap/Accordion';
 
-import FreeTimes from '../components/FreeTimes';
-import UseIndexes from '../components/UseIndexes';
-import MiscConstraints from '../components/MiscConstraints';
+import FreeTimes from './FreeTimes';
+import UseIndexes from './UseIndexes';
+import MiscConstraints from './MiscConstraints';
 
-import { CustomisationContext } from '../contexts/CustomisationContext';
+import { CustomisationContext } from '../../contexts/CustomisationContext';
 
 function TimetablePlanConstraints() {
 

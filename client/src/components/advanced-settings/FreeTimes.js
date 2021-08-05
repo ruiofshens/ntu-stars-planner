@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react';
 
 import { Table } from 'react-bootstrap';
 
-import { ConstraintsContext } from '../contexts/ConstraintsContext';
-import { CustomisationContext } from '../contexts/CustomisationContext';
+import { ConstraintsContext } from '../../contexts/ConstraintsContext';
+import { CustomisationContext } from '../../contexts/CustomisationContext';
 
 const generateTimeSlots = () => {
   const timeslots = ["freeDay"]

@@ -9,10 +9,10 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-import Timetable from '../components/Timetable';
-import CourseOverview from '../components/CourseOverview';
-import IndexEditOverview from '../components/IndexEditOverview';
-import SavedPlansOverview from '../components/SavedPlansOverview';
+import Timetable from '../components/timetable/Timetable';
+import CourseOverview from '../components/overviews/CourseOverview';
+import IndexEditOverview from '../components/overviews/IndexEditOverview';
+import SavedPlansOverview from '../components/overviews/SavedPlansOverview';
 
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 import { TimetablePlansContext } from '../contexts/TimetablePlansContext';

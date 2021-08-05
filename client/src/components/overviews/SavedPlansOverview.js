@@ -4,9 +4,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
-import PlanDetails from './PlanDetails';
-import { SavedPlansContext } from '../contexts/SavedPlansContext';
-import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
+import PlanDetails from '../PlanDetails';
+import { SavedPlansContext } from '../../contexts/SavedPlansContext';
+import { CurrentPlanContext } from '../../contexts/CurrentPlanContext';
 
 function SavedPlansOverview() {
 

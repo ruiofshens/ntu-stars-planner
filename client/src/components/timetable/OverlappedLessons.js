@@ -1,6 +1,6 @@
 import React from 'react';
 import Lesson from './Lesson';
-import ClashChecker from '../services/timetables/clashChecker';
+import ClashChecker from '../../services/timetables/clashChecker';
 
 const OverlappedLessons = (props) => {
   // check if lessons are merely overlapped, or actually clashes with each other (in terms of teaching weeks)

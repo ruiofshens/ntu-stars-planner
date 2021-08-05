@@ -4,10 +4,10 @@ import { Col, Form } from 'react-bootstrap';
 import Select from 'react-select'; 
 import makeAnimated from 'react-select/animated'
 
-import { fetchCourses } from '../services/DataRetriever';
-import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
-import { ConstraintsContext } from '../contexts/ConstraintsContext';
-import { CustomisationContext } from '../contexts/CustomisationContext';
+import { fetchCourses } from '../../services/DataRetriever';
+import { SelectedCoursesContext } from '../../contexts/SelectedCoursesContext';
+import { ConstraintsContext } from '../../contexts/ConstraintsContext';
+import { CustomisationContext } from '../../contexts/CustomisationContext';
 
 const animatedComponents = makeAnimated();
 
