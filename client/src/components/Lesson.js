@@ -8,6 +8,7 @@ function Lesson(props) {
     fontSize: "0.75vw", 
     color: !props.clashed ? "black" : "red",
     fontWeight: !props.clashed ? "normal" : "bold",
+    borderRadius: "5px",
     transform: `translate(${props.offset}`, 
     position: props.position,
   }

@@ -4,8 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 
-import { TimetablePlansContext } from '../contexts/TimetablePlansContext';
-import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 import { CustomisationContext } from '../contexts/CustomisationContext';
 import { CoursesContext } from '../contexts/CoursesContext';
@@ -15,8 +13,6 @@ import { Form } from 'react-bootstrap';
 import { fetchVacanciesAndWaitlist } from '../services/DataRetriever';
 
 function IndexEditOverview() {
-  const { selectedCourses } = useContext(SelectedCoursesContext);
-  const { setTimetablePlans } = useContext(TimetablePlansContext);
   const { setCurrentPlan } = useContext(CurrentPlanContext);
   const { courses } = useContext(CoursesContext);
 
@@ -40,17 +36,18 @@ function IndexEditOverview() {
 
   return (
     <Row>
-      <Col xs={2}>
+      <Col xs={1}>
+      Save To:
         <Row className="px-1 my-1 align-items-center">
           <Form.Control size="sm" as="select" onChange={choice => saveToPlan(choice.target.value)}>
-              <option value = {-1}>Save to Plan!</option>
-              <option value = {0}>Save to Plan 1</option>
-              <option value = {1}>Save to Plan 2</option>
-              <option value = {2}>Save to Plan 3</option>
+              <option value = {-1}>Choose Plan</option>
+              <option value = {0}>Plan 1</option>
+              <option value = {1}>Plan 2</option>
+              <option value = {2}>Plan 3</option>
           </Form.Control>
         </Row>
       </Col>
-      <Col xs={10}>
+      <Col xs={11}>
         <Table striped hover size="sm" variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}>
         <thead>
           <tr>
@@ -122,7 +119,7 @@ function CourseRow(props) {
       <th scope="row">{props.rowNo}</th>
       <td>
         <Form className="mr-5">
-          <Form.Select aria-label="select-index" onChange={handleIndexChange} value={props.currIndex.indexNo}>
+          <Form.Select size="sm" aria-label="select-index" onChange={handleIndexChange} value={props.currIndex.indexNo}>
             {indexes.map(index => (
               <option id={index.indexNo} value={index.indexNo} key={index.indexNo}>
                 {`${index.indexNo}/${index.vacancies}/${index.waitlistLength}`}

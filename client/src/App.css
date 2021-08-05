@@ -7,11 +7,13 @@
   width: 100%;
   top: 0;
   margin-bottom: 1;
-  background-color:#cecece;
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4.5px );
+  -webkit-backdrop-filter: blur( 4.5px );
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   font-family: 'Nunito', sans-serif;
-  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19);
 }
 
  /* Large devices (desktops, less than 1200px) */
@@ -58,6 +60,8 @@
   padding-top: 3px;
   transform: translateX(4vw);
   margin: 0px;
+  opacity: 0.85;
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.4 );
 }
 
 .timetableRow {
