@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 
 import { TimetablePlansContext } from '../contexts/TimetablePlansContext';
@@ -10,6 +9,8 @@ import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 import { CustomisationContext } from '../contexts/CustomisationContext';
 import { CoursesContext } from '../contexts/CoursesContext';
+import { SavedPlansContext } from '../contexts/SavedPlansContext';
+
 import { Form } from 'react-bootstrap';
 import { fetchVacanciesAndWaitlist } from '../services/DataRetriever';
 
@@ -21,41 +22,67 @@ function IndexEditOverview() {
 
   /* currentPlan -> to display plan details */
   const { currentPlan } = useContext(CurrentPlanContext);
+  const { savedPlans, setSavedPlans } = useContext(SavedPlansContext);
   const { customOptions } = useContext(CustomisationContext);
 
   const planToEdit = [...currentPlan];
 
-  return (
-    <Table striped hover size="sm" variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}>
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Index/Waitlist/Vacancy</th>
-          <th scope="col">Course Code and Name</th>
-          <th scope="col">AUs</th>
-          <th scope="col">Exam Timing</th>
-        </tr>
-      </thead>
+  //Save the currently active generated timetable to the selected plan
+  //First check if currentPlan is already defined
+  const saveToPlan = (value) => {
+    if (value !== "-1" && currentPlan.length !== 0) {
+      let tempSavedPlans = savedPlans;
+      tempSavedPlans.plans[value] = [...currentPlan];
+      setSavedPlans({...tempSavedPlans, currentIndex: tempSavedPlans.currentIndex});
+      alert(`Saved to Plan ${+value+1}!`); //Unary plus operator converts value to number in string literal
+    }
+  }
 
-      <tbody>
-        {currentPlan.map((course, number) => {
-          const courseObj = courses.filter(thisCourse => thisCourse.courseCode === course.courseCode)[0];
-          return (
-            <CourseRow
-              rowNo={number+1}
-              course={courseObj}
-              courseCodeName={`${course.courseCode} ${course.courseName}`}
-              currIndex={course.index}
-              AUs={course.courseAUs}
-              examStart={course.examStart}
-              examEnd={course.examEnd}
-              planToEdit={planToEdit}
-              setCurrentPlan={setCurrentPlan}
-            />
-          )
-        })}
-      </tbody>
-    </Table>
+  return (
+    <Row>
+      <Col xs={2}>
+        <Row className="px-1 my-1 align-items-center">
+          <Form.Control size="sm" as="select" onChange={choice => saveToPlan(choice.target.value)}>
+              <option value = {-1}>Save to Plan!</option>
+              <option value = {0}>Save to Plan 1</option>
+              <option value = {1}>Save to Plan 2</option>
+              <option value = {2}>Save to Plan 3</option>
+          </Form.Control>
+        </Row>
+      </Col>
+      <Col xs={10}>
+        <Table striped hover size="sm" variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Index/Waitlist/Vacancy</th>
+            <th scope="col">Course Code and Name</th>
+            <th scope="col">AUs</th>
+            <th scope="col">Exam Timing</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {currentPlan.map((course, number) => {
+            const courseObj = courses.filter(thisCourse => thisCourse.courseCode === course.courseCode)[0];
+            return (
+              <CourseRow
+                rowNo={number+1}
+                course={courseObj}
+                courseCodeName={`${course.courseCode} ${course.courseName}`}
+                currIndex={course.index}
+                AUs={course.courseAUs}
+                examStart={course.examStart}
+                examEnd={course.examEnd}
+                planToEdit={planToEdit}
+                setCurrentPlan={setCurrentPlan}
+              />
+            )
+          })}
+        </tbody>
+      </Table>
+      </Col>
+    </Row>
   )
 }
 

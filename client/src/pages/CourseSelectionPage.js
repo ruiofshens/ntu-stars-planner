@@ -84,7 +84,7 @@ function CourseSelectionPage() {
         </Row>
       }
       <Row>
-        <Col xs={3}>
+        <Col xs={12} lg={3}>
           <h5 className="text-center">Select Course Codes</h5>
           <hr/>
           <CourseInputGroup/>
@@ -100,7 +100,7 @@ function CourseSelectionPage() {
             variant="outline-primary m-1"
             onClick={() => setSelectedCourses(Array(7).fill(""))}>Clear All</Button>
         </Col>
-        <Col xs={9} className="d-flex flex-column align-items-center">
+        <Col xs={12} lg={9} className="d-flex flex-column align-items-center">
           <CourseDatabase/>
         </Col>
       </Row>

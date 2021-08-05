@@ -6,7 +6,7 @@ function Lesson(props) {
   const style = {
     backgroundColor: props.color, 
     width: props.width, 
-    fontSize: "0.80vw", 
+    fontSize: "0.75vw", 
     color: !props.clashed ? "black" : "red",
     fontWeight: !props.clashed ? "normal" : "bold",
     transform: `translate(${props.offset}`, 

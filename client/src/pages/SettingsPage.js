@@ -78,6 +78,9 @@ function SettingsPage() {
 
       <hr/>
       <Row className="d-flex justify-content-center font-italic pt-4">
+        may the force be with you
+      </Row>
+      <Row className="d-flex justify-content-center font-italic">
         ~ Build V1.0.0 ~
       </Row>
       <Col className="d-flex justify-content-center font-italic pb-4">

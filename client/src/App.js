@@ -4,7 +4,6 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import logo from './icons/icons8-pixel-star-48.png';
 import TimetablePage from './pages/TimetablePage.js';
 import CourseSelectionPage from './pages/CourseSelectionPage.js';
 import SettingsPage from './pages/SettingsPage.js';
@@ -41,20 +40,19 @@ function App() {
             <CurrentPlanContextProvider>
               <ConstraintsContextProvider>
                 <CustomisationContextProvider>
-                  <Navbar variant="light" expand="lg" fixed="top" className="sticky-nav">
+                  <Navbar 
+                  variant="light" 
+                  fixed="top" 
+                  className="sticky-nav d-flex justify-content-center">
                     <LinkContainer to="/">
                       <Navbar.Brand>
-                        <img
-                          src={logo}
-                          width="30"
-                          height="30"
-                          className="d-inline-block align-top"
-                          alt="NTU Stars logo"
-                        />{' '}
-                        NTU Stars V2
+                        <span role="img" aria-label="star">⭐</span>
+                        {' '}planner
                       </Navbar.Brand>
                     </LinkContainer>
-                    <Nav activeKey={window.location.pathname} className="ml-auto">
+                    <Nav 
+                    activeKey={window.location.pathname} 
+                    className="nav-options">
                       <LinkContainer to="/">
                         <Nav.Link>Timetable</Nav.Link>
                       </LinkContainer>

@@ -1,31 +1,40 @@
 .main {
   font-family: 'Nunito', sans-serif;
-  /* height: 100vh; */
-}
-
-.altColor {
-  background-color: #c9c9c9;
-}
-
-.dayCell {
-  background-color: #d47c7c;
-  width: 4vw;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content:center;
 }
 
 .sticky-nav {
   position: sticky;
+  width: 100%;
   top: 0;
-  background-color: #0b77a2;
+  margin-bottom: 1;
+  background-color:#cecece;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   font-family: 'Nunito', sans-serif;
-  font-weight: bold;
+  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19);
 }
+
+ /* Large devices (desktops, less than 1200px) */
+ @media (min-width: 992px) {
+  .nav-options {
+    border-left: 1px solid black;
+  }
+
+  .sticky-nav {
+    flex-direction: row;
+  }
+ }
+
+ /* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+  .sticky-nav {
+    flex-direction: column;
+  }
+ }
 
 .database-title {
   background-color: #0b77a2;
+  color: black;
 }
 
 .retrievedCourses {
@@ -33,28 +42,20 @@
   height: 65%;
 }
 
-.align-text {
+.align-plan-text {
   display: flex;
   align-items: center;
 }
 
-.app {
-  height: 20vh;
-}
+/* ============= Styling for timetable component ============= */
 
 .lessonText {
   font-size: 14px;
-  /* position: absolute; */
   top: 0;
   left: 0;
   z-index: 1;
   padding-left: 3px;
   padding-top: 3px;
-  /* margin-left: 50%; */
-  background-color: navajowhite;
-  /* height: 100%;
-  width: 150%; */
-  /* width: 10%; */
   transform: translateX(4vw);
 }
 
@@ -73,6 +74,19 @@
 .timeSlot {
   /* 4vw for day, 1.5vw each side for horizontal padding, remaining 92vw split among 15 cells*/
   width: 6.2vw;
+}
+
+.altColor {
+  background-color: #c9c9c9;
+}
+
+.dayCell {
+  background-color: #d47c7c;
+  width: 4vw;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content:center;
 }
 
 /* ============= For light mode and dark mode customisation ============= */
@@ -99,4 +113,3 @@
 .darkModeAltCell {
   background-color:#494949;
 }
-
