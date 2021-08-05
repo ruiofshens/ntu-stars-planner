@@ -7,7 +7,6 @@ import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 
 function CourseInputGroup() {
     const { selectedCourses } = useContext(SelectedCoursesContext);
-    console.log(selectedCourses);
     return (
         <Container className="w-75">
             {[...Array(7)].map((value, index) => (

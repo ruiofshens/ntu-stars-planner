@@ -1,24 +1,24 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import Lesson from './Lesson';
 import ClashChecker from '../services/timetables/clashChecker';
 
 const OverlappedLessons = (props) => {
   // check if lessons are merely overlapped, or actually clashes with each other (in terms of teaching weeks)
   // clashes instead of overlap happens when the user edits the indexes manually
+  
+  // first reset all clashed states
+  props.lessons.forEach(lesson => lesson.clashed = false);
+  // if (props.lessons[0].day === "WED") console.log(props.lessons)
   for (let i=0; i<props.lessons.length-1; i++) {
+    let curr = props.lessons[i];
     for (let j=i+1; j<props.lessons.length; j++) {
-      let curr = props.lessons[i];
       let next = props.lessons[j];
       if (!curr.clashed) { // doesn't have any clashes *yet* - if it already clashes we can simply skip the check
-        console.log("teachingWeeks:", curr.teachingWeeks, next.teachingWeeks)
-        if (ClashChecker.checkTeachingweeksClash(curr.teachingWeeks, next.teachingWeeks)) {
+        if (ClashChecker.checkTeachingweeksClash(curr.teachingWeeks, next.teachingWeeks, true)) {
           curr.clashed = true;
           next.clashed = true;
-          console.log("clashed~")
         }
-      } else {
-        console.log("why")
-      }
+      } 
     }
   }
 

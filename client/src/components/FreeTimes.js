@@ -23,7 +23,6 @@ const FreeTimes = () => {
 
   // states for advanced settings
   const { freeTimes, setFreeTimes } = useContext(ConstraintsContext);
-  console.log(freeTimes);
 
   const handleChecked = (e) => {
     if (e.target.checked) {

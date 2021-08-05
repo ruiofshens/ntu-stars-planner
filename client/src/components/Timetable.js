@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { Container } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -35,24 +35,29 @@ function Timetable() {
     lesson.color = COLORS[i];
     allLessons[lesson.day].push(lesson);
   }));
+  console.log("before:", JSON.stringify(allLessons.THU))
   // identify all overlapping lessons
   Object.values(allLessons).forEach(lessons => {
     for (let i=0; i<lessons.length-1; i++) {
       let overlapped = [];
+      let curr = lessons[i];
       for (let j=i+1; j<lessons.length; j++) {
-        if (lessons[i].startTime < lessons[j].endTime && lessons[i].endTime > lessons[j].startTime) {
-          overlapped.push(lessons[j]);
+        let next = lessons[j];
+        if (curr.startTime < next.endTime && curr.endTime > next.startTime) {
+          overlapped.push(next);
           lessons.splice(j, 1);
+          j--;
         }
       }
       if (overlapped.length !== 0) {
-        overlapped.push(lessons[i]);
+        overlapped.push(curr);
         lessons.splice(i, 1);
         i--;
         lessons.push(overlapped);
       }
     }
   });
+  console.log("after:", JSON.stringify(allLessons.THU))
 
   return (
       <Container fluid style={{padding: "0 1.5vw"}}>
