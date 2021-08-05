@@ -92,6 +92,13 @@ function CourseRow(props) {
   useEffect(() => {
     async function getVacanciesAndWaitlist() {
       const indexes = await fetchVacanciesAndWaitlist(props.course.courseCode);
+      if (indexes.length === 0) { // retrieved after 10pm
+        props.course.indexes.forEach(index => indexes.push({
+          indexNo: index.indexNo,
+          vacancies: "NA",
+          waitlistLength: "NA"
+        }))
+      }
       setIndexes(indexes);
     }
     getVacanciesAndWaitlist();
