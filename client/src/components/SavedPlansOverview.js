@@ -28,7 +28,7 @@ function SavedPlansOverview() {
 
     return (
         <Row>
-            <Col xs={1}>
+            <Col xs={12} lg={1} className="d-flex flex-column align-items-center">
             Load Plan:
                 <Form.Control 
                 size="sm" 
@@ -40,7 +40,7 @@ function SavedPlansOverview() {
                     <option value = {2}>Plan 3</option>
                 </Form.Control>
             </Col>
-            <Col xs={11}>
+            <Col xs={12} lg={11}>
                 <PlanDetails/>
             </Col>
         </Row>

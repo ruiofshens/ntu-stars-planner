@@ -108,8 +108,8 @@ function TimetablePage() {
     <Container fluid className={`px-0 main ${customOptions.displaySetting}`}>
       <Row className="px-1 pt-3 align-items-center">
         {currentTab === "choose-plan" ?
-        <>
-          <Col xs="auto" className="ml-2">
+        <Col className="d-flex flex-row top-row-toggle">
+          <Col xs="auto">
             <Button 
               variant="outline-primary my-1" 
               size="sm"
@@ -129,9 +129,9 @@ function TimetablePage() {
               {'>'}
             </Button>
           </Col>
-        </>  : null }
+        </Col>  : null }
           
-        <Col className="d-flex justify-content-end mr-2">
+        <Col className="d-flex top-row-download">
           <Button 
             variant="outline-primary my-1" 
             size="sm"
@@ -148,9 +148,10 @@ function TimetablePage() {
 
       <Container fluid className ="pt-2">
           <Tabs 
+          variant="pills"
           activeKey={currentTab}
           id="toggle-course-overview" 
-          className="mb-3"
+          className="mb-3 tabs"
           onSelect={togglePlanToShow}>
             <Tab eventKey="choose-plan" title="Generated Plans">
               <CourseOverview/>

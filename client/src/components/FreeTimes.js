@@ -55,7 +55,7 @@ const FreeTimes = () => {
   }
   
   return (
-    <Table striped bordered hover 
+    <Table responsive striped bordered hover 
     className="text-center align-middle"
     variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}> 
       <thead>

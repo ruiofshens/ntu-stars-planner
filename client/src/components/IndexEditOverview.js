@@ -36,9 +36,9 @@ function IndexEditOverview() {
 
   return (
     <Row>
-      <Col xs={1}>
+      <Col xs={12} lg={1} className="d-flex flex-column align-items-center">
       Save To:
-        <Row className="px-1 my-1 align-items-center">
+        <Row className="px-1 pb-4 my-1 align-items-center">
           <Form.Control size="sm" as="select" onChange={choice => saveToPlan(choice.target.value)}>
               <option value = {-1}>Choose Plan</option>
               <option value = {0}>Plan 1</option>
@@ -47,8 +47,8 @@ function IndexEditOverview() {
           </Form.Control>
         </Row>
       </Col>
-      <Col xs={11}>
-        <Table striped hover size="sm" variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}>
+      <Col xs={12} lg={11}>
+        <Table responsive striped hover size="sm" variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}>
         <thead>
           <tr>
             <th scope="col">#</th>

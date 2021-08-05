@@ -148,35 +148,6 @@ function TimetableRow({ day, lessons }) {
           className={customOptions.displaySetting === "lightMode" ? "timeSlot altColor" : "timeSlot darkModeAltCell"} />
         }
       })}
-      {/* <Lesson /> */}
-      
-      {/* {currentPlan.map((mod,index) => {
-        return (
-          <>
-            {mod.index.lessons.map(lesson => {
-              if (lesson.day === day.toUpperCase()) {
-                const lessonWidth = calculateLessonWidth(lesson.startTime, lesson.endTime);
-                const lessonOffset = calculateLessonOffset(lesson.startTime);
-                const overlapStyle = handleOverlap(lessonWidth, lessonOffset);
-                return (
-                  <Lesson 
-                    width={lessonWidth}
-                    height={overlapStyle.height}
-                    offset={lessonOffset}
-                    verticalOffset={overlapStyle.verticalOffset}
-                    color={colorArray[index]}
-                    courseCode={mod.courseCode}
-                    type={lesson.type}
-                    group={lesson.group}
-                    venue={lesson.venue}
-                    teachingWeeks={lesson.teachingWeeks}
-                  />
-                )
-              }
-            })}
-          </>
-        )
-      })} */}
     </ListGroup>
   );
 }

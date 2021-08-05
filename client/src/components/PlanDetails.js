@@ -13,7 +13,7 @@ function PlanDetails() {
     const { customOptions } = useContext(CustomisationContext);
 
     return (
-        <Table striped hover size="sm" variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}>
+        <Table responsive striped hover size="sm" variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}>
             <thead>
             <tr>
                 <th scope="col">#</th>

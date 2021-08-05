@@ -69,7 +69,7 @@ function CourseSelectionPage() {
   }
 
   return (
-    <Container fluid className={`px-4 pt-3 main ${customOptions.displaySetting}`}>
+    <Container fluid className={`px-1 pt-3 main ${customOptions.displaySetting}`}>
       {!canGenerate && showError && 
         <Row>
           <Alert variant="danger" onClose={() => setShowError(false)} dismissible>
@@ -84,24 +84,28 @@ function CourseSelectionPage() {
         </Row>
       }
       <Row>
-        <Col xs={12} lg={3}>
-          <h5 className="text-center">Select Course Codes</h5>
-          <hr/>
-          <CourseInputGroup/>
-
-          <hr/>
-          
-          <Button 
-            variant="outline-primary m-1"
-            onClick={() => retrieveTimetablePlans()}>
-            Generate Plans!
-          </Button>
-          <Button 
-            variant="outline-primary m-1"
-            onClick={() => setSelectedCourses(Array(7).fill(""))}>Clear All</Button>
-        </Col>
+        
         <Col xs={12} lg={9} className="d-flex flex-column align-items-center">
           <CourseDatabase/>
+        </Col>
+        <Col xs={12} lg={3} className="pt-3 pl-0">
+          <h5 className="text-center">Courses Selected</h5>
+          <hr/>
+          <CourseInputGroup/>
+          <Row className="d-flex justify-content-center">
+            <Button 
+            className="w-50"
+              variant="outline-primary m-1"
+              onClick={() => retrieveTimetablePlans()}>
+              Generate Plans!
+            </Button>
+            <Button 
+            className="w-50"
+              variant="outline-primary m-1"
+              onClick={() => setSelectedCourses(Array(7).fill(""))}>
+              Clear All
+            </Button>
+          </Row>
         </Col>
       </Row>
 

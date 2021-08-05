@@ -25,12 +25,33 @@
   .sticky-nav {
     flex-direction: row;
   }
+
+  .top-row-toggle{
+    margin-left: 1%;
+  }
+
+  .top-row-download{
+    justify-content: flex-end;
+    margin-right: 1%;
+  }
  }
 
  /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
   .sticky-nav {
     flex-direction: column;
+  }
+
+  .tabs{
+    flex-direction: column;
+  }
+
+  .top-row-toggle{
+    justify-content: center;
+  }
+
+  .top-row-download{
+    justify-content: center;
   }
  }
 
@@ -40,7 +61,7 @@
 }
 
 .retrievedCourses {
-  width: 80%;
+  width: 90%;
   height: 65%;
 }
 
