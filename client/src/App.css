@@ -80,6 +80,7 @@
   padding-left: 3px;
   padding-top: 3px;
   transform: translateX(4vw);
+  margin: 0px;
   opacity: 0.85;
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.4 );
 }

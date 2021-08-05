@@ -56,6 +56,7 @@ class ClashChecker {
      * 3) Teaching Wk1-3,5-7 (range + combination)
      * 4) "" (empty string - means will happen every week)
      * 5) "Not conducted during teaching weeks" / "Asychronous online learning" / etc - assume it'll never clash
+     * 6) Teaching Wk2 (single week only)
      */
 
     // one of them happens every week - so will clash
@@ -108,6 +109,8 @@ class ClashChecker {
       for (let week = startWeek; week <= endWeek; week++) {
         weeksArray.push(""+week);
       }
+    } else { // format 6
+      weeksArray.push(teachingWeeksStr);
     }
 
     return weeksArray;
