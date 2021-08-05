@@ -38,7 +38,7 @@ function SettingsPage() {
       className={`px-4 pt-3 main ${customOptions.displaySetting}`}>
 
       <hr/>
-      <h5 className="text-center">Customisation Options (beta)</h5>
+      <h5 className="text-center">⚙️ Customisation Options (beta) ⚙️</h5>
       <hr/>
 
       <Form>
@@ -52,24 +52,22 @@ function SettingsPage() {
       </Form>
 
       <hr/>
-      <h5 className="text-center">NTU Stars V2 - Features</h5>
+      <h5 className="text-center">✔️ NTU Stars V2 - Features ✔️</h5>
       <hr/>
       
       <ListGroup variant="flush">
         <ListGroup.Item className={customOptions.displaySetting}>Automatic Timetable Generation</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Improved Summary of Timetable Details</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Fixing of Specific Indexes</ListGroup.Item>
+        <ListGroup.Item className={customOptions.displaySetting}>Editing of Timetable Plans</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Advanced Options such as Free Times, No Back To Back Lessons</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Saving and Downloading of Plans</ListGroup.Item>
       </ListGroup>
 
       <hr/>
-      <h5 className="text-center">About Us</h5>
+      <h5 className="text-center">❓ About the Website ❓</h5>
       <hr/>
 
-      <Row> 
-        A side-project by Chong Shen Rui and Toh Jun Wei.
-      </Row>
       <Row>
         Based of the current Student Automated Registration System (STARS), 
         NTU Stars V2 serves to improve upon its existing functionality and address common use cases when using the system, 
@@ -77,11 +75,14 @@ function SettingsPage() {
       </Row>
 
       <hr/>
-      <Row className="d-flex justify-content-center font-italic pt-4">
+      <Row className="d-flex justify-content-center font-italic pt-4 pb-3">
         may the force be with you
       </Row>
       <Row className="d-flex justify-content-center font-italic">
         ~ Build V1.0.0 ~
+      </Row>
+      <Row className="d-flex justify-content-center font-italic">
+        Made by Chong Shen Rui and Toh Jun Wei
       </Row>
       <Col className="d-flex justify-content-center font-italic pb-4">
         <a target="_blank" rel="noopener noreferrer" href="https://icons8.com/icon/121624/pixel-star">Pixel Star</a>

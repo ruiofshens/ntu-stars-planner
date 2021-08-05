@@ -28,7 +28,8 @@ function SavedPlansOverview() {
 
     return (
         <Row>
-            <Col xs={2}>
+            <Col xs={1}>
+            Load Plan:
                 <Form.Control 
                 size="sm" 
                 as="select" 
@@ -39,7 +40,7 @@ function SavedPlansOverview() {
                     <option value = {2}>Plan 3</option>
                 </Form.Control>
             </Col>
-            <Col xs={10}>
+            <Col xs={11}>
                 <PlanDetails/>
             </Col>
         </Row>

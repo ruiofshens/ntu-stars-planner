@@ -2,13 +2,13 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 
 function Lesson(props) {
-  console.log(props.clashed);
   const style = {
     backgroundColor: props.color, 
     width: props.width, 
     fontSize: "0.75vw", 
     color: !props.clashed ? "black" : "red",
     fontWeight: !props.clashed ? "normal" : "bold",
+    borderRadius: "5px",
     transform: `translate(${props.offset}`, 
     position: props.position,
   }

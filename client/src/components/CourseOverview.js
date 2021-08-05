@@ -31,17 +31,18 @@ function CourseOverview() {
 
   return (
     <Row>
-      <Col xs={2}>
+      <Col xs={1}>
+        Save To:
         <Row className="px-1 my-1 align-items-center">
           <Form.Control size="sm" as="select" onChange={choice => saveToPlan(choice.target.value)}>
-              <option value = {-1}>Save to Plan!</option>
-              <option value = {0}>Save to Plan 1</option>
-              <option value = {1}>Save to Plan 2</option>
-              <option value = {2}>Save to Plan 3</option>
+              <option value = {-1}>Choose Plan</option>
+              <option value = {0}>Plan 1</option>
+              <option value = {1}>Plan 2</option>
+              <option value = {2}>Plan 3</option>
           </Form.Control>
         </Row>
       </Col>
-      <Col xs={10}>
+      <Col xs={11}>
         <PlanDetails/>
       </Col>
     </Row>
