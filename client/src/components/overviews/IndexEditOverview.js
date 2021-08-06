@@ -12,6 +12,8 @@ import { SavedPlansContext } from '../../contexts/SavedPlansContext';
 import { Form } from 'react-bootstrap';
 import { fetchVacanciesAndWaitlist } from '../../services/DataRetriever';
 
+import storageAvailable from '../../services/storageAvailable';
+
 function IndexEditOverview() {
   const { setCurrentPlan } = useContext(CurrentPlanContext);
   const { courses } = useContext(CoursesContext);
@@ -31,6 +33,12 @@ function IndexEditOverview() {
       tempSavedPlans.plans[value] = [...currentPlan];
       setSavedPlans({...tempSavedPlans, currentIndex: tempSavedPlans.currentIndex});
       alert(`Saved to Plan ${+value+1}!`); //Unary plus operator converts value to number in string literal
+      if (storageAvailable("localStorage")) {
+        localStorage.setItem(`saved-${+value+1}`, JSON.stringify(tempSavedPlans.plans[value]));
+      } else {
+        alert("Your browser does not support local storage or the storage has ran out of space. " +
+              "Either use another browser or clear your browsing history for this site to keep your saved plans across different sessions.")
+      }
     }
   }
 
@@ -73,6 +81,7 @@ function IndexEditOverview() {
                 examEnd={course.examEnd}
                 planToEdit={planToEdit}
                 setCurrentPlan={setCurrentPlan}
+                key={`edit-index-row-${number+1}`}
               />
             )
           })}
@@ -87,6 +96,7 @@ function CourseRow(props) {
   const [indexes, setIndexes] = useState([]); // holds vacancies and waitlist data for each index
 
   useEffect(() => {
+    if (!props.course) return; // temp fix
     async function getVacanciesAndWaitlist() {
       const indexes = await fetchVacanciesAndWaitlist(props.course.courseCode);
       if (indexes.length === 0) { // retrieved after 10pm
@@ -96,7 +106,13 @@ function CourseRow(props) {
           waitlistLength: "NA"
         }))
       }
-      setIndexes(indexes);
+      const fullTimeIndexes = [];
+      indexes.forEach(index => {
+        if (props.course.indexes.filter(ftIndex => ftIndex.indexNo === index.indexNo).length !== 0) { // find if index number exists in props.course, which only has FT indexes
+          fullTimeIndexes.push(index);
+        }
+      });
+      setIndexes(fullTimeIndexes);
     }
     getVacanciesAndWaitlist();
   }, []);

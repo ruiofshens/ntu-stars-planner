@@ -9,20 +9,14 @@ const SelectedCoursesContextProvider = (props) => {
 
     //Add selected course to current array of selected courses
     const addSelection = (courseCode) => {
-        // setSelectedCourses([...selectedCourses, courseCode]);
         if (!selectedCourses.includes(courseCode)){
             let emptySlot = selectedCourses.indexOf("");
             setSelectedCourses([...selectedCourses.slice(0, emptySlot), courseCode, ...selectedCourses.slice(emptySlot+1)]);
         }
     };
 
-    /* const addSelection = (courseCode, courseName, AUs) => {
-        setSelectedCourses([...selectedCourses, {courseCode, courseName, AUs}]);
-    }; */
-
-    //REmove selected course to current array of selected courses
+    //Remove selected course to current array of selected courses
     const removeSelection = (index) => {
-        // setSelectedCourses(selectedCourses.filter(course => course !== courseCode));
         setSelectedCourses([...selectedCourses.slice(0, index), "", ...selectedCourses.slice(index+1)]);
     };
 

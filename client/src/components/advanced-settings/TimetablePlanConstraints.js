@@ -19,7 +19,7 @@ function TimetablePlanConstraints() {
           <Accordion.Item eventKey="advanced-settings" className={customOptions.displaySetting}>
             <Accordion.Header><strong>Advanced Settings</strong></Accordion.Header>
             <Accordion.Body>
-              <Tabs className="vertical-if-sm" variant="pills" defaultActiveKey="use-indexes" id="adjust-rules" className="mb-3">
+              <Tabs className="vertical-if-sm mb-3" variant="pills" defaultActiveKey="use-indexes" id="adjust-rules">
                 <Tab eventKey="use-indexes" title="Use Indexes">
                   <UseIndexes />
                 </Tab>

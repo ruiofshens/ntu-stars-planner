@@ -2,7 +2,7 @@ import './App.css';
 
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
 
 import TimetablePage from './pages/TimetablePage.js';
 import CourseSelectionPage from './pages/CourseSelectionPage.js';
@@ -51,11 +51,11 @@ function App() {
                       </Navbar.Brand>
                     </LinkContainer>
                     <Nav 
-                    activeKey={window.location.pathname} 
+                    // activeKey={window.location.pathname} 
                     className="nav-options">
-                      <LinkContainer to="/">
+                      <IndexLinkContainer to="/">
                         <Nav.Link>Timetable</Nav.Link>
-                      </LinkContainer>
+                      </IndexLinkContainer>
                       <LinkContainer to="/courses">
                         <Nav.Link>Courses</Nav.Link>
                       </LinkContainer>

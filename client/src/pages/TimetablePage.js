@@ -7,7 +7,6 @@ import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 
 import Timetable from '../components/timetable/Timetable';
 import CourseOverview from '../components/overviews/CourseOverview';
@@ -77,7 +76,7 @@ function TimetablePage() {
         break;
       case "choose-plan":
         if (!exitEditPlan("choose-plan")) break;
-        if (currentPlan.length !== 0) //Check if current plan is defined alr first
+        if (currentPlan.length !== 0 && timetablePlans.timetables) //Check if current plan is defined alr first
           setCurrentPlan(timetablePlans.timetables[timetablePlans.currentIndex]);
         break;
       case "save-plan":

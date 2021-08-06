@@ -8,7 +8,6 @@ const OverlappedLessons = (props) => {
   
   // first reset all clashed states
   props.lessons.forEach(lesson => lesson.clashed = false);
-  // if (props.lessons[0].day === "WED") console.log(props.lessons)
   for (let i=0; i<props.lessons.length-1; i++) {
     let curr = props.lessons[i];
     for (let j=i+1; j<props.lessons.length; j++) {
@@ -24,7 +23,7 @@ const OverlappedLessons = (props) => {
 
   return (
     <div id="overlappedLessons" style={{position: "absolute", zIndex: 1}}>
-      {props.lessons.map(lesson => {
+      {props.lessons.map((lesson, number) => {
         const lessonWidth = props.calculateLessonWidth(lesson.startTime, lesson.endTime);
         const lessonOffset = props.calculateLessonOffset(lesson.startTime);
         return (
@@ -39,6 +38,7 @@ const OverlappedLessons = (props) => {
             venue={lesson.venue}
             teachingWeeks={lesson.teachingWeeks}
             clashed={lesson.clashed}
+            key={number}
           />
         )
       })}
