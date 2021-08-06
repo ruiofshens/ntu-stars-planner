@@ -42,16 +42,18 @@ function SavedPlansOverview() {
         <Row>
             <Col xs={12} lg={1} className="d-flex flex-column align-items-center">
             Load Plan:
-                <Form.Control 
-                size="sm" 
-                as="select" 
-                value={chosenPlan}
-                onChange={choice => renderPlan(choice.target.value)}>
-                    <option value = {-1}>Choose Plan</option>
-                    <option value = {0}>Plan 1</option>
-                    <option value = {1}>Plan 2</option>
-                    <option value = {2}>Plan 3</option>
-                </Form.Control>
+                <Row className="px-1 pb-4 my-1 align-items-center">
+                    <Form.Control 
+                    size="sm" 
+                    as="select" 
+                    value={chosenPlan}
+                    onChange={choice => renderPlan(choice.target.value)}>
+                        <option value = {-1}>Choose Plan</option>
+                        <option value = {0}>Plan 1</option>
+                        <option value = {1}>Plan 2</option>
+                        <option value = {2}>Plan 3</option>
+                    </Form.Control>
+                </Row>
             </Col>
             <Col xs={12} lg={11}>
                 <PlanDetails/>

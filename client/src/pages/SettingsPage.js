@@ -38,7 +38,7 @@ function SettingsPage() {
       className={`px-4 pt-3 main ${customOptions.displaySetting}`}>
 
       <hr/>
-      <h5 className="text-center">⚙️ Customisation Options (beta) ⚙️</h5>
+      <h5 className="text-center">⚙️ Customisation Options ⚙️</h5>
       <hr/>
 
       <Form>
@@ -52,15 +52,15 @@ function SettingsPage() {
       </Form>
 
       <hr/>
-      <h5 className="text-center">✔️ NTU Stars V2 - Features ✔️</h5>
+      <h5 className="text-center">✔️ The Features ✔️</h5>
       <hr/>
       
       <ListGroup variant="flush">
         <ListGroup.Item className={customOptions.displaySetting}>Automatic Timetable Generation</ListGroup.Item>
-        <ListGroup.Item className={customOptions.displaySetting}>Improved Summary of Timetable Details</ListGroup.Item>
+        <ListGroup.Item className={customOptions.displaySetting}>Waitlist and Vacancy Details included (10am to 10pm)</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Fixing of Specific Indexes</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Editing of Timetable Plans</ListGroup.Item>
-        <ListGroup.Item className={customOptions.displaySetting}>Advanced Options such as Free Times, No Back To Back Lessons</ListGroup.Item>
+        <ListGroup.Item className={customOptions.displaySetting}>Advanced Options: Choosing Free Times, No Back To Back Lessons</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Saving and Downloading of Plans</ListGroup.Item>
       </ListGroup>
 

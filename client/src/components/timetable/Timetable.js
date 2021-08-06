@@ -91,7 +91,18 @@ function TimetableRow({ day, lessons }) {
 
     // need to add 10 min to endTime because lessons end 10min "earlier"
     let lessonDuration = (new Date(endTime.getTime() + 10*60*1000) - startTime) / (1000*60);
-    return (lessonDuration * ratio) + "vw";
+
+    //Media query
+    if (window.matchMedia( "(max-width: 575.98px)" ).matches) {
+      // window width is at less than 575.98px (phones)
+      return (lessonDuration * ratio * 3) + "vw";
+    } else if (window.matchMedia( "(max-width: 991.98px)" ).matches) {
+      // Medium devices (tablets, less than 992px)
+      return (lessonDuration * ratio * 2) + "vw";
+    } else {
+      // window width is greater than 575.98px (computers)
+      return (lessonDuration * ratio ) + "vw";
+    }
   }
 
   const calculateLessonOffset = (startTime) => {
@@ -100,11 +111,22 @@ function TimetableRow({ day, lessons }) {
     // day text takes up 4vw
     const startingHour = new Date("January 1 2021 8:00"); // 8am
     let offsetInMin = (startTime - startingHour) / (1000*60);
-    return (offsetInMin * ratio + 4) + "vw";
+
+    //Media query
+    if (window.matchMedia( "(max-width: 575.98px)" ).matches) {
+      // window width is at less than 575.98px (phones)
+      return ((offsetInMin * ratio * 3) + 12) + "vw";
+    } else if (window.matchMedia( "(max-width: 991.98px)" ).matches) {
+      // Medium devices (tablets, less than 992px)
+      return ((offsetInMin * ratio * 2) + 8) + "vw";
+    } else {
+      // window width is greater than 575.98px (computers)
+      return ((offsetInMin * ratio) + 4) + "vw";
+    }
   }
   
   return (
-    <ListGroup horizontal className="position-relative">
+    <ListGroup horizontal className="position-relative timetableRow">
       {lessons.map((lesson, number) => {
         if (!(lesson instanceof Array)) {
           const width = calculateLessonWidth(lesson.startTime, lesson.endTime);
@@ -136,7 +158,7 @@ function TimetableRow({ day, lessons }) {
       })}
 
       <ListGroup.Item 
-        className="dayCell timetableRow" 
+        className="dayCell" 
         style={ maxOverlapped > 1 ? {height: `${maxOverlapped*12}vh`} : {}}
       >
         {day}
@@ -159,7 +181,7 @@ function TimeRow() {
 
   return (
     <>
-      <ListGroup horizontal className="timeRow">
+      <ListGroup horizontal className="timeRow mt-2">
         <ListGroup.Item className={`dayCell border-0 ${customOptions.displaySetting}`}></ListGroup.Item>
         {Array(15).fill("").map((e, i) => (
           <ListGroup.Item key={i} className={`timeSlot timeCell border-0 px-0 text-center ${customOptions.displaySetting}`}>

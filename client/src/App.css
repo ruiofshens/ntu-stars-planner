@@ -14,46 +14,21 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   font-family: 'Nunito', sans-serif;
+  flex-direction: row;
 }
 
- /* Large devices (desktops, less than 1200px) */
- @media (min-width: 992px) {
-  .nav-options {
-    border-left: 1px solid black;
-  }
+.nav-options {
+  border-left: 1px solid black;
+}
 
-  .sticky-nav {
-    flex-direction: row;
-  }
+.top-row-toggle{
+  margin-left: 1%;
+}
 
-  .top-row-toggle{
-    margin-left: 1%;
-  }
-
-  .top-row-download{
-    justify-content: flex-end;
-    margin-right: 1%;
-  }
- }
-
- /* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) { 
-  .sticky-nav {
-    flex-direction: column;
-  }
-
-  .tabs{
-    flex-direction: column;
-  }
-
-  .top-row-toggle{
-    justify-content: center;
-  }
-
-  .top-row-download{
-    justify-content: center;
-  }
- }
+.top-row-download{
+  justify-content: flex-end;
+  margin-right: 1%;
+}
 
 .database-title {
   background-color: #0b77a2;
@@ -82,6 +57,7 @@
   margin: 0px;
   opacity: 0.85;
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.4 );
+  font-size: 0.75vw;
 }
 
 .timetableRow {
@@ -97,10 +73,6 @@
   transform: translateX(-50%);
 }
 
-.timetableContainer {
-  overflow-x:scroll;
-}
-
 .timeSlot {
   /* 4vw for day, 1.5vw each side for horizontal padding, remaining 92vw split among 15 cells*/
   width: 6.2vw;
@@ -112,11 +84,11 @@
 
 .dayCell {
   background-color: #d47c7c;
-  width: 4vw;
   text-align: center;
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
+  width: 4vw;
 }
 
 /* ============= For light mode and dark mode customisation ============= */
@@ -142,4 +114,105 @@
 
 .darkModeAltCell {
   background-color:#494949;
+}
+
+/* ============= Media Responsiveness ============= */
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+  .sticky-nav {
+    flex-direction: column;
+  }
+
+  .vertical-if-sm{
+    flex-direction: column;
+  }
+
+  .top-row-toggle{
+    justify-content: center;
+  }
+
+  .top-row-download{
+    justify-content: center;
+  }
+
+  .timeSlot {
+    width: 12.4vw;
+  }
+
+  .lessonText {
+    font-size: 1.6vw;
+  }
+
+  .dayCell {
+    width: 8vw;
+  }
+
+  .timetableContainer {
+    overflow-x: scroll;
+  }
+
+  .timetableRow {
+    /* whole timetable is 4vw (day cell) + 6.2vw*15 = 97vw. Then multiply by 2 */
+    width: 194vw;
+  }
+
+  .timeRow {
+    width: 194vw;
+    font-size: 1.6vw;
+  }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+/* iPhone X is 812 pixels long */
+@media (max-width: 850px) {
+  .lessonText {
+    font-size: 1vw;
+  }
+ }
+
+
+ /* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+  .sticky-nav {
+    flex-direction: column;
+  }
+
+  .vertical-if-sm{
+    flex-direction: column;
+  }
+
+  .top-row-toggle{
+    justify-content: center;
+  }
+
+  .top-row-download{
+    justify-content: center;
+  }
+
+  .timeSlot {
+    width: 18.6vw;
+  }
+
+  .lessonText {
+    font-size: 2.4vw;
+  }
+
+  .dayCell {
+    width: 12vw;
+  }
+
+  .timetableContainer {
+    overflow-x: scroll;
+  }
+
+  .timetableRow {
+    /* whole timetable is 4vw (day cell) + 6.2vw*15 = 97vw. Then multiply by 3 */
+    width: 291vw;
+  }
+
+  .timeRow {
+    width: 291vw;
+    font-size: 2.4vw;
+  }
 }
