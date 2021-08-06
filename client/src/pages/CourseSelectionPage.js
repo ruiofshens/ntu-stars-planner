@@ -70,6 +70,7 @@ function CourseSelectionPage() {
 
   return (
     <Container fluid className={`px-1 pt-3 main ${customOptions.displaySetting}`}>
+    
       {!canGenerate && showError && 
         <Row>
           <Alert variant="danger" onClose={() => setShowError(false)} dismissible>
@@ -83,8 +84,7 @@ function CourseSelectionPage() {
           </Alert>
         </Row>
       }
-      <Row>
-        
+      <Container fluid className="d-flex flex-row">
         <Col xs={12} lg={9} className="d-flex flex-column align-items-center">
           <CourseDatabase/>
         </Col>
@@ -107,11 +107,12 @@ function CourseSelectionPage() {
             </Button>
           </Row>
         </Col>
-      </Row>
+      </Container>
 
-      <Row className="mt-4 mb-2">
+      <Container fluid className="mt-4 mb-2">
         <TimetablePlanConstraints />
-      </Row>
+      </Container>
+
     </Container>
   );
 }

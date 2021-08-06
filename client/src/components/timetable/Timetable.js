@@ -60,7 +60,7 @@ function Timetable() {
   console.log("after:", JSON.stringify(allLessons.THU))
 
   return (
-      <Container fluid style={{padding: "0 1.5vw"}}>
+      <Container fluid style={{padding: "0 0"}} className="timetableContainer">
         <TimeRow />
         <TimetableRow day="Mon" lessons={allLessons.MON}/>
         <TimetableRow day="Tue" lessons={allLessons.TUE}/>
@@ -165,7 +165,7 @@ function TimeRow() {
       <ListGroup horizontal className="timeRow">
         <ListGroup.Item className={`dayCell border-0 ${customOptions.displaySetting}`}></ListGroup.Item>
         {Array(15).fill("").map((e, i) => (
-          <ListGroup.Item key={i} className={`timeSlot timeCell border-0 text-center ${customOptions.displaySetting}`}>
+          <ListGroup.Item key={i} className={`timeSlot timeCell border-0 px-0 text-center ${customOptions.displaySetting}`}>
             <time>{i+8 < 10 ? "0"+(i+8) : i+8}:00</time>
           </ListGroup.Item>
         ))}

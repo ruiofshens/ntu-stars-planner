@@ -73,7 +73,6 @@
 /* ============= Styling for timetable component ============= */
 
 .lessonText {
-  font-size: 14px;
   top: 0;
   left: 0;
   z-index: 1;
@@ -91,10 +90,16 @@
 
 .timeRow {
   height: 6vh;
+  /* word-wrap: break-word; */
+  align-items: flex-end;
 }
 
 .timeCell {
   transform: translateX(-50%);
+}
+
+.timetableContainer {
+  overflow-x:scroll;
 }
 
 .timeSlot {

@@ -106,7 +106,7 @@ function TimetablePage() {
 
   return (
     <Container fluid className={`px-0 main ${customOptions.displaySetting}`}>
-      <Row className="px-1 pt-3 align-items-center">
+      <Row className="mx-0 pt-3 align-items-center">
         {currentTab === "choose-plan" ?
         <Col className="d-flex flex-row top-row-toggle">
           <Col xs="auto">
@@ -142,9 +142,9 @@ function TimetablePage() {
         </Col>        
       </Row>
 
-      <Row ref={ref}>
+      <Container fluid ref={ref}>
         <Timetable />
-      </Row>
+      </Container>
 
       <Container fluid className ="pt-2">
           <Tabs 
