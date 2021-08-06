@@ -94,7 +94,17 @@ function TimetableRow({ day, lessons }) {
 
     // need to add 10 min to endTime because lessons end 10min "earlier"
     let lessonDuration = (new Date(endTime.getTime() + 10*60*1000) - startTime) / (1000*60);
-    return (lessonDuration * ratio) + "vw";
+
+    //Media query
+    var mq = window.matchMedia( "(max-width: 575.98px)" );
+    if (mq.matches) {
+        // window width is at less than 575.98px (phones)
+        return (lessonDuration * ratio * 3) + "vw";
+    }
+    else {
+        // window width is greater than 575.98px (computers)
+        return (lessonDuration * ratio ) + "vw";
+    }
   }
 
   const calculateLessonOffset = (startTime) => {
@@ -103,7 +113,7 @@ function TimetableRow({ day, lessons }) {
     // day text takes up 4vw
     const startingHour = new Date("January 1 2021 8:00"); // 8am
     let offsetInMin = (startTime - startingHour) / (1000*60);
-    return (offsetInMin * ratio + 4) + "vw";
+    return ((offsetInMin * ratio * 1) + 4) + "vw";
   }
   
   return (
@@ -145,10 +155,10 @@ function TimetableRow({ day, lessons }) {
       {Array(15).fill().map((e, i) => {
         if (i%2 === 0) {
           return <ListGroup.Item key={i} 
-          className={customOptions.displaySetting === "lightMode" ? "timeSlot" : "timeSlot darkModeCell"} />
+          className={customOptions.displaySetting === "lightMode" ? "timeSlot flex-fill" : "timeSlot darkModeCell"} />
         } else {
           return <ListGroup.Item key={i} 
-          className={customOptions.displaySetting === "lightMode" ? "timeSlot altColor" : "timeSlot darkModeAltCell"} />
+          className={customOptions.displaySetting === "lightMode" ? "timeSlot altColor flex-fill" : "timeSlot darkModeAltCell"} />
         }
       })}
     </ListGroup>

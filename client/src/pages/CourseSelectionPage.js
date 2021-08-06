@@ -84,7 +84,7 @@ function CourseSelectionPage() {
           </Alert>
         </Row>
       }
-      <Container fluid className="d-flex flex-row">
+      <Container fluid className="d-flex vertical-if-sm">
         <Col xs={12} lg={9} className="d-flex flex-column align-items-center">
           <CourseDatabase/>
         </Col>

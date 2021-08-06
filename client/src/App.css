@@ -34,6 +34,15 @@
     justify-content: flex-end;
     margin-right: 1%;
   }
+
+  .timeSlot {
+    /* 4vw for day, 1.5vw each side for horizontal padding, remaining 92vw split among 15 cells*/
+    width: 6.2vw;
+  }
+
+  .lessonText {
+    font-size: 0.75vw;
+  }
  }
 
  /* Extra small devices (portrait phones, less than 576px) */
@@ -42,7 +51,7 @@
     flex-direction: column;
   }
 
-  .tabs{
+  .vertical-if-sm{
     flex-direction: column;
   }
 
@@ -52,6 +61,18 @@
 
   .top-row-download{
     justify-content: center;
+  }
+
+  .timetableContainer {
+    width: 292.5vw;
+  }
+
+  .timeSlot {
+    width: 292.5vw;
+  }
+
+  .lessonText {
+    font-size: 3vw;
   }
  }
 
@@ -95,15 +116,6 @@
 
 .timeCell {
   transform: translateX(-50%);
-}
-
-.timetableContainer {
-  overflow-x:scroll;
-}
-
-.timeSlot {
-  /* 4vw for day, 1.5vw each side for horizontal padding, remaining 92vw split among 15 cells*/
-  width: 6.2vw;
 }
 
 .altColor {
