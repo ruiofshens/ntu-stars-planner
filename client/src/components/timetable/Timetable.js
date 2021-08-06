@@ -58,7 +58,7 @@ function Timetable() {
   });
 
   return (
-      <Container fluid style={{padding: "0 0"}} className="timetableContainer">
+      <Container fluid style={{padding: "0 1.5vw"}} className="timetableContainer">
         <TimeRow />
         <TimetableRow day="Mon" lessons={allLessons.MON}/>
         <TimetableRow day="Tue" lessons={allLessons.TUE}/>
@@ -72,9 +72,6 @@ function Timetable() {
 
 // Contains the cells for each day as a row, excluding the day itself
 function TimetableRow({ day, lessons }) {
-
-  // const { currentPlan } = useContext(CurrentPlanContext);
-  // const lessonsArray = [];
 
   const { customOptions } = useContext(CustomisationContext);
 
@@ -113,11 +110,21 @@ function TimetableRow({ day, lessons }) {
     // day text takes up 4vw
     const startingHour = new Date("January 1 2021 8:00"); // 8am
     let offsetInMin = (startTime - startingHour) / (1000*60);
-    return ((offsetInMin * ratio * 1) + 4) + "vw";
+
+    //Media query
+    var mq = window.matchMedia( "(max-width: 575.98px)" );
+    if (mq.matches) {
+        // window width is at less than 575.98px (phones)
+        return ((offsetInMin * ratio * 3) + 12) + "vw";
+    }
+    else {
+        // window width is greater than 575.98px (computers)
+        return ((offsetInMin * ratio) + 4) + "vw";
+    }
   }
   
   return (
-    <ListGroup horizontal className="position-relative">
+    <ListGroup horizontal className="position-relative timetableRow">
       {lessons.map(lesson => {
         if (!(lesson instanceof Array)) {
           const width = calculateLessonWidth(lesson.startTime, lesson.endTime);
@@ -147,7 +154,7 @@ function TimetableRow({ day, lessons }) {
       })}
 
       <ListGroup.Item 
-        className="dayCell timetableRow" 
+        className="dayCell" 
         style={ maxOverlapped > 1 ? {height: `${maxOverlapped*12}vh`} : {}}
       >
         {day}
@@ -155,10 +162,10 @@ function TimetableRow({ day, lessons }) {
       {Array(15).fill().map((e, i) => {
         if (i%2 === 0) {
           return <ListGroup.Item key={i} 
-          className={customOptions.displaySetting === "lightMode" ? "timeSlot flex-fill" : "timeSlot darkModeCell"} />
+          className={customOptions.displaySetting === "lightMode" ? "timeSlot" : "timeSlot darkModeCell"} />
         } else {
           return <ListGroup.Item key={i} 
-          className={customOptions.displaySetting === "lightMode" ? "timeSlot altColor flex-fill" : "timeSlot darkModeAltCell"} />
+          className={customOptions.displaySetting === "lightMode" ? "timeSlot altColor" : "timeSlot darkModeAltCell"} />
         }
       })}
     </ListGroup>
@@ -170,7 +177,7 @@ function TimeRow() {
 
   return (
     <>
-      <ListGroup horizontal className="timeRow">
+      <ListGroup horizontal className="timeRow timetableRow">
         <ListGroup.Item className={`dayCell border-0 ${customOptions.displaySetting}`}></ListGroup.Item>
         {Array(15).fill("").map((e, i) => (
           <ListGroup.Item key={i} className={`timeSlot timeCell border-0 px-0 text-center ${customOptions.displaySetting}`}>
