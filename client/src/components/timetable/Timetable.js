@@ -35,7 +35,6 @@ function Timetable() {
     lesson.color = COLORS[i];
     allLessons[lesson.day].push(lesson);
   }));
-  console.log("before:", JSON.stringify(allLessons.THU))
   // identify all overlapping lessons
   Object.values(allLessons).forEach(lessons => {
     for (let i=0; i<lessons.length-1; i++) {
@@ -57,7 +56,6 @@ function Timetable() {
       }
     }
   });
-  console.log("after:", JSON.stringify(allLessons.THU))
 
   return (
       <Container fluid style={{padding: "0 0"}} className="timetableContainer">
