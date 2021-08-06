@@ -87,6 +87,10 @@
     /* whole timetable is 4vw (day cell) + 6.2vw*15 = 97vw. Then multiply by 3 */
     width: 291vw;
   }
+
+  .timeRow {
+    width: 291vw;
+  }
  }
 
 .database-title {
@@ -141,7 +145,6 @@
   display: flex;
   align-items: center;
   justify-content:center;
-  min-height: 12vh;
 }
 
 /* ============= For light mode and dark mode customisation ============= */
