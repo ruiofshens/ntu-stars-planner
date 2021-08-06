@@ -11,7 +11,7 @@ const SavedPlansContextProvider = (props) => {
         if (plan) plans[i] = JSON.parse(plan);
     }
 
-    const [savedPlans, setSavedPlans] = useState({plans, currentIndex: 0});
+    const [savedPlans, setSavedPlans] = useState({plans, currentIndex: -1});
 
     return (
         <SavedPlansContext.Provider value={{savedPlans, setSavedPlans}}>
