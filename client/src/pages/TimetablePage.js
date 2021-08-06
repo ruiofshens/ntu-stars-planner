@@ -77,7 +77,7 @@ function TimetablePage() {
         break;
       case "choose-plan":
         if (!exitEditPlan("choose-plan")) break;
-        if (currentPlan.length !== 0) //Check if current plan is defined alr first
+        if (currentPlan.length !== 0 && timetablePlans.timetables) //Check if current plan is defined alr first
           setCurrentPlan(timetablePlans.timetables[timetablePlans.currentIndex]);
         break;
       case "save-plan":

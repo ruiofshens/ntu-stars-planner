@@ -2,8 +2,16 @@ import React, { createContext, useState } from 'react';
 
 export const SavedPlansContext = createContext();
 
+const PLANS_COUNT = 3;
+
 const SavedPlansContextProvider = (props) => {
-    const [savedPlans, setSavedPlans] = useState({plans: new Array(3), currentIndex: 0});
+    let plans = new Array(PLANS_COUNT);
+    for (let i=0; i<PLANS_COUNT; i++) {
+        let plan = localStorage.getItem(`saved-${i+1}`);
+        if (plan) plans[i] = JSON.parse(plan);
+    }
+
+    const [savedPlans, setSavedPlans] = useState({plans, currentIndex: 0});
 
     return (
         <SavedPlansContext.Provider value={{savedPlans, setSavedPlans}}>

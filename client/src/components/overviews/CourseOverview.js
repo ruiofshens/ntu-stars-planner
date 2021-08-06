@@ -9,6 +9,7 @@ import { SavedPlansContext } from '../../contexts/SavedPlansContext';
 
 import PlanDetails from '../PlanDetails';
 
+import storageAvailable from '../../services/storageAvailable';
 
 function CourseOverview() {
 
@@ -26,6 +27,12 @@ function CourseOverview() {
       tempSavedPlans.plans[value] = [...currentPlan];
       setSavedPlans({...tempSavedPlans, currentIndex: tempSavedPlans.currentIndex});
       alert(`Saved to Plan ${+value+1}!`); //Unary plus operator converts value to number in string literal
+      if (storageAvailable("localStorage")) {
+        localStorage.setItem(`saved-${+value+1}`, JSON.stringify(tempSavedPlans.plans[value]));
+      } else {
+        alert("Your browser does not support local storage or the storage has ran out of space. " +
+              "Either use another browser or clear your browsing history for this site to keep your saved plans across different sessions.")
+      }
     }
   }
 
