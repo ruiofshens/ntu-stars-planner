@@ -14,40 +14,154 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   font-family: 'Nunito', sans-serif;
+  flex-direction: row;
 }
 
- /* Large devices (desktops, less than 1200px) */
- @media (min-width: 992px) {
-  .nav-options {
-    border-left: 1px solid black;
+.nav-options {
+  border-left: 1px solid black;
+}
+
+.top-row-toggle{
+  margin-left: 1%;
+}
+
+.top-row-download{
+  justify-content: flex-end;
+  margin-right: 1%;
+}
+
+.database-title {
+  background-color: #0b77a2;
+  color: black;
+}
+
+.retrievedCourses {
+  width: 90%;
+  height: 65%;
+}
+
+.align-plan-text {
+  display: flex;
+  align-items: center;
+}
+
+/* ============= Styling for timetable component ============= */
+
+.lessonText {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding-left: 3px;
+  padding-top: 3px;
+  transform: translateX(4vw);
+  margin: 0px;
+  opacity: 0.85;
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.4 );
+  font-size: 0.75vw;
+}
+
+.timetableRow {
+  min-height: 12vh;
+}
+
+.timeRow {
+  height: 6vh;
+  align-items: flex-end;
+}
+
+.timeCell {
+  transform: translateX(-50%);
+}
+
+.timeSlot {
+  /* 4vw for day, 1.5vw each side for horizontal padding, remaining 92vw split among 15 cells*/
+  width: 6.2vw;
+}
+
+.altColor {
+  background-color: #c9c9c9;
+}
+
+.dayCell {
+  background-color: #d47c7c;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4vw;
+}
+
+/* ============= For light mode and dark mode customisation ============= */
+
+:root {
+  --dark: #181818;
+  --light: #fefefe
+}
+
+.darkMode {
+  background-color:var(--dark);
+  color: #c9c7c7;
+}
+
+.lightMode {
+  background-color:var(--light);
+  color: #121212;
+}
+
+.darkModeCell {
+  background-color:#5a5a5a;
+}
+
+.darkModeAltCell {
+  background-color:#494949;
+}
+
+/* ============= Media Responsiveness ============= */
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+  .sticky-nav {
+    flex-direction: column;
   }
 
-  .sticky-nav {
-    flex-direction: row;
+  .vertical-if-sm{
+    flex-direction: column;
   }
 
   .top-row-toggle{
-    margin-left: 1%;
+    justify-content: center;
   }
 
   .top-row-download{
-    justify-content: flex-end;
-    margin-right: 1%;
+    justify-content: center;
   }
 
   .timeSlot {
-    /* 4vw for day, 1.5vw each side for horizontal padding, remaining 92vw split among 15 cells*/
-    width: 6.2vw;
+    width: 12.4vw;
   }
 
   .lessonText {
-    font-size: 0.75vw;
+    font-size: 1.6vw;
   }
 
   .dayCell {
-    width: 4vw;
+    width: 8vw;
   }
- }
+
+  .timetableContainer {
+    overflow-x: scroll;
+  }
+
+  .timetableRow {
+    /* whole timetable is 4vw (day cell) + 6.2vw*15 = 97vw. Then multiply by 2 */
+    width: 194vw;
+  }
+
+  .timeRow {
+    width: 194vw;
+    font-size: 1.6vw;
+  }
+}
 
  /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
@@ -90,128 +204,6 @@
 
   .timeRow {
     width: 291vw;
+    font-size: 2.4vw;
   }
- }
-
-.database-title {
-  background-color: #0b77a2;
-  color: black;
-}
-
-.retrievedCourses {
-  width: 90%;
-  height: 65%;
-}
-
-.align-plan-text {
-  display: flex;
-  align-items: center;
-}
-
-/* Medium devices (tablets, less than 992px) */
-@media (max-width: 991.98px) {
-  .sticky-nav {
-    flex-direction: column;
-  }
-
-  .vertical-if-sm{
-    flex-direction: column;
-  }
-
-  .top-row-toggle{
-    justify-content: center;
-  }
-
-  .top-row-download{
-    justify-content: center;
-  }
-
-  .timeSlot {
-    width: 12.4vw;
-  }
-
-  .lessonText {
-    font-size: 2vw;
-  }
-
-  .dayCell {
-    width: 8vw;
-  }
-
-  .timetableContainer {
-    overflow-x: scroll;
-  }
-
-  .timetableRow {
-    /* whole timetable is 4vw (day cell) + 6.2vw*15 = 97vw. Then multiply by 2 */
-    width: 194vw;
-  }
-
-  .timeRow {
-    width: 194vw;
-  }
-}
-
-/* ============= Styling for timetable component ============= */
-
-.lessonText {
-  top: 0;
-  left: 0;
-  z-index: 1;
-  padding-left: 3px;
-  padding-top: 3px;
-  transform: translateX(4vw);
-  margin: 0px;
-  opacity: 0.85;
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.4 );
-}
-
-.timetableRow {
-  min-height: 12vh;
-}
-
-.timeRow {
-  height: 6vh;
-  align-items: flex-end;
-}
-
-.timeCell {
-  transform: translateX(-50%);
-}
-
-.altColor {
-  background-color: #c9c9c9;
-}
-
-.dayCell {
-  background-color: #d47c7c;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-}
-
-/* ============= For light mode and dark mode customisation ============= */
-
-:root {
-  --dark: #181818;
-  --light: #fefefe
-}
-
-.darkMode {
-  background-color:var(--dark);
-  color: #c9c7c7;
-}
-
-.lightMode {
-  background-color:var(--light);
-  color: #121212;
-}
-
-.darkModeCell {
-  background-color:#5a5a5a;
-}
-
-.darkModeAltCell {
-  background-color:#494949;
 }
