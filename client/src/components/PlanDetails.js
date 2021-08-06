@@ -36,6 +36,7 @@ function PlanDetails() {
                             AUs={course.courseAUs}
                             examStart={course.examStart}
                             examEnd={course.examEnd}
+                            key={`plan-details-row-${number+1}`}
                         />
                     )
                 })}

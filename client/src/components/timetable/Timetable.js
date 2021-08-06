@@ -105,7 +105,7 @@ function TimetableRow({ day, lessons }) {
   
   return (
     <ListGroup horizontal className="position-relative">
-      {lessons.map(lesson => {
+      {lessons.map((lesson, number) => {
         if (!(lesson instanceof Array)) {
           const width = calculateLessonWidth(lesson.startTime, lesson.endTime);
           const offset = calculateLessonOffset(lesson.startTime);
@@ -120,6 +120,7 @@ function TimetableRow({ day, lessons }) {
               group={lesson.group}
               venue={lesson.venue}
               teachingWeeks={lesson.teachingWeeks}
+              key={number}
             />
           )
         } else {
@@ -128,6 +129,7 @@ function TimetableRow({ day, lessons }) {
               lessons={lesson}
               calculateLessonWidth={calculateLessonWidth}
               calculateLessonOffset={calculateLessonOffset}
+              key={number}
             />
           )
         }

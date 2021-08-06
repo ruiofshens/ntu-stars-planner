@@ -7,7 +7,6 @@ import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 
 import Timetable from '../components/timetable/Timetable';
 import CourseOverview from '../components/overviews/CourseOverview';

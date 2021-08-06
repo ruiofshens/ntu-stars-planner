@@ -81,6 +81,7 @@ function IndexEditOverview() {
                 examEnd={course.examEnd}
                 planToEdit={planToEdit}
                 setCurrentPlan={setCurrentPlan}
+                key={`edit-index-row-${number+1}`}
               />
             )
           })}

@@ -23,7 +23,7 @@ const OverlappedLessons = (props) => {
 
   return (
     <div id="overlappedLessons" style={{position: "absolute", zIndex: 1}}>
-      {props.lessons.map(lesson => {
+      {props.lessons.map((lesson, number) => {
         const lessonWidth = props.calculateLessonWidth(lesson.startTime, lesson.endTime);
         const lessonOffset = props.calculateLessonOffset(lesson.startTime);
         return (
@@ -38,6 +38,7 @@ const OverlappedLessons = (props) => {
             venue={lesson.venue}
             teachingWeeks={lesson.teachingWeeks}
             clashed={lesson.clashed}
+            key={number}
           />
         )
       })}
