@@ -8,7 +8,6 @@ const OverlappedLessons = (props) => {
   
   // first reset all clashed states
   props.lessons.forEach(lesson => lesson.clashed = false);
-  // if (props.lessons[0].day === "WED") console.log(props.lessons)
   for (let i=0; i<props.lessons.length-1; i++) {
     let curr = props.lessons[i];
     for (let j=i+1; j<props.lessons.length; j++) {

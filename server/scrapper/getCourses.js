@@ -60,7 +60,6 @@ const getCourses = async () => {
         const courseCode = $(element).find('td[width="100"] > b > font[color="#0000FF"]').text();
         const courseName = $(element).find('td[width="500"] > b > font[color="#0000FF"]').text();
         const courseAUs = $(element).find('td[width="50"] > b > font[color="#0000FF"]').text().trim();
-        // console.log(courseCode, courseName, courseAUs);
         course = {
           courseCode,
           courseName,

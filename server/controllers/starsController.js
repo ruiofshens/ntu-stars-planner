@@ -1,6 +1,5 @@
 /* Handlers for the routes
 Keep the code for the routes shorter by shifting the handlers to this seperate file */
-// import TimetableGenerator from '../timetables/generator.js';
 import { getVacancies } from '../scrapper/getVacancies.js';
 
 /* Import models */
@@ -10,7 +9,6 @@ import ExamModel from '../models/examDetails.js';
 export const getAllCourses = async (req, res) => {
     try {
         const allCourses = await CourseModel.find(); //Finding something in a model is async
-        console.log("fetched all courses");
         res.status(200).json(allCourses); // res.json() is a Express.js function that sends a JSON response
     } catch (error) {
         res.status(404).json({message: error.message});
@@ -26,18 +24,6 @@ export const getCourses = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
-
-// export const getTimetables = async (req, res) => {
-//     // courseCodes must be sent as a query params separated by comma
-//     try {
-//         const courseCodes = req.query.courseCodes.split(",");
-//         const timetables = await TimetableGenerator(courseCodes); // { canGenerate: boolean, timetables: Array }
-        
-//         res.json(timetables);
-//     } catch (error) {
-//         res.status(500).json({ error });
-//     }
-// }
 
 export const getVacanciesAndWaitlist = async (req, res) => {
     try {

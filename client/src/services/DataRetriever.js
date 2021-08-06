@@ -12,9 +12,9 @@ export const fetchAllCourses = async () => {
         console.log(error.message);
     }
     
- }
+}
 
- export const fetchCourses = async (courseCodes) => {
+export const fetchCourses = async (courseCodes) => {
     //courseCodes: array
     try {
         const { data } = await axios.get(url + "courses?courseCodes=" + courseCodes.join(","));
@@ -22,20 +22,7 @@ export const fetchAllCourses = async () => {
     } catch (error) {
         console.log(error.message);
     }
- } 
-
-
-// export const fetchTimetablePlans = async (courseCodes) => {
-
-//     try {
-//         courseCodes = courseCodes.filter(courseCode => courseCode);
-//         return await axios.get(url + "generate?courseCodes=" + courseCodes.join(','));
-//     }
-//     catch(error) {
-//         console.log(error.message);
-//     }
-
-// }
+} 
 
 export const fetchVacanciesAndWaitlist = async (courseCode) => {
     try {

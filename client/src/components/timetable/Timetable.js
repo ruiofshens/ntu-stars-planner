@@ -73,9 +73,6 @@ function Timetable() {
 // Contains the cells for each day as a row, excluding the day itself
 function TimetableRow({ day, lessons }) {
 
-  // const { currentPlan } = useContext(CurrentPlanContext);
-  // const lessonsArray = [];
-
   const { customOptions } = useContext(CustomisationContext);
 
   let maxOverlapped = 0;

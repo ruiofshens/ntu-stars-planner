@@ -18,7 +18,6 @@ function CourseDatabase() {
     setCourses -> For Button to retrieve list of ALL courses from server
     selectedCourses -> List of selected courses by user for timetable planning
     addSelection -> For ListGroup.Item to add course to list of selected courses by user  */
-  // const [courses, setCourses] = useState ([]);
   const { addSelection } = useContext(SelectedCoursesContext);
   const { courses } = useContext(CoursesContext);
   const { customOptions } = useContext(CustomisationContext);
