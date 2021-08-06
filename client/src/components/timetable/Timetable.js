@@ -93,14 +93,15 @@ function TimetableRow({ day, lessons }) {
     let lessonDuration = (new Date(endTime.getTime() + 10*60*1000) - startTime) / (1000*60);
 
     //Media query
-    var mq = window.matchMedia( "(max-width: 575.98px)" );
-    if (mq.matches) {
-        // window width is at less than 575.98px (phones)
-        return (lessonDuration * ratio * 3) + "vw";
-    }
-    else {
-        // window width is greater than 575.98px (computers)
-        return (lessonDuration * ratio ) + "vw";
+    if (window.matchMedia( "(max-width: 575.98px)" ).matches) {
+      // window width is at less than 575.98px (phones)
+      return (lessonDuration * ratio * 3) + "vw";
+    } else if (window.matchMedia( "(max-width: 991.98px)" ).matches) {
+      // Medium devices (tablets, less than 992px)
+      return (lessonDuration * ratio * 2) + "vw";
+    } else {
+      // window width is greater than 575.98px (computers)
+      return (lessonDuration * ratio ) + "vw";
     }
   }
 
@@ -112,14 +113,15 @@ function TimetableRow({ day, lessons }) {
     let offsetInMin = (startTime - startingHour) / (1000*60);
 
     //Media query
-    var mq = window.matchMedia( "(max-width: 575.98px)" );
-    if (mq.matches) {
-        // window width is at less than 575.98px (phones)
-        return ((offsetInMin * ratio * 3) + 12) + "vw";
-    }
-    else {
-        // window width is greater than 575.98px (computers)
-        return ((offsetInMin * ratio) + 4) + "vw";
+    if (window.matchMedia( "(max-width: 575.98px)" ).matches) {
+      // window width is at less than 575.98px (phones)
+      return ((offsetInMin * ratio * 3) + 12) + "vw";
+    } else if (window.matchMedia( "(max-width: 991.98px)" ).matches) {
+      // Medium devices (tablets, less than 992px)
+      return ((offsetInMin * ratio * 2) + 8) + "vw";
+    } else {
+      // window width is greater than 575.98px (computers)
+      return ((offsetInMin * ratio) + 4) + "vw";
     }
   }
   
@@ -177,7 +179,7 @@ function TimeRow() {
 
   return (
     <>
-      <ListGroup horizontal className="timeRow">
+      <ListGroup horizontal className="timeRow mt-2">
         <ListGroup.Item className={`dayCell border-0 ${customOptions.displaySetting}`}></ListGroup.Item>
         {Array(15).fill("").map((e, i) => (
           <ListGroup.Item key={i} className={`timeSlot timeCell border-0 px-0 text-center ${customOptions.displaySetting}`}>
