@@ -58,7 +58,7 @@ function Timetable() {
   });
 
   return (
-      <Container fluid style={{padding: "0 1.5vw"}} className="timetableContainer">
+      <Container fluid style={{padding: "0 0"}} className="timetableContainer">
         <TimeRow />
         <TimetableRow day="Mon" lessons={allLessons.MON}/>
         <TimetableRow day="Tue" lessons={allLessons.TUE}/>

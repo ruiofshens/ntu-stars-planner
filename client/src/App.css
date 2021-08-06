@@ -163,6 +163,15 @@
   }
 }
 
+/* Small devices (landscape phones, less than 768px) */
+/* iPhone X is 812 pixels long */
+@media (max-width: 850px) {
+  .lessonText {
+    font-size: 1vw;
+  }
+ }
+
+
  /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
   .sticky-nav {

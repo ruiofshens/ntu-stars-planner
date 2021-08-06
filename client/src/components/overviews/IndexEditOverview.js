@@ -120,7 +120,7 @@ function CourseRow(props) {
     <tr>
       <th scope="row">{props.rowNo}</th>
       <td>
-        <Form className="mr-5">
+        <Form className="mr-4">
           <Form.Select size="sm" aria-label="select-index" onChange={handleIndexChange} value={props.currIndex.indexNo}>
             {indexes.map(index => (
               <option id={index.indexNo} value={index.indexNo} key={index.indexNo}>
