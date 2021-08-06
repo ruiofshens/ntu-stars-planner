@@ -91,6 +91,7 @@
 
 .timeRow {
   height: 6vh;
+  align-items: flex-end;
 }
 
 .timeCell {
