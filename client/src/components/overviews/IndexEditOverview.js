@@ -107,6 +107,8 @@ function CourseRow(props) {
     const courseToEdit = props.planToEdit.filter(course => course.courseCode === props.course.courseCode)[0]; 
     const courseEdited = {...courseToEdit};
     courseEdited.index = props.course.indexes.filter(index => index.indexNo === indexNo)[0];
+    courseEdited.index.vacancies = indexes.filter(index => index.indexNo === indexNo)[0].vacancies;
+    courseEdited.index.waitlistLength = indexes.filter(index => index.indexNo === indexNo)[0].waitlistLength;
     // replace old course with new course
     const position = props.planToEdit.indexOf(courseToEdit);
     props.planToEdit[position] = courseEdited;
