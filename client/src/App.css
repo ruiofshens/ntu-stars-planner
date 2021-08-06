@@ -108,6 +108,50 @@
   align-items: center;
 }
 
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+  .sticky-nav {
+    flex-direction: column;
+  }
+
+  .vertical-if-sm{
+    flex-direction: column;
+  }
+
+  .top-row-toggle{
+    justify-content: center;
+  }
+
+  .top-row-download{
+    justify-content: center;
+  }
+
+  .timeSlot {
+    width: 12.4vw;
+  }
+
+  .lessonText {
+    font-size: 2vw;
+  }
+
+  .dayCell {
+    width: 8vw;
+  }
+
+  .timetableContainer {
+    overflow-x: scroll;
+  }
+
+  .timetableRow {
+    /* whole timetable is 4vw (day cell) + 6.2vw*15 = 97vw. Then multiply by 2 */
+    width: 194vw;
+  }
+
+  .timeRow {
+    width: 194vw;
+  }
+}
+
 /* ============= Styling for timetable component ============= */
 
 .lessonText {
