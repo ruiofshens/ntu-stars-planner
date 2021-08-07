@@ -8,9 +8,6 @@ import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 
 function CourseInput(props) {
     
-    /* input -> Variable accessible by both Button and FormControl components
-    setInput -> For Button  to delete entered course code in FormControl
-    removeSelection -> For Button to remove course from list of selected courses  */
     const { removeSelection } = useContext(SelectedCoursesContext);
     const [input, setInput] = useState("");
 

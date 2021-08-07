@@ -21,11 +21,6 @@ import { CustomisationContext } from '../contexts/CustomisationContext';
 
 function TimetablePage() {
 
-  /* timetablePlans -> to have access to generated timetablePlans when toggling
-  setTimetablePlans -> to update currently active plan
-  currentPlan -> to check if currentPlan has been defined already
-  setCurrentPlan -> to have access to current plan of timetablePlans when toggling
-  savedPlans ->  to have access to array of savedPlans to display when toggling to "Save Plan" */
   const { timetablePlans, setTimetablePlans } = useContext(TimetablePlansContext);
   const { savedPlans } = useContext(SavedPlansContext);
   const { currentPlan, setCurrentPlan } = useContext(CurrentPlanContext);

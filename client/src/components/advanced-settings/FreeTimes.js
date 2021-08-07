@@ -6,7 +6,7 @@ import { ConstraintsContext } from '../../contexts/ConstraintsContext';
 import { CustomisationContext } from '../../contexts/CustomisationContext';
 
 const generateTimeSlots = () => {
-  const timeslots = ["freeDay"]
+  const timeslots = ["freeDay"];
   for (let hour=8; hour < 23; hour++) {
     timeslots.push(hour < 10 ? `0${hour}:00` : `${hour}:00`);
     timeslots.push(hour < 10 ? `0${hour}:30` : `${hour}:30`);
@@ -76,7 +76,14 @@ const FreeTimes = () => {
                   let id = `${j}-${timeSlot}`;
                   return (
                     <td key={j}>
-                      <input type="checkbox" id={id} value={id} onChange={handleChecked} disabled={freeDays[j]} defaultChecked={freeTimes.includes(id)}/>
+                      <input 
+                        type="checkbox" 
+                        id={id} 
+                        value={id} 
+                        onChange={handleChecked} 
+                        disabled={freeDays[j]} 
+                        defaultChecked={freeTimes.includes(id)}
+                      />
                     </td>
                   )
                 })}
@@ -92,7 +99,13 @@ const FreeTimes = () => {
                   }
                   return (
                     <td key={j}>
-                      <input type="checkbox" id={id} value={id} onChange={handleFreeDayChecked} defaultChecked={freeDayChecked} />
+                      <input 
+                        type="checkbox" 
+                        id={id} 
+                        value={id} 
+                        onChange={handleFreeDayChecked} 
+                        defaultChecked={freeDayChecked}  
+                      />
                     </td>
                   )
                 })}

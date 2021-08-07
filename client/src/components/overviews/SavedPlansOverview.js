@@ -11,9 +11,6 @@ import { CoursesContext } from '../../contexts/CoursesContext';
 
 function SavedPlansOverview() {
 
-    /* savedPlans -> to have access to array of saved plans
-    setSavedPlan -> to update currently active plan in array of saved plans
-    setCurrentPlan -> to update the plan to be displayed to user */
     const { savedPlans, setSavedPlans } = useContext(SavedPlansContext);
     const { setCurrentPlan } = useContext(CurrentPlanContext);
     

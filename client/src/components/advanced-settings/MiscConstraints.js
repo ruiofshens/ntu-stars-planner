@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
+
 import { Form, Col } from 'react-bootstrap';
+
 import { ConstraintsContext } from '../../contexts/ConstraintsContext';
 
 const MiscConstraints = () => {

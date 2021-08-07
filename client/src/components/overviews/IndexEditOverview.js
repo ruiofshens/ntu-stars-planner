@@ -15,11 +15,9 @@ import { fetchVacanciesAndWaitlist } from '../../services/DataRetriever';
 import storageAvailable from '../../services/storageAvailable';
 
 function IndexEditOverview() {
-  const { setCurrentPlan } = useContext(CurrentPlanContext);
+  
   const { courses } = useContext(CoursesContext);
-
-  /* currentPlan -> to display plan details */
-  const { currentPlan } = useContext(CurrentPlanContext);
+  const { currentPlan, setCurrentPlan } = useContext(CurrentPlanContext);
   const { savedPlans, setSavedPlans } = useContext(SavedPlansContext);
   const { customOptions } = useContext(CustomisationContext);
 

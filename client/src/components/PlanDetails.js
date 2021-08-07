@@ -8,7 +8,6 @@ import { CustomisationContext } from '../contexts/CustomisationContext';
 
 function PlanDetails() {
 
-    /* currentPlan -> to display plan details */
     const { currentPlan } = useContext(CurrentPlanContext);
     const { customOptions } = useContext(CustomisationContext);
 

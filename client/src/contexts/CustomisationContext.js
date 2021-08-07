@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 
+// User settings for customisation, such as light or dark mode
 export const CustomisationContext = createContext();
 
 const CustomisationContextProvider = (props) => {

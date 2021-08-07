@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 
+// Constraints set by user for generating of timetable plans
 export const ConstraintsContext = createContext();
 
 const ConstraintsContextProvider = (props) => {

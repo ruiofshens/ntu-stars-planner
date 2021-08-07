@@ -15,9 +15,8 @@ import { CustomisationContext } from '../contexts/CustomisationContext';
 function CourseDatabase() {
 
   /* courses -> List of ALL courses in NTU, retrieved from server
-    setCourses -> For Button to retrieve list of ALL courses from server
-    selectedCourses -> List of selected courses by user for timetable planning
-    addSelection -> For ListGroup.Item to add course to list of selected courses by user  */
+     acadSem -> Current semester in NTU
+     addSelection -> For adding course to currently selected courses  */
   const { addSelection } = useContext(SelectedCoursesContext);
   const { courses, acadSem } = useContext(CoursesContext);
   const { customOptions } = useContext(CustomisationContext);

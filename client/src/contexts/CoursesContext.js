@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 
+// Course information sent by the server
 export const CoursesContext = createContext();
 
 const CoursesContextProvider = (props) => {

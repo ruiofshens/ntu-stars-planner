@@ -13,9 +13,6 @@ import storageAvailable from '../../services/storageAvailable';
 
 function CourseOverview() {
 
-  /* currentPlan -> to check if currentPlan has been defined already and also for saving
-  savedPlans ->  to clone array of saved plans, used while saving currently active plan
-  setSavedPlans -> to update array of saved plans */
   const { currentPlan } = useContext(CurrentPlanContext);
   const { savedPlans, setSavedPlans } = useContext(SavedPlansContext);
 

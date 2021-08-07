@@ -1,7 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-// Selected courses refer to the courses that are currently selected for planning of timetable
-//Currently a course is represented by only a string (eg. "CZ2003"), might add more details if necessary
+// Courses that are currently selected for planning of timetable
 export const SelectedCoursesContext = createContext();
 
 const SelectedCoursesContextProvider = (props) => {

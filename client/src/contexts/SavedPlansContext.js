@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 
+// Plans saved by the user
 export const SavedPlansContext = createContext();
 
 const PLANS_COUNT = 3;

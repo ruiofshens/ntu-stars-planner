@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup'
 
@@ -57,7 +56,7 @@ function SettingsPage() {
       
       <ListGroup variant="flush">
         <ListGroup.Item className={customOptions.displaySetting}>Automatic Timetable Generation</ListGroup.Item>
-        <ListGroup.Item className={customOptions.displaySetting}>Waitlist and Vacancy Details included (10am to 10pm)</ListGroup.Item>
+        <ListGroup.Item className={customOptions.displaySetting}>Waitlist and Vacancy Details included (Only from 10am-10pm)</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Fixing of Specific Indexes</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Editing of Timetable Plans</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Advanced Options: Choosing Free Times, No Back To Back Lessons</ListGroup.Item>
@@ -69,12 +68,11 @@ function SettingsPage() {
       <hr/>
 
       <ListGroup variant="flush">
-        <ListGroup.Item>
-          Based of the current Student Automated Registration System (STARS), 
-          NTU Stars V2 serves to improve upon its existing functionality and address common use cases when using the system, 
-          such as automatic timetable generation based on the modules selected and customising of plans for easy planning.
+        <ListGroup.Item className={customOptions.displaySetting}>
+          Based off the current Student Automated Registration System (STARS), 
+          STARS-panel serves to be an all-in-one control panel for course registration planning, addressing commonly requested functionalities for easy planning.
         </ListGroup.Item>
-        <ListGroup.Item>
+        <ListGroup.Item className={customOptions.displaySetting}>
           Disclaimer: All NTU data are obtained by crawling the public NTU sites; we do not own any of the data. 
           As this is an unofficial planner, we strongly encourage you to double check your timetables with the actual STARS.
         </ListGroup.Item>
@@ -89,7 +87,7 @@ function SettingsPage() {
       </Row>
       <Row className="d-flex justify-content-center font-italic">
         <span className="text-center">
-          Should you encounter any issues, please help us to report it&nbsp;
+          Should you encounter any issues, please kindly help us by reporting it&nbsp;
           <a href="https://github.com/ruiofshens/ntu-stars-planner/issues" target="_blank" rel="noreferrer">here</a>.
         </span>
       </Row>

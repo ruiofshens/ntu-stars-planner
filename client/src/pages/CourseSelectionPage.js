@@ -21,9 +21,6 @@ import { CustomisationContext } from '../contexts/CustomisationContext';
 
 function CourseSelectionPage() {
 
-  /* selectedCourses -> List of selected courses by user to generate timetable plans  
-  setTimetablePlans -> For Button to call and generate timetables based on selectedCourses
-  setCurrentPlan -> Intialise first timetable plan as current plan  */
   const { selectedCourses, setSelectedCourses } = useContext(SelectedCoursesContext);
   const { setTimetablePlans } = useContext(TimetablePlansContext);
   const { setCurrentPlan } = useContext(CurrentPlanContext);

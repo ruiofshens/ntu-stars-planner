@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 
-import { Container } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import { CurrentPlanContext } from '../../contexts/CurrentPlanContext';
@@ -92,15 +91,15 @@ function TimetableRow({ day, lessons }) {
     // need to add 10 min to endTime because lessons end 10min "earlier"
     let lessonDuration = (new Date(endTime.getTime() + 10*60*1000) - startTime) / (1000*60);
 
-    //Media query
+    // Media query
     if (window.matchMedia( "(max-width: 575.98px)" ).matches) {
-      // window width is at less than 575.98px (phones)
+      // For window widths of less than 575.98px (phones)
       return (lessonDuration * ratio * 3) + "vw";
     } else if (window.matchMedia( "(max-width: 991.98px)" ).matches) {
-      // Medium devices (tablets, less than 992px)
+      // For medium devices (tablets, less than 992px)
       return (lessonDuration * ratio * 2) + "vw";
     } else {
-      // window width is greater than 575.98px (computers)
+      // For window width greater than 575.98px (computer screens)
       return (lessonDuration * ratio ) + "vw";
     }
   }
@@ -112,15 +111,15 @@ function TimetableRow({ day, lessons }) {
     const startingHour = new Date("January 1 2021 8:00"); // 8am
     let offsetInMin = (startTime - startingHour) / (1000*60);
 
-    //Media query
+    // Media query
     if (window.matchMedia( "(max-width: 575.98px)" ).matches) {
-      // window width is at less than 575.98px (phones)
+      // For window widths of less than 575.98px (phones)
       return ((offsetInMin * ratio * 3) + 12) + "vw";
     } else if (window.matchMedia( "(max-width: 991.98px)" ).matches) {
-      // Medium devices (tablets, less than 992px)
+      // For medium devices (tablets, less than 992px)
       return ((offsetInMin * ratio * 2) + 8) + "vw";
     } else {
-      // window width is greater than 575.98px (computers)
+      // For window width greater than 575.98px (computer screens)
       return ((offsetInMin * ratio) + 4) + "vw";
     }
   }
