@@ -3,6 +3,7 @@ import cheerio from 'cheerio';
 import fs from 'fs';
 
 import CourseModel from '../models/courseDetails.js';
+import AcadSemModel from '../models/acadSemDetails.js';
 
 const getCourses = async () => {
   /**
@@ -148,12 +149,26 @@ const getCourses = async () => {
   }
 }
 
-const getAcadSem = async () => {
+export const getAcadSem = async () => {
   try {
     const { data } = await axios.get("https://wish.wis.ntu.edu.sg/webexe/owa/aus_schedule.main");
     const $ = cheerio.load(data);
 
     const acadSem = $('select[name="acadsem"] > option[selected="selected"]').attr('value');
+
+    const dropped = await AcadSemModel.collection.drop();
+    if (dropped) {
+      console.log("AcadSemModel dropped")
+    }
+    const acadSemObject = {
+      year: acadSem.split(";")[0],
+      sem: acadSem.split(";")[1],
+    }
+    await new AcadSemModel(acadSemObject).save((err) => {
+      if (err) console.log(err);
+      else console.log(`Added academic semester ${acadSem} to database.`)
+    })
+
     return acadSem;
   } catch (err) {
     console.log(err);

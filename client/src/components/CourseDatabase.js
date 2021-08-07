@@ -12,8 +12,6 @@ import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { CoursesContext } from '../contexts/CoursesContext';
 import { CustomisationContext } from '../contexts/CustomisationContext';
 
-const CURRENT_SEM = "AY2021-22 Semester 1" // update this every sem
-
 function CourseDatabase() {
 
   /* courses -> List of ALL courses in NTU, retrieved from server
@@ -21,7 +19,7 @@ function CourseDatabase() {
     selectedCourses -> List of selected courses by user for timetable planning
     addSelection -> For ListGroup.Item to add course to list of selected courses by user  */
   const { addSelection } = useContext(SelectedCoursesContext);
-  const { courses } = useContext(CoursesContext);
+  const { courses, acadSem } = useContext(CoursesContext);
   const { customOptions } = useContext(CustomisationContext);
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -38,10 +36,11 @@ function CourseDatabase() {
     <Card className={`retrievedCourses ${customOptions.displaySetting}`} style={{height: "30rem"}} border={customOptions.displaySetting === "lightMode" ? "" : "secondary"}>
       <Card.Header className="database-title font-weight-bold">
         <Row className="align-items-center">
-          <Col sm={8}> 
-            Courses Available ({CURRENT_SEM})
+          <Col sm={8} xs={9}> 
+            Courses Available 
+            { acadSem ? ` (AY${acadSem.year}-${((parseInt(acadSem.year)+1)+"").substring(2)} Sem ${acadSem.sem})` : ""}
           </Col>
-          <Col sm={4}>
+          <Col sm={4} xs={12}>
             <Form className="d-flex ml-auto">
               <Form.Control 
               placeholder="Search course code/name" 

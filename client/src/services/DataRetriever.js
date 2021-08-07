@@ -42,3 +42,12 @@ export const fetchExams = async (courseCodes) => {
         console.log(error.message);
     }
 }
+
+export const fetchAcadSem = async () => {
+    try {
+        const { data } = await axios.get(url + "acadSem");
+        return data;
+    } catch (error) {
+        console.log(error.message);
+    }
+}

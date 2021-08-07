@@ -19,13 +19,16 @@ import ConstraintsContextProvider from './contexts/ConstraintsContext';
 import CustomisationContextProvider from './contexts/CustomisationContext';
 
 import { CoursesContext } from './contexts/CoursesContext';
-import { fetchAllCourses } from './services/DataRetriever';
+import { fetchAllCourses, fetchAcadSem } from './services/DataRetriever';
 
 function App() {
-  const { setCourses } = React.useContext(CoursesContext);
+  const { setCourses, setAcadSem } = React.useContext(CoursesContext);
 
   React.useEffect(() => {
     async function retrieveAllCourses() {
+      let acadSem = await fetchAcadSem();
+      setAcadSem({ year: acadSem.year, sem: acadSem.sem });
+      console.log(acadSem);
       let coursesJSON = await fetchAllCourses();
       setCourses(coursesJSON);
     }

@@ -5,6 +5,7 @@ import { getVacancies } from '../scrapper/getVacancies.js';
 /* Import models */
 import CourseModel from '../models/courseDetails.js';
 import ExamModel from '../models/examDetails.js';
+import AcadSemModel from '../models/acadSemDetails.js';
 
 export const getAllCourses = async (req, res) => {
     try {
@@ -47,6 +48,15 @@ export const getExamDetails = async (req, res) => {
         }
 
         res.json(exams);
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+}
+
+export const getAcadSemDetails = async (req, res) => {
+    try {
+        const acadSem = await AcadSemModel.find(); 
+        res.status(200).json(acadSem[0]); // should only have one
     } catch (error) {
         res.status(500).json({ error });
     }

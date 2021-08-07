@@ -30,6 +30,3 @@ mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedT
 mongoose.set('useFindAndModify', false);
 
 doPeriodicRefresh();
-
-
-
