@@ -30,10 +30,12 @@ function CourseSelectionPage() {
   const [canGenerate, setCanGenerate] = useState(false);
   const [errorMessage, setErrorMessage] = useState({ header: null, details: null }); // for displaying why timetable could not be generated
   const [showError, setShowError] = useState(false);
+  const [buttonText, setButtonText] = useState("Generate plans!")
 
   const history = useHistory();
 
   async function retrieveTimetablePlans() {
+    setButtonText("Generating....");
     if (selectedCourses.some(selectedCourse => selectedCourse !== "")){
       let generated = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
       if (generated.canGenerate && generated.timetables.length !== 0) {
@@ -63,6 +65,8 @@ function CourseSelectionPage() {
         }
       }
     }
+    setButtonText("Generate plans!");
+    window.scrollTo(0, 0);
   }
 
   return (
@@ -94,7 +98,7 @@ function CourseSelectionPage() {
             className="w-50"
               variant="outline-primary m-1"
               onClick={() => retrieveTimetablePlans()}>
-              Generate Plans!
+              {buttonText}
             </Button>
             <Button 
             className="w-50"

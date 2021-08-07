@@ -167,13 +167,19 @@
 
 /* Small devices (landscape phones) */
 /* iPhone 12 Pro Max is 926 pixels long */
-@media (max-width: 930px) {
+@media (max-width: 930px) and (orientation: landscape) {
   .sticky-nav {
     flex-direction: row;
   }
 
   .lessonText {
     font-size: 1vw;
+  }
+ }
+
+@media (max-width: 930px) {
+  .sticky-nav {
+    flex-direction: row;
   }
  }
 
