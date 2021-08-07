@@ -144,7 +144,7 @@ function TimetablePage() {
         </Col>        
       </Row>
 
-      <Container fluid ref={ref}>
+      <Container fluid ref={ref} className="timetableContainer">
         <Timetable />
       </Container>
 
@@ -153,7 +153,7 @@ function TimetablePage() {
           variant="pills"
           activeKey={currentTab}
           id="toggle-course-overview" 
-          className="mb-3 tabs"
+          className="my-3 tabs"
           onSelect={togglePlanToShow}>
             <Tab eventKey="choose-plan" title="Generated Plans">
               <CourseOverview/>
