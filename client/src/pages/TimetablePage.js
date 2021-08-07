@@ -134,7 +134,7 @@ function TimetablePage() {
             size="sm"
             className="mx-2"
             onClick={downloadScreenshot}>
-            {'Download Timetable'}
+            {'Download Timetable (BETA)'}
           </Button>
         </Col>        
       </Row>
