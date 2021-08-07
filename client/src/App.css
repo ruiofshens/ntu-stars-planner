@@ -15,6 +15,7 @@
   border-bottom-right-radius: 10px;
   font-family: 'Nunito', sans-serif;
   flex-direction: row;
+  transition: top 0.1s;
 }
 
 .nav-options {
@@ -166,6 +167,10 @@
 /* Small devices (landscape phones, less than 768px) */
 /* iPhone X is 812 pixels long */
 @media (max-width: 850px) {
+  .sticky-nav {
+    flex-direction: row;
+  }
+
   .lessonText {
     font-size: 1vw;
   }
@@ -176,6 +181,10 @@
 @media (max-width: 575.98px) { 
   .sticky-nav {
     flex-direction: column;
+  }
+
+  .nav-options {
+    border-left: 0;
   }
 
   .vertical-if-sm{
