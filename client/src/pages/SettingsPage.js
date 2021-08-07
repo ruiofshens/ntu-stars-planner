@@ -68,11 +68,17 @@ function SettingsPage() {
       <h5 className="text-center">❓ About the Website ❓</h5>
       <hr/>
 
-      <Row>
-        Based of the current Student Automated Registration System (STARS), 
-        NTU Stars V2 serves to improve upon its existing functionality and address common use cases when using the system, 
-        such as automatic timetable generation based on the modules selected and customising of plans for easy planning.
-      </Row>
+      <ListGroup variant="flush">
+        <ListGroup.Item>
+          Based of the current Student Automated Registration System (STARS), 
+          NTU Stars V2 serves to improve upon its existing functionality and address common use cases when using the system, 
+          such as automatic timetable generation based on the modules selected and customising of plans for easy planning.
+        </ListGroup.Item>
+        <ListGroup.Item>
+          Disclaimer: All NTU data are obtained by crawling the public NTU sites; we do not own any of the data. 
+          As this is an unofficial planner, we strongly encourage you to double check your timetables with the actual STARS.
+        </ListGroup.Item>
+      </ListGroup>
 
       <hr/>
       <Row className="d-flex justify-content-center font-italic pt-4 pb-3">
@@ -82,13 +88,24 @@ function SettingsPage() {
         ~ Build V1.0.0 ~
       </Row>
       <Row className="d-flex justify-content-center font-italic">
-        Made by Chong Shen Rui and Toh Jun Wei
+        <span className="text-center">
+          Should you encounter any issues, please help us to report it&nbsp;
+          <a href="https://github.com/ruiofshens/ntu-stars-planner/issues" target="_blank" rel="noreferrer">here</a>.
+        </span>
       </Row>
-      <Col className="d-flex justify-content-center font-italic pb-4">
-        <a target="_blank" rel="noopener noreferrer" href="https://icons8.com/icon/121624/pixel-star">Pixel Star</a>
-        &nbsp;icon by&nbsp;
-        <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">Icons8</a>
-      </Col>
+      <Row className="d-flex justify-content-center font-italic">
+        <span className="text-center">Made by&nbsp;
+        <a href="https://github.com/ruiofshens" target="_blank" rel="noreferrer">Chong Shen Rui</a>
+        &nbsp;and&nbsp;
+        <a href="https://github.com/junwei-tj" target="_blank" rel="noreferrer">Toh Jun Wei</a></span>
+      </Row>
+      <Row className="d-flex justify-content-center font-italic pb-4">
+        <span className="text-center">
+          <a target="_blank" rel="noopener noreferrer" href="https://icons8.com/icon/121624/pixel-star">Pixel Star</a>
+          &nbsp;icon by&nbsp;
+          <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">Icons8</a>
+        </span>
+      </Row>
     </Container>
   );
 }
