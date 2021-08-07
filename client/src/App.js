@@ -64,7 +64,7 @@ function App() {
                     <LinkContainer to="/">
                       <Navbar.Brand>
                         <span role="img" aria-label="star">⭐</span>
-                        {' '}planner
+                        {' '}panel
                       </Navbar.Brand>
                     </LinkContainer>
                     <Nav 
