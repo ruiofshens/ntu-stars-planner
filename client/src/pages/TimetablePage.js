@@ -1,5 +1,4 @@
-import React, { useContext, createRef, useState } from 'react';
-import { useScreenshot, createFileName } from 'use-react-screenshot';
+import React, { useContext, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Tabs from 'react-bootstrap/Tabs';
@@ -27,23 +26,6 @@ function TimetablePage() {
   const { customOptions } = useContext(CustomisationContext);
 
   const [currentTab, setCurrentTab] = useState("choose-plan");
-
-  const ref = createRef(null);
-  const [image, takeScreenShot] = useScreenshot({
-    type: "image/jpeg",
-    quality: 1.0
-  })
-
-  const download = (image, { name = "timetable", extension = "jpg" } = {}) => {
-    const a = document.createElement("a");
-    a.href = image;
-    a.download = createFileName(extension, name);
-    a.click();
-  }
-
-  const downloadScreenshot = () => {
-    takeScreenShot(ref.current).then(download);
-  }
 
   // for raising unsaved changes alert when user exits edit plans
   const exitEditPlan = (nextTabKey) => {
@@ -126,20 +108,10 @@ function TimetablePage() {
               {'>'}
             </Button>
           </Col>
-        </Col>  : null }
-          
-        <Col className="d-flex top-row-download">
-          <Button 
-            variant="outline-primary my-1" 
-            size="sm"
-            className="mx-2"
-            onClick={downloadScreenshot}>
-            {'Download Timetable (BETA)'}
-          </Button>
-        </Col>        
+        </Col>  : null }   
       </Row>
 
-      <Container fluid ref={ref} className="timetableContainer">
+      <Container fluid className="timetableContainer">
         <Timetable />
       </Container>
 

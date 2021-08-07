@@ -26,11 +26,6 @@
   margin-left: 1%;
 }
 
-.top-row-download{
-  justify-content: flex-end;
-  margin-right: 1%;
-}
-
 .database-title {
   background-color: #0b77a2;
   color: black;
@@ -44,6 +39,10 @@
 .align-plan-text {
   display: flex;
   align-items: center;
+}
+
+.top-row-toggle{
+  justify-content: center;
 }
 
 /* ============= Styling for timetable component ============= */
@@ -122,6 +121,8 @@
   background-color:#494949;
 }
 
+
+
 /* ============= Media Responsiveness ============= */
 
 /* Medium devices (vertical tablets, less than 992px) */
@@ -132,10 +133,6 @@
 
   .vertical-if-sm{
     flex-direction: column;
-  }
-
-  .top-row-toggle{
-    justify-content: center;
   }
 
   .top-row-download{
@@ -196,10 +193,6 @@
 
   .vertical-if-sm{
     flex-direction: column;
-  }
-
-  .top-row-toggle{
-    justify-content: center;
   }
 
   .top-row-download{
