@@ -12,6 +12,8 @@ import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { CoursesContext } from '../contexts/CoursesContext';
 import { CustomisationContext } from '../contexts/CustomisationContext';
 
+const CURRENT_SEM = "AY2021-22 Semester 1" // update this every sem
+
 function CourseDatabase() {
 
   /* courses -> List of ALL courses in NTU, retrieved from server
@@ -36,8 +38,8 @@ function CourseDatabase() {
     <Card className={`retrievedCourses ${customOptions.displaySetting}`} style={{height: "30rem"}} border={customOptions.displaySetting === "lightMode" ? "" : "secondary"}>
       <Card.Header className="database-title font-weight-bold">
         <Row className="align-items-center">
-          <Col sm={8}>
-            Courses Available
+          <Col sm={8}> 
+            Courses Available ({CURRENT_SEM})
           </Col>
           <Col sm={4}>
             <Form className="d-flex ml-auto">

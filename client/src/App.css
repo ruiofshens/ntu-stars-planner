@@ -48,6 +48,11 @@
 
 /* ============= Styling for timetable component ============= */
 
+.timetableContainer {
+  overflow-x: auto;
+  padding: 0 1.5vw;
+}
+
 .lessonText {
   top: 0;
   left: 0;
@@ -149,10 +154,6 @@
     width: 8vw;
   }
 
-  .timetableContainer {
-    overflow-x: scroll;
-  }
-
   .timetableRow {
     /* whole timetable is 4vw (day cell) + 6.2vw*15 = 97vw. Then multiply by 2 */
     width: 194vw;
@@ -209,10 +210,6 @@
 
   .dayCell {
     width: 12vw;
-  }
-
-  .timetableContainer {
-    overflow-x: scroll;
   }
 
   .timetableRow {
