@@ -124,7 +124,7 @@
 
 /* ============= Media Responsiveness ============= */
 
-/* Medium devices (tablets, less than 992px) */
+/* Medium devices (vertical tablets, less than 992px) */
 @media (max-width: 991.98px) {
   .sticky-nav {
     flex-direction: column;
@@ -165,9 +165,9 @@
   }
 }
 
-/* Small devices (landscape phones, less than 768px) */
-/* iPhone X is 812 pixels long */
-@media (max-width: 850px) {
+/* Small devices (landscape phones) */
+/* iPhone 12 Pro Max is 926 pixels long */
+@media (max-width: 930px) {
   .sticky-nav {
     flex-direction: row;
   }
