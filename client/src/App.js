@@ -20,9 +20,11 @@ import CustomisationContextProvider from './contexts/CustomisationContext';
 
 import { CoursesContext } from './contexts/CoursesContext';
 import { fetchAllCourses, fetchAcadSem } from './services/DataRetriever';
+import { useWindowDimension } from './services/useWindowDimension';
 
 function App() {
   const { setCourses, setAcadSem } = React.useContext(CoursesContext);
+  const [width, height] = useWindowDimension();
 
   React.useEffect(() => {
     async function retrieveAllCourses() {
