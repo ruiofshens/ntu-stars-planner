@@ -8,7 +8,7 @@
   top: 0;
   margin-bottom: 1;
   background: rgba( 255, 255, 255, 0.25 );
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  box-shadow: 0 8px 32px 0 rgba(80, 91, 112, 0.5);
   backdrop-filter: blur( 4.5px );
   -webkit-backdrop-filter: blur( 4.5px );
   border-bottom-left-radius: 10px;
@@ -62,7 +62,7 @@
   transform: translateX(4vw);
   margin: 0px;
   opacity: 0.85;
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.4 );
+  box-shadow: 0 8px 32px 0 rgba(55, 57, 61, 0.5);
   font-size: 0.75vw;
 }
 
