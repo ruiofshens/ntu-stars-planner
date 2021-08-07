@@ -60,7 +60,7 @@ class ClashChecker {
      */
 
     // one of them happens every week - so will clash
-    if ((teachingWeeksA === "" && teachingWeeksB.includes("Teaching Wk")) || (teachingWeeksB === "" && teachingWeeksA.includes("Teaching Wk"))) { 
+    if (teachingWeeksA === "" || teachingWeeksB === "") { 
       return true;
     }
 
