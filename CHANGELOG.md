@@ -14,6 +14,10 @@ Any new suggestions are welcomed.
 - legend for symbols in course names in CourseOverview and IndexEditOverview
 - loading message for spinner in CourseDatabase
 
+### Changed
+
+- favicon
+
 ### Fixed
 
 - bug where 2 lessons with no teaching weeks at the same time do not register as clashing
