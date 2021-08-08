@@ -82,7 +82,7 @@ function SettingsPage() {
         may the force be with you
       </Row>
       <Row className="d-flex justify-content-center font-italic">
-        ~ Build V1.1.0 ~
+        ~ Version 1.1.0 ~
       </Row>
       <Row className="d-flex justify-content-center font-italic">
         <span className="text-center">
@@ -98,7 +98,7 @@ function SettingsPage() {
       </Row>
       <Row className="d-flex justify-content-center font-italic pb-4">
         <span className="text-center">
-          <a target="_blank" rel="noopener noreferrer" href="https://icons8.com/icon/121624/pixel-star">Pixel Star</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://icons8.com/icon/70836/star-filled">Star Filled</a>
           &nbsp;icon by&nbsp;
           <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">Icons8</a>
         </span>
