@@ -1,9 +1,8 @@
 # ntu-stars-planner
 
-<img src="screenshots\timetablepage.png" alt="alt text" width="750" height="418">
+<img src="screenshots\timetablepage.png" alt="alt text">
 <br/>
-<img src="screenshots\coursespage.jpeg" alt="alt text" width="188" height="295">
-<img src="screenshots\timetablepage2.png" alt="alt text" width="525" height="293">
+<img src="screenshots\timetablepage2.png" alt="alt text">
 <br/>
 
 ## About The Project
