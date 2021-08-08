@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
@@ -50,9 +51,14 @@ function CourseDatabase() {
         </Row>
       </Card.Header>
       {courses.length === 0 ? 
-        <Spinner animation="border" role="status" variant="secondary" style={{ margin: 'auto' }}>
-          <span className="sr-only">Loading...</span>
-        </Spinner> :
+        <Container className="d-flex flex-column justify-content-center align-items-center h-100">
+          <Spinner animation="grow" role="status" variant="secondary">
+            <span className="sr-only">Loading...</span>
+          </Spinner> 
+          <Row className="text-center pt-1">
+            Almost there...
+          </Row>
+        </Container> :
 
         <ListGroup variant="flush" className="overflow-auto">
           {dynamicSearch().map(course => {
