@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import { CurrentPlanContext } from '../../contexts/CurrentPlanContext';
 import { CustomisationContext } from '../../contexts/CustomisationContext';
@@ -85,6 +86,15 @@ function IndexEditOverview() {
           })}
         </tbody>
       </Table>
+      {currentPlan.length !== 0 ?
+            <ListGroup horizontal className="legend">
+                <ListGroup.Item className={`flex-fill ${customOptions.displaySetting}`} variant="secondary">Legend:</ListGroup.Item>
+                <ListGroup.Item className={`flex-fill ${customOptions.displaySetting}`}>* Available as UEs</ListGroup.Item>
+                <ListGroup.Item className={`flex-fill ${customOptions.displaySetting}`}>~ Available as BDEs</ListGroup.Item>
+                <ListGroup.Item className={`flex-fill ${customOptions.displaySetting}`}>^ Self-paced Course</ListGroup.Item>
+                <ListGroup.Item className={`flex-fill ${customOptions.displaySetting}`}># Available as GERPEs</ListGroup.Item>
+            </ListGroup> : null
+        }
       </Col>
     </Row>
   )

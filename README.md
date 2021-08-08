@@ -2,8 +2,8 @@
 
 <img src="screenshots\timetablepage.JPG" alt="alt text" width="750" height="418">
 <br/>
-<img src="screenshots\coursespage.jpeg" alt="alt text" width="197" height="310">
-<img src="screenshots\timetablepage2.JPG" alt="alt text" width="550" height="307">
+<img src="screenshots\coursespage.jpeg" alt="alt text" width="188" height="295">
+<img src="screenshots\timetablepage2.JPG" alt="alt text" width="525" height="293">
 <br/>
 
 ## About The Project
