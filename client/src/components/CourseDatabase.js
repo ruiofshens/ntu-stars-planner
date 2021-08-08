@@ -63,7 +63,12 @@ function CourseDatabase() {
               delay={{ show: 250, hide: 400 }}
               overlay={popover}
             >
-              <Button size = "sm" variant="none" style={{fontWeight: "bold", color: "white", border: "1.5px solid white", borderRadius: "40px"}}>&nbsp;?&nbsp;</Button>
+              <Button 
+              size = "sm" 
+              variant="none" 
+              style={{fontWeight: "bold", color: "white", border: "1.5px solid white", borderRadius: "40px"}}>
+                &nbsp;?&nbsp;
+              </Button>
             </OverlayTrigger>
           </Col>
         </Row>
