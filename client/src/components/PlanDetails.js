@@ -12,7 +12,7 @@ function PlanDetails() {
     const { currentPlan } = useContext(CurrentPlanContext);
     const { customOptions } = useContext(CustomisationContext);
 
-    return (<>
+    return (
         <Table responsive striped hover size="sm" variant={customOptions.displaySetting === "lightMode" ? "light" : "dark"}>
             <thead>
             <tr>
@@ -42,17 +42,6 @@ function PlanDetails() {
                 })}
             </tbody>
         </Table>
-        {currentPlan.length !== 0 ?
-            <ListGroup horizontal className="legend">
-            
-                <ListGroup.Item className={`flex-fill ${customOptions.displaySetting}`} variant="secondary">Legend:</ListGroup.Item>
-                <ListGroup.Item className={`flex-fill ${customOptions.displaySetting}`}>* Available as UEs</ListGroup.Item>
-                <ListGroup.Item className={`flex-fill ${customOptions.displaySetting}`}>~ Available as BDEs</ListGroup.Item>
-                <ListGroup.Item className={`flex-fill ${customOptions.displaySetting}`}>^ Self-paced Course</ListGroup.Item>
-                <ListGroup.Item className={`flex-fill ${customOptions.displaySetting}`}># Available as GERPEs</ListGroup.Item>
-            </ListGroup> : null
-        }
-    </>
     )
 }
 

@@ -56,14 +56,14 @@ function CourseDatabase() {
               onChange={handleInput} />
             </Form>
           </Col>
-          <Col sm={1} xs={1}>
+          <Col sm={1} xs={1} className="d-flex justify-content-center">
             <OverlayTrigger
               trigger="click"
               placement="left"
               delay={{ show: 250, hide: 400 }}
               overlay={popover}
             >
-              <Button size = "sm" variant="secondary">...</Button>
+              <Button size = "sm" variant="none" style={{fontWeight: "bold", color: "white", border: "1.5px solid white", borderRadius: "40px"}}>&nbsp;?&nbsp;</Button>
             </OverlayTrigger>
           </Col>
         </Row>

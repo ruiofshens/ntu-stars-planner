@@ -11,7 +11,7 @@ Any new suggestions are welcomed.
 
 ### Added
 
-- legend for symbols in course names in CourseOverview and IndexEditOverview
+- popover for legend for symbols in course names in CourseDatabase
 - loading message for spinner in CourseDatabase
 
 ### Changed
@@ -21,6 +21,7 @@ Any new suggestions are welcomed.
 ### Fixed
 
 - bug where 2 lessons with no teaching weeks at the same time do not register as clashing
+- bug for rendering of 1AU mods with no lessons
 
 ### Removed
 
