@@ -30,7 +30,7 @@ function CourseSelectionPage() {
   const [canGenerate, setCanGenerate] = useState(false);
   const [errorMessage, setErrorMessage] = useState({ header: null, details: null }); // for displaying why timetable could not be generated
   const [showError, setShowError] = useState(false);
-  const [buttonText, setButtonText] = useState("Generate plans!")
+  const [buttonText, setButtonText] = useState("Generate Plans!")
 
   const history = useHistory();
 
@@ -65,7 +65,7 @@ function CourseSelectionPage() {
         }
       }
     }
-    setButtonText("Generate plans!");
+    setButtonText("Generate Plans!");
     window.scrollTo(0, 0);
   }
 

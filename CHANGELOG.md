@@ -9,6 +9,10 @@ Any new suggestions are welcomed.
 
 ## [1.1.0] - 2021-08-08
 
+### Added
+
+- legend for symbols in course names
+
 ### Fixed
 
 - bug where 2 lessons with no teaching weeks at the same time do not register as clashing

@@ -1,8 +1,9 @@
 # ntu-stars-planner
 
-<img src="screenshots\timetablepage.JPG" alt="alt text" width="650" height="363">
+<img src="screenshots\timetablepage.JPG" alt="alt text" width="750" height="418">
 <br/>
-<img src="screenshots\coursespage.jpeg" alt="alt text" width="254" height="400">
+<img src="screenshots\coursespage.jpeg" alt="alt text" width="197" height="310">
+<img src="screenshots\timetablepage2.JPG" alt="alt text" width="550" height="307">
 <br/>
 
 ## About The Project
@@ -12,10 +13,6 @@ STARS-panel is also media-responsive! However, the timetable is best viewed on d
 View the website here: [https://stars-panel.netlify.app/](https://stars-panel.netlify.app/)
 <br/>
 
-## Screenshots
-
-
-
 ## Features
 
 - Automatic Timetable Generation
@@ -23,7 +20,6 @@ View the website here: [https://stars-panel.netlify.app/](https://stars-panel.ne
 - Fixing of Specific Indexes
 - Editing and Saving of Timetable Plans
 - Advanced Options: No Back-To-Back Lessons, Choose Free Times
-<br/>
 
 ## Built With
 
@@ -34,7 +30,6 @@ View the website here: [https://stars-panel.netlify.app/](https://stars-panel.ne
 - Bootstrap
 - Netlify
 - Heroku
-<br/>
 
 ## Feedback
 
@@ -42,6 +37,5 @@ Should you encounter any issues, please kindly help us by reporting it here.
 <br/>
 
 ## Authors
-
-Chong Shen Rui<br/>
-Toh Jun Wei
+[Chong Shen Rui](https://github.com/ruiofshens)<br/>
+[Toh Jun Wei](https://github.com/junwei-tj)

@@ -220,4 +220,8 @@
     width: 291vw;
     font-size: 2.4vw;
   }
+
+  .legend{
+    flex-direction: column;
+  }
 }

@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
-import ListGroup from 'react-bootstrap/ListGroup'
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import { CustomisationContext } from '../contexts/CustomisationContext';
 
