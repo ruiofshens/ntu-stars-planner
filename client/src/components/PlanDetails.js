@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import Table from 'react-bootstrap/Table';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 import { CustomisationContext } from '../contexts/CustomisationContext';
@@ -17,7 +18,7 @@ function PlanDetails() {
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Index/Waitlist/Vacancy</th>
-                <th scope="col">Course Code and Name</th>
+                <th scope="col">Course Code/Name</th>
                 <th scope="col">AUs</th>
                 <th scope="col">Exam Timing</th>
             </tr>
