@@ -58,7 +58,7 @@ function SettingsPage() {
         <ListGroup.Item className={customOptions.displaySetting}>Automatic Timetable Generation</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Waitlist and Vacancy Details included (Only from 10am-10pm)</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Fixing of Specific Indexes</ListGroup.Item>
-        <ListGroup.Item className={customOptions.displaySetting}>Editing of Timetable Plans</ListGroup.Item>
+        <ListGroup.Item className={customOptions.displaySetting}>Editing and Saving of Timetable Plans</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Advanced Options: Choosing Free Times, No Back To Back Lessons</ListGroup.Item>
       </ListGroup>
 

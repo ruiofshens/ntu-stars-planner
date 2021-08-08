@@ -12,6 +12,7 @@ Any new suggestions are welcomed.
 ### Added
 
 - legend for symbols in course names in CourseOverview and IndexEditOverview
+- loading message for spinner in CourseDatabase
 
 ### Fixed
 
