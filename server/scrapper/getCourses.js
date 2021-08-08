@@ -178,21 +178,30 @@ export const getAcadSem = async () => {
 export const addCoursesToDB = async () => {
   const courses = await getCourses();
 
-  const dropped = await CourseModel.collection.drop();
-  if (dropped) {
-    console.log("CourseModel dropped")
-  }
+  await CourseModel.collection.drop()
+    .then(() => console.log("CourseModel dropped"))
+    .catch((e) => {
+      if (e.code === 26) {
+        console.log(`Namespace ${CourseModel.collection.name} not found, thus could not drop.`)
+      } else {
+        throw e;
+      }
+    });
   
   for (let i = 0; i < courses.length; i++) {
     let course = new CourseModel(courses[i]);
     await course.save((err) => {
-      if (err) console.log(err);
+      if (err) {
+        console.log(err);
+        return false;
+      }
       else console.log(`Added Course ${courses[i].courseCode} to database.`)
 
       if (i === courses.length-1) console.log("All courses added successfully.\n")
     })
   }
-  
+ 
+  return true;
 }
 
 // addCoursesToDB();

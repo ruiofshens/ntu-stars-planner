@@ -98,18 +98,28 @@ const getExamDetails = async (sem, acadYear, planNo, examYear) => {
 export const addExamsToDB = async () => {
   const exams = await getExamDetails("1", "2021-2022", "105", "2021");
 
-  const dropped = await ExamModel.collection.drop();
-  if (dropped) {
-    console.log("ExamModel dropped")
-  }
+  await ExamModel.collection.drop()
+    .then(() => console.log("ExamModel dropped"))
+    .catch((e) => {
+      if (e.code === 26) {
+        console.log(`Namespace ${ExamModel.collection.name} not found, thus could not drop.`)
+      } else {
+        throw e;
+      }
+    });
   
   for (let i = 0; i < exams.length; i++) {
     let exam = new ExamModel(exams[i]);
     await exam.save((err) => {
-      if (err) console.log(err);
+      if (err) { 
+        console.log(err);
+        return false;
+      }
       else console.log(`Added Exam for ${exams[i].courseCode} to database.`)
 
       if (i === exams.length-1) console.log("All exams added successfully\n")
     })
   }  
+
+  return true;
 }
