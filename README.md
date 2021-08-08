@@ -1,8 +1,11 @@
 # ntu-stars-planner
 
-<img src="screenshots\timetablepage.png" alt="alt text">
+<img src="screenshots\timetablepage1.png" alt="alt text">
 <br/>
 <img src="screenshots\timetablepage2.png" alt="alt text">
+<br/>
+<img src="screenshots\phonescreenshot1.png" alt="alt text">
+<img src="screenshots\tabletscreenshot1.png" alt="alt text">
 <br/>
 
 ## About The Project
