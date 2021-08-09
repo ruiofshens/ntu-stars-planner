@@ -9,9 +9,19 @@ Any new suggestions are welcomed.
 
 ## [1.1.0] - 2021-08-08
 
+### Added
+
+- popover for legend for symbols in course names in CourseDatabase
+- loading message for spinner in CourseDatabase
+
+### Changed
+
+- favicon
+
 ### Fixed
 
 - bug where 2 lessons with no teaching weeks at the same time do not register as clashing
+- bug for rendering of 1AU mods with no lessons
 
 ### Removed
 
