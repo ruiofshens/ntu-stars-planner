@@ -74,6 +74,7 @@ function SettingsPage() {
         <ListGroup.Item className={customOptions.displaySetting}>
           Disclaimer: All NTU data are obtained by crawling the public NTU sites; we do not own any of the data. 
           As this is an unofficial planner, we strongly encourage you to double check your timetables with the actual STARS.
+          For example, some indexes may be reserved for certain schools only.
         </ListGroup.Item>
       </ListGroup>
 
@@ -82,7 +83,7 @@ function SettingsPage() {
         may the force be with you
       </Row>
       <Row className="d-flex justify-content-center font-italic">
-        ~ Version 1.1.0 ~
+        ~ Version 1.2.0 ~
       </Row>
       <Row className="d-flex justify-content-center font-italic">
         <span className="text-center">

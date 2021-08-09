@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import Accordion from 'react-bootstrap/Accordion';
+import Spinner from 'react-bootstrap/Spinner';
 
 import CourseInputGroup from '../components/CourseInputGroup';
 import CourseDatabase from '../components/CourseDatabase';
@@ -18,10 +20,12 @@ import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 import { ConstraintsContext } from '../contexts/ConstraintsContext';
 import { CustomisationContext } from '../contexts/CustomisationContext';
+import { CoursesContext } from '../contexts/CoursesContext';
 
 function CourseSelectionPage() {
 
-  const { selectedCourses, setSelectedCourses } = useContext(SelectedCoursesContext);
+  const { courses } = useContext(CoursesContext);
+  const { selectedCourses } = useContext(SelectedCoursesContext);
   const { setTimetablePlans } = useContext(TimetablePlansContext);
   const { setCurrentPlan } = useContext(CurrentPlanContext);
   const { chosenIndexes, freeTimes, miscConstraints } = useContext(ConstraintsContext);
@@ -30,14 +34,14 @@ function CourseSelectionPage() {
   const [canGenerate, setCanGenerate] = useState(false);
   const [errorMessage, setErrorMessage] = useState({ header: null, details: null }); // for displaying why timetable could not be generated
   const [showError, setShowError] = useState(false);
-  const [buttonText, setButtonText] = useState("Generate Plans!")
+  const [generatingPlans, setGeneratingPlans] = useState(false);
 
   const history = useHistory();
 
   async function retrieveTimetablePlans() {
-    setButtonText("Generating....");
+    setGeneratingPlans(true);
     if (selectedCourses.some(selectedCourse => selectedCourse !== "")){
-      let generated = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
+      let generated = await TimetablesGenerator.generateAll(courses, selectedCourses, chosenIndexes, freeTimes, miscConstraints);
       if (generated.canGenerate && generated.timetables.length !== 0) {
         setCanGenerate(true);
         setTimetablePlans({timetables: generated.timetables, currentIndex: 0});
@@ -65,15 +69,15 @@ function CourseSelectionPage() {
         }
       }
     }
-    setButtonText("Generate Plans!");
+    setGeneratingPlans(false);
     window.scrollTo(0, 0);
   }
 
   return (
-    <Container fluid className={`px-1 pt-3 main ${customOptions.displaySetting}`}>
+    <Container fluid className={`pt-3 main ${customOptions.displaySetting}`}>
     
       {!canGenerate && showError && 
-        <Row>
+        <Row className="px-4">
           <Alert variant="danger" onClose={() => setShowError(false)} dismissible>
             <span>{errorMessage.header}</span>
             {errorMessage.details &&
@@ -89,25 +93,9 @@ function CourseSelectionPage() {
         <Col xs={12} lg={9} className="d-flex flex-column align-items-center">
           <CourseDatabase/>
         </Col>
-        <Col xs={12} lg={3} className="pt-3 pl-0">
-          <h5 className="text-center">Courses Selected</h5>
-          <hr/>
-          <CourseInputGroup/>
-          <Row className="d-flex justify-content-center">
-            <Button 
-            className="w-50"
-              variant="outline-primary m-1"
-              onClick={() => retrieveTimetablePlans()}>
-              {buttonText}
-            </Button>
-            <Button 
-            className="w-50"
-              variant="outline-primary m-1"
-              onClick={() => setSelectedCourses(Array(7).fill(""))}>
-              Clear All
-            </Button>
-          </Row>
-        </Col>
+        <SelectedCourses 
+        retrieveTimetablePlans={retrieveTimetablePlans}
+        generatingPlans={generatingPlans} />
       </Container>
 
       <Container fluid className="mt-4 mb-2">
@@ -116,6 +104,68 @@ function CourseSelectionPage() {
 
     </Container>
   );
+}
+
+const SelectedCourses = ({ retrieveTimetablePlans, generatingPlans }) => {
+
+  const { selectedCourses, setSelectedCourses } = useContext(SelectedCoursesContext);
+  const { customOptions } = useContext(CustomisationContext);
+
+  const InputGroup = () => {
+    return(
+      <>
+        <CourseInputGroup/>
+        <Row className="d-flex justify-content-center">
+          <Button 
+            className="w-75"
+            disabled={generatingPlans}
+            variant="outline-primary m-1"
+            onClick={() => retrieveTimetablePlans()}>
+            {generatingPlans ?  
+            <Spinner
+              as="span"
+              animation="grow"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+              className="mr-2"
+            /> : null}
+            {generatingPlans ? "Generating..." : "Generate Plans!"}
+          </Button>
+          <Button 
+            className="w-75"
+            variant="outline-primary m-1"
+            onClick={() => setSelectedCourses(Array(12).fill(""))}>
+            Clear All
+          </Button>
+        </Row>
+      </>
+    )
+  }
+
+  if (window.innerWidth < 992)
+    return (
+      <Col xs={12} lg={3} className="pt-3 pl-0 px-0">
+      <Accordion defaultActiveKey="course-input" className="pt-4">
+      <Accordion.Item eventKey="course-input" className={customOptions.displaySetting}>
+        <Accordion.Header><strong>{`${selectedCourses.reduce((a,v) => (v !== "" ? a + 1 : a), 0)} Courses Selected`}</strong></Accordion.Header>
+        <Accordion.Body>
+          <InputGroup/>
+        </Accordion.Body>
+      </Accordion.Item>
+      </Accordion>
+      </Col>
+    )
+
+  else {
+    return (
+      <Col xs={12} lg={3} className="pt-3 pl-0">
+        <h5 className="text-center">{`${selectedCourses.reduce((a,v) => (v !== "" ? a + 1 : a), 0)} Courses Selected`}</h5>
+        <hr/>
+        <InputGroup/>
+      </Col>
+    )
+  }
 }
 
 export default CourseSelectionPage;

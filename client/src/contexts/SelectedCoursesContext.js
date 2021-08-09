@@ -4,11 +4,12 @@ import React, { createContext, useState } from 'react';
 export const SelectedCoursesContext = createContext();
 
 const SelectedCoursesContextProvider = (props) => {
-    const [selectedCourses, setSelectedCourses] = useState(Array(7).fill(""));
+    const [selectedCourses, setSelectedCourses] = useState(Array(12).fill(""));
 
     //Add selected course to current array of selected courses
+    //Only add if courses has not been added and there is empty course input
     const addSelection = (courseCode) => {
-        if (!selectedCourses.includes(courseCode)){
+        if (!selectedCourses.includes(courseCode) && (selectedCourses.some(course => course === ""))){
             let emptySlot = selectedCourses.indexOf("");
             setSelectedCourses([...selectedCourses.slice(0, emptySlot), courseCode, ...selectedCourses.slice(emptySlot+1)]);
         }
