@@ -13,6 +13,7 @@ Any new suggestions are welcomed.
 
 - more colours for lessons for timetable to accomodate 12 courses
 - check for unavailable indexes when loading previously saved plans
+- left and right arrow keyboard presses can toggle between generated plans
 
 ### Changed
 

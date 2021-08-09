@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Tabs from 'react-bootstrap/Tabs';
@@ -26,6 +26,27 @@ function TimetablePage() {
   const { customOptions } = useContext(CustomisationContext);
 
   const [currentTab, setCurrentTab] = useState("choose-plan");
+
+    //Left arrow keypress to decrement plan, right arrow keypress to increment plan
+    const downHandler = (event) => {
+      if (currentTab === "choose-plan"){
+        switch(event.key) {
+          case "ArrowLeft":
+            decreasePlanIndex();
+            break;
+          case "ArrowRight":
+            increasePlanIndex();
+            break;
+        }
+      }
+    }
+
+    useEffect(() => {
+      window.addEventListener("keydown", downHandler);
+      return () => { // Remove event listeners on cleanup
+        window.removeEventListener("keydown", downHandler);
+      };
+    }, [downHandler]); //downHandler in dependency list since we require latest state of currentTab
 
   // for raising unsaved changes alert when user exits edit plans
   const exitEditPlan = (nextTabKey) => {
