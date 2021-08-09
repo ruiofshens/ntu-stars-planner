@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import Offcanvas from 'react-bootstrap/Offcanvas'
 
 import CourseInputGroup from '../components/CourseInputGroup';
 import CourseDatabase from '../components/CourseDatabase';
@@ -69,6 +70,11 @@ function CourseSelectionPage() {
     window.scrollTo(0, 0);
   }
 
+  // for displaying selected courses offcanvas for mobile
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <Container fluid className={`pt-3 main ${customOptions.displaySetting}`}>
     
@@ -89,25 +95,21 @@ function CourseSelectionPage() {
         <Col xs={12} lg={9} className="d-flex flex-column align-items-center">
           <CourseDatabase/>
         </Col>
-        <Col xs={12} lg={3} className="pt-3 pl-0">
-          <h5 className="text-center">Courses Selected</h5>
-          <hr/>
-          <CourseInputGroup/>
-          <Row className="d-flex justify-content-center">
-            <Button 
-            className="w-50"
-              variant="outline-primary m-1"
-              onClick={() => retrieveTimetablePlans()}>
-              {buttonText}
+        {window.innerWidth > 992 ? 
+          <SelectedCourses retrieveTimetablePlans={retrieveTimetablePlans} setSelectedCourses={setSelectedCourses} buttonText={buttonText} />
+        :
+          <Row className="d-flex justify-content-center mt-3">
+            <Button className="w-50" variant="outline-primary m-1" onClick={handleShow}>
+              Selected Courses
             </Button>
-            <Button 
-            className="w-50"
-              variant="outline-primary m-1"
-              onClick={() => setSelectedCourses(Array(12).fill(""))}>
-              Clear All
-            </Button>
+            <Offcanvas show={show} onHide={handleClose} placement="end">
+              <Offcanvas.Body>
+                <SelectedCourses retrieveTimetablePlans={retrieveTimetablePlans} setSelectedCourses={setSelectedCourses} buttonText={buttonText} onHide={handleClose}/>
+              </Offcanvas.Body>
+            </Offcanvas>
           </Row>
-        </Col>
+        }
+        
       </Container>
 
       <Container fluid className="mt-4 mb-2">
@@ -116,6 +118,38 @@ function CourseSelectionPage() {
 
     </Container>
   );
+}
+
+const SelectedCourses = ({ retrieveTimetablePlans, setSelectedCourses, buttonText, onHide }) => {
+  return (
+    <Col xs={12} lg={3} className="pt-3 pl-0">
+      <h5 className="text-center">Courses Selected</h5>
+      <hr/>
+      <CourseInputGroup/>
+      <Row className="d-flex justify-content-center">
+        <Button 
+          className="w-50"
+          variant="outline-primary m-1"
+          onClick={() => retrieveTimetablePlans()}>
+          {buttonText}
+        </Button>
+        <Button 
+          className="w-50"
+          variant="outline-primary m-1"
+          onClick={() => setSelectedCourses(Array(12).fill(""))}>
+          Clear All
+        </Button>
+        {onHide && 
+          <Button 
+            className="w-50"
+            variant="outline-primary m-1"
+            onClick={onHide}>
+            Hide
+          </Button>
+        }
+      </Row>
+    </Col>
+  )
 }
 
 export default CourseSelectionPage;
