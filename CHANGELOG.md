@@ -42,3 +42,4 @@ Any new suggestions are welcomed.
 ### Fixed
 
 - bug for adding courses when CourseInputGroup is full
+- vacancy and waitlist headers in PlanDetails
