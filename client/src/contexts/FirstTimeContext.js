@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-// Course information sent by the server
+// Used for dismissing of tip
 export const FirstTimeContext = createContext();
 
 const FirstTimeContextProvider = (props) => {
