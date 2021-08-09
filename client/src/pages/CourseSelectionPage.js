@@ -20,9 +20,11 @@ import { SelectedCoursesContext } from '../contexts/SelectedCoursesContext';
 import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 import { ConstraintsContext } from '../contexts/ConstraintsContext';
 import { CustomisationContext } from '../contexts/CustomisationContext';
+import { CoursesContext } from '../contexts/CoursesContext';
 
 function CourseSelectionPage() {
 
+  const { courses } = useContext(CoursesContext);
   const { selectedCourses } = useContext(SelectedCoursesContext);
   const { setTimetablePlans } = useContext(TimetablePlansContext);
   const { setCurrentPlan } = useContext(CurrentPlanContext);
@@ -39,7 +41,7 @@ function CourseSelectionPage() {
   async function retrieveTimetablePlans() {
     setGeneratingPlans(true);
     if (selectedCourses.some(selectedCourse => selectedCourse !== "")){
-      let generated = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
+      let generated = await TimetablesGenerator.generateAll(courses, selectedCourses, chosenIndexes, freeTimes, miscConstraints);
       if (generated.canGenerate && generated.timetables.length !== 0) {
         setCanGenerate(true);
         setTimetablePlans({timetables: generated.timetables, currentIndex: 0});
