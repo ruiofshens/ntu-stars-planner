@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
-import ListGroup from 'react-bootstrap/ListGroup'
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import { CustomisationContext } from '../contexts/CustomisationContext';
 
@@ -58,7 +58,7 @@ function SettingsPage() {
         <ListGroup.Item className={customOptions.displaySetting}>Automatic Timetable Generation</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Waitlist and Vacancy Details included (Only from 10am-10pm)</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Fixing of Specific Indexes</ListGroup.Item>
-        <ListGroup.Item className={customOptions.displaySetting}>Editing of Timetable Plans</ListGroup.Item>
+        <ListGroup.Item className={customOptions.displaySetting}>Editing and Saving of Timetable Plans</ListGroup.Item>
         <ListGroup.Item className={customOptions.displaySetting}>Advanced Options: Choosing Free Times, No Back To Back Lessons</ListGroup.Item>
       </ListGroup>
 
@@ -82,7 +82,7 @@ function SettingsPage() {
         may the force be with you
       </Row>
       <Row className="d-flex justify-content-center font-italic">
-        ~ Build V1.0.0 ~
+        ~ Version 1.1.0 ~
       </Row>
       <Row className="d-flex justify-content-center font-italic">
         <span className="text-center">
@@ -98,7 +98,7 @@ function SettingsPage() {
       </Row>
       <Row className="d-flex justify-content-center font-italic pb-4">
         <span className="text-center">
-          <a target="_blank" rel="noopener noreferrer" href="https://icons8.com/icon/121624/pixel-star">Pixel Star</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://icons8.com/icon/70836/star-filled">Star Filled</a>
           &nbsp;icon by&nbsp;
           <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">Icons8</a>
         </span>

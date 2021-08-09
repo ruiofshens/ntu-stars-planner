@@ -21,6 +21,7 @@ const COLORS = [
 
 function Timetable() {
   const { currentPlan } = useContext(CurrentPlanContext);
+  console.log(currentPlan);
   const allLessons = {
     MON: [],
     TUE: [],
@@ -32,7 +33,8 @@ function Timetable() {
   currentPlan.forEach((mod, i) => mod.index.lessons.forEach(lesson => {
     lesson.courseCode = mod.courseCode;
     lesson.color = COLORS[i];
-    allLessons[lesson.day].push(lesson);
+    if (allLessons[lesson.day]) // online courses like 1AU ones have no actual lessons
+      allLessons[lesson.day].push(lesson);
   }));
   // identify all overlapping lessons
   Object.values(allLessons).forEach(lessons => {
