@@ -31,7 +31,6 @@ function App() {
     async function retrieveAllCourses() {
       let acadSem = await fetchAcadSem();
       setAcadSem({ year: acadSem.year, sem: acadSem.sem });
-      console.log(acadSem);
       let coursesJSON = await fetchAllCourses();
       setCourses(coursesJSON);
     }

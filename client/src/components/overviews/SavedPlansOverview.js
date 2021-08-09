@@ -73,11 +73,17 @@ function SavedPlansOverview() {
             promiseArray.push(new Promise((resolve, reject) => {
                 fetchVacanciesAndWaitlist(course.courseCode)
                 .then((indexes) => {
-                    const thisIndex = indexes.filter(index => index.indexNo === course.index.indexNo)[0];
-                    course.index.vacancies = thisIndex.vacancies;
-                    course.index.waitlistLength = thisIndex.waitlistLength;
+                    if (indexes.length !== 0) { // 10am to 10pm
+                        const thisIndex = indexes.filter(index => index.indexNo === course.index.indexNo)[0];
+                        course.index.vacancies = thisIndex.vacancies;
+                        course.index.waitlistLength = thisIndex.waitlistLength;
+                    } else { // 10pm to 10am
+                        course.index.vacancies = "NA";
+                        course.index.waitlistLength = "NA";
+                    }
                 })
-                .then(() => resolve());
+                .then(() => resolve())
+                .catch((e) => console.log(e));
             }));
         });
         await Promise.all(promiseArray);
