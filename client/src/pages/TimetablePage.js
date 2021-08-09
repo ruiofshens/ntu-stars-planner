@@ -117,7 +117,7 @@ function TimetablePage() {
     <Container fluid className={`px-0 main ${customOptions.displaySetting}`}>
       <Row className="mx-0 pt-3 align-items-center">
         {currentTab === "choose-plan" ? <>
-        <Row className="top-row-toggle">
+        <Row className=" mx-0 top-row-toggle">
           <Col xs="auto">
             <Button 
               variant="outline-primary my-1" 
@@ -140,7 +140,7 @@ function TimetablePage() {
           </Col>
         </Row>
         {(window.innerWidth > 1200) && (Object.entries(timetablePlans).length !== 0) && (firstTime) ?
-          <Row className="top-row-toggle">
+          <Row className="mx-0 top-row-toggle">
             <Toast show={showTip} onClose={toggleShowTip}>
               <Toast.Header>
                 <strong className="me-auto">Tip: Left/Right arrow keys work too!</strong>
