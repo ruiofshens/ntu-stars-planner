@@ -83,7 +83,7 @@ function SettingsPage() {
         may the force be with you
       </Row>
       <Row className="d-flex justify-content-center font-italic">
-        ~ Version 1.2.0 ~
+        ~ Version 1.2.1 ~
       </Row>
       <Row className="d-flex justify-content-center font-italic">
         <span className="text-center">

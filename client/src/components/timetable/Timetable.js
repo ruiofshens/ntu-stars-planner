@@ -31,7 +31,6 @@ const COLORS = [
 
 function Timetable() {
   const { currentPlan } = useContext(CurrentPlanContext);
-  console.log(currentPlan);
   const allLessons = {
     MON: [],
     TUE: [],
