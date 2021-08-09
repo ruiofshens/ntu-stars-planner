@@ -6,7 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import Offcanvas from 'react-bootstrap/Offcanvas'
+import Accordion from 'react-bootstrap/Accordion';
+import Spinner from 'react-bootstrap/Spinner';
 
 import CourseInputGroup from '../components/CourseInputGroup';
 import CourseDatabase from '../components/CourseDatabase';
@@ -22,7 +23,7 @@ import { CustomisationContext } from '../contexts/CustomisationContext';
 
 function CourseSelectionPage() {
 
-  const { selectedCourses, setSelectedCourses } = useContext(SelectedCoursesContext);
+  const { selectedCourses } = useContext(SelectedCoursesContext);
   const { setTimetablePlans } = useContext(TimetablePlansContext);
   const { setCurrentPlan } = useContext(CurrentPlanContext);
   const { chosenIndexes, freeTimes, miscConstraints } = useContext(ConstraintsContext);
@@ -36,7 +37,7 @@ function CourseSelectionPage() {
   const history = useHistory();
 
   async function retrieveTimetablePlans() {
-    setButtonText("Generating....");
+    setButtonText("Generating...");
     if (selectedCourses.some(selectedCourse => selectedCourse !== "")){
       let generated = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
       if (generated.canGenerate && generated.timetables.length !== 0) {
@@ -70,11 +71,6 @@ function CourseSelectionPage() {
     window.scrollTo(0, 0);
   }
 
-  // for displaying selected courses offcanvas for mobile
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   return (
     <Container fluid className={`pt-3 main ${customOptions.displaySetting}`}>
     
@@ -95,21 +91,9 @@ function CourseSelectionPage() {
         <Col xs={12} lg={9} className="d-flex flex-column align-items-center">
           <CourseDatabase/>
         </Col>
-        {window.innerWidth > 992 ? 
-          <SelectedCourses retrieveTimetablePlans={retrieveTimetablePlans} setSelectedCourses={setSelectedCourses} buttonText={buttonText} />
-        :
-          <Row className="d-flex justify-content-center mt-3">
-            <Button className="w-50" variant="outline-primary m-1" onClick={handleShow}>
-              Selected Courses
-            </Button>
-            <Offcanvas show={show} onHide={handleClose} placement="end">
-              <Offcanvas.Body>
-                <SelectedCourses retrieveTimetablePlans={retrieveTimetablePlans} setSelectedCourses={setSelectedCourses} buttonText={buttonText} onHide={handleClose}/>
-              </Offcanvas.Body>
-            </Offcanvas>
-          </Row>
-        }
-        
+        <SelectedCourses 
+        retrieveTimetablePlans={retrieveTimetablePlans}
+        buttonText={buttonText} />
       </Container>
 
       <Container fluid className="mt-4 mb-2">
@@ -120,36 +104,65 @@ function CourseSelectionPage() {
   );
 }
 
-const SelectedCourses = ({ retrieveTimetablePlans, setSelectedCourses, buttonText, onHide }) => {
-  return (
-    <Col xs={12} lg={3} className="pt-3 pl-0">
-      <h5 className="text-center">Courses Selected</h5>
-      <hr/>
-      <CourseInputGroup/>
-      <Row className="d-flex justify-content-center">
-        <Button 
-          className="w-50"
-          variant="outline-primary m-1"
-          onClick={() => retrieveTimetablePlans()}>
-          {buttonText}
-        </Button>
-        <Button 
-          className="w-50"
-          variant="outline-primary m-1"
-          onClick={() => setSelectedCourses(Array(12).fill(""))}>
-          Clear All
-        </Button>
-        {onHide && 
+const SelectedCourses = ({ retrieveTimetablePlans, buttonText }) => {
+
+  const { selectedCourses, setSelectedCourses } = useContext(SelectedCoursesContext);
+  const { customOptions } = useContext(CustomisationContext);
+
+  const InputGroup = () => {
+    return(
+      <>
+        <CourseInputGroup/>
+        <Row className="d-flex justify-content-center">
           <Button 
-            className="w-50"
+            className="w-75"
             variant="outline-primary m-1"
-            onClick={onHide}>
-            Hide
+            onClick={() => retrieveTimetablePlans()}>
+            {buttonText === "Generating..." ? 
+            <Spinner
+              as="span"
+              animation="grow"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+              className="mr-2"
+            /> : null}
+            {buttonText}
           </Button>
-        }
-      </Row>
-    </Col>
-  )
+          <Button 
+            className="w-75"
+            variant="outline-primary m-1"
+            onClick={() => setSelectedCourses(Array(12).fill(""))}>
+            Clear All
+          </Button>
+        </Row>
+      </>
+    )
+  }
+
+  if (window.innerWidth < 992)
+    return (
+      <Col xs={12} lg={3} className="pt-3 pl-0 px-0">
+      <Accordion className="pt-4">
+      <Accordion.Item eventKey="course-input" className={customOptions.displaySetting}>
+        <Accordion.Header><strong>{`${selectedCourses.reduce((a,v) => (v !== "" ? a + 1 : a), 0)} Courses Selected`}</strong></Accordion.Header>
+        <Accordion.Body>
+          <InputGroup/>
+        </Accordion.Body>
+      </Accordion.Item>
+      </Accordion>
+      </Col>
+    )
+
+  else {
+    return (
+      <Col xs={12} lg={3} className="pt-3 pl-0">
+        <h5 className="text-center">{`${selectedCourses.reduce((a,v) => (v !== "" ? a + 1 : a), 0)} Courses Selected`}</h5>
+        <hr/>
+        <InputGroup/>
+      </Col>
+    )
+  }
 }
 
 export default CourseSelectionPage;

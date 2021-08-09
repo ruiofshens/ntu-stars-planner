@@ -16,7 +16,7 @@ function CourseInput(props) {
     }
 
     return (
-        <InputGroup className="mb-3">
+        <InputGroup className="mb-2">
             <Button 
                 variant="outline-secondary" 
                 id="selection1"
