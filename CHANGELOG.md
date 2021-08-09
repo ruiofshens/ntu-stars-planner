@@ -33,13 +33,17 @@ Any new suggestions are welcomed.
 
 - more colours for courses to accomodate 12 courses
 - spinner in button for generating plans
+- check for unavailable indexes when loading saved plans
 
 ### Changed
 
 - CourseInputGroup to show two columns of 6 inputs each
 - CourseInputGroup to be rendered in an Accordion for smaller screens
+- UseIndexes now use the courses object to get indexes rather than fetching from the API
+- removed unused getVacancies.js under client
 
 ### Fixed
 
 - bug for adding courses when CourseInputGroup is full
 - vacancy and waitlist headers in PlanDetails
+- vacancy and waitlist showing NA even when available in SavedPlansOverview
