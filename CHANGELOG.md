@@ -13,11 +13,11 @@ Any new suggestions are welcomed.
 
 - more colours for lessons for timetable to accomodate 12 courses
 - check for unavailable indexes when loading previously saved plans
-- left and right arrow keyboard presses can toggle between generated plans
+- left/right arrow keyboard presses toggle between generated plans, tip added in TimetablePage for bigger screens
 
 ### Changed
 
-- button for generating plans disabled and includes a spinner while timetable plans are generated
+- button for generating plans is disabled and includes a spinner while timetable plans are generated
 - CourseInputGroup to show two columns of 6 inputs each
 - CourseInputGroup to be rendered in an Accordion for smaller screens
 - timetablesGenerator and UseIndexes now uses the courses object to get courses/indexes rather than fetching from the API

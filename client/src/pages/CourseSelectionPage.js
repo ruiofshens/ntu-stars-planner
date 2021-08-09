@@ -146,7 +146,7 @@ const SelectedCourses = ({ retrieveTimetablePlans, generatingPlans }) => {
   if (window.innerWidth < 992)
     return (
       <Col xs={12} lg={3} className="pt-3 pl-0 px-0">
-      <Accordion className="pt-4">
+      <Accordion defaultActiveKey="course-input" className="pt-4">
       <Accordion.Item eventKey="course-input" className={customOptions.displaySetting}>
         <Accordion.Header><strong>{`${selectedCourses.reduce((a,v) => (v !== "" ? a + 1 : a), 0)} Courses Selected`}</strong></Accordion.Header>
         <Accordion.Body>
