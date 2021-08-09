@@ -70,10 +70,10 @@ function CourseSelectionPage() {
   }
 
   return (
-    <Container fluid className={`px-1 pt-3 main ${customOptions.displaySetting}`}>
+    <Container fluid className={`pt-3 main ${customOptions.displaySetting}`}>
     
       {!canGenerate && showError && 
-        <Row>
+        <Row className="px-4">
           <Alert variant="danger" onClose={() => setShowError(false)} dismissible>
             <span>{errorMessage.header}</span>
             {errorMessage.details &&
@@ -103,7 +103,7 @@ function CourseSelectionPage() {
             <Button 
             className="w-50"
               variant="outline-primary m-1"
-              onClick={() => setSelectedCourses(Array(7).fill(""))}>
+              onClick={() => setSelectedCourses(Array(12).fill(""))}>
               Clear All
             </Button>
           </Row>

@@ -9,7 +9,7 @@ function CourseInputGroup() {
     const { selectedCourses } = useContext(SelectedCoursesContext);
     return (
         <Container className="w-75">
-            {[...Array(7)].map((value, index) => (
+            {[...Array(12)].map((value, index) => (
                 <CourseInput index={index} course={selectedCourses[index]} key={`course-input-${index}`}/>
             ))}
         </Container>

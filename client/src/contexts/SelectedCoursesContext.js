@@ -4,7 +4,7 @@ import React, { createContext, useState } from 'react';
 export const SelectedCoursesContext = createContext();
 
 const SelectedCoursesContextProvider = (props) => {
-    const [selectedCourses, setSelectedCourses] = useState(Array(7).fill(""));
+    const [selectedCourses, setSelectedCourses] = useState(Array(12).fill(""));
 
     //Add selected course to current array of selected courses
     const addSelection = (courseCode) => {
