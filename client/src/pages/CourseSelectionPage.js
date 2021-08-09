@@ -32,12 +32,12 @@ function CourseSelectionPage() {
   const [canGenerate, setCanGenerate] = useState(false);
   const [errorMessage, setErrorMessage] = useState({ header: null, details: null }); // for displaying why timetable could not be generated
   const [showError, setShowError] = useState(false);
-  const [buttonText, setButtonText] = useState("Generate Plans!")
+  const [generatingPlans, setGeneratingPlans] = useState(false);
 
   const history = useHistory();
 
   async function retrieveTimetablePlans() {
-    setButtonText("Generating...");
+    setGeneratingPlans(true);
     if (selectedCourses.some(selectedCourse => selectedCourse !== "")){
       let generated = await TimetablesGenerator.generateAll(selectedCourses, chosenIndexes, freeTimes, miscConstraints);
       if (generated.canGenerate && generated.timetables.length !== 0) {
@@ -67,7 +67,7 @@ function CourseSelectionPage() {
         }
       }
     }
-    setButtonText("Generate Plans!");
+    setGeneratingPlans(false);
     window.scrollTo(0, 0);
   }
 
@@ -93,7 +93,7 @@ function CourseSelectionPage() {
         </Col>
         <SelectedCourses 
         retrieveTimetablePlans={retrieveTimetablePlans}
-        buttonText={buttonText} />
+        generatingPlans={generatingPlans} />
       </Container>
 
       <Container fluid className="mt-4 mb-2">
@@ -104,7 +104,7 @@ function CourseSelectionPage() {
   );
 }
 
-const SelectedCourses = ({ retrieveTimetablePlans, buttonText }) => {
+const SelectedCourses = ({ retrieveTimetablePlans, generatingPlans }) => {
 
   const { selectedCourses, setSelectedCourses } = useContext(SelectedCoursesContext);
   const { customOptions } = useContext(CustomisationContext);
@@ -116,9 +116,10 @@ const SelectedCourses = ({ retrieveTimetablePlans, buttonText }) => {
         <Row className="d-flex justify-content-center">
           <Button 
             className="w-75"
+            disabled={generatingPlans}
             variant="outline-primary m-1"
             onClick={() => retrieveTimetablePlans()}>
-            {buttonText === "Generating..." ? 
+            {generatingPlans ?  
             <Spinner
               as="span"
               animation="grow"
@@ -127,7 +128,7 @@ const SelectedCourses = ({ retrieveTimetablePlans, buttonText }) => {
               aria-hidden="true"
               className="mr-2"
             /> : null}
-            {buttonText}
+            {generatingPlans ? "Generating..." : "Generate Plans!"}
           </Button>
           <Button 
             className="w-75"

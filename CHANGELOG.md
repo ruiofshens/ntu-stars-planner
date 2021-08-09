@@ -31,19 +31,22 @@ Any new suggestions are welcomed.
 
 ### Added
 
-- more colours for courses to accomodate 12 courses
-- spinner in button for generating plans
-- check for unavailable indexes when loading saved plans
+- more colours for lessons for timetable to accomodate 12 courses
+- check for unavailable indexes when loading previously saved plans
 
 ### Changed
 
+- button for generating plans disabled and includes a spinner while timetable plans are generated
 - CourseInputGroup to show two columns of 6 inputs each
 - CourseInputGroup to be rendered in an Accordion for smaller screens
-- UseIndexes now use the courses object to get indexes rather than fetching from the API
-- removed unused getVacancies.js under client
+- UseIndexes now uses the courses object to get indexes rather than fetching from the API
 
 ### Fixed
 
 - bug for adding courses when CourseInputGroup is full
 - vacancy and waitlist headers in PlanDetails
 - vacancy and waitlist showing NA even when available in SavedPlansOverview
+
+### Removed
+
+- Unused getVacancies.js under client
