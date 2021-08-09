@@ -17,7 +17,7 @@ import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 import { TimetablePlansContext } from '../contexts/TimetablePlansContext';
 import { SavedPlansContext } from '../contexts/SavedPlansContext';
 import { CustomisationContext } from '../contexts/CustomisationContext';
-
+import { FirstTimeContext } from '../contexts/FirstTimeContext';
 
 function TimetablePage() {
 
@@ -25,12 +25,16 @@ function TimetablePage() {
   const { savedPlans } = useContext(SavedPlansContext);
   const { currentPlan, setCurrentPlan } = useContext(CurrentPlanContext);
   const { customOptions } = useContext(CustomisationContext);
+  const { firstTime, setFirstTime } = useContext(FirstTimeContext);
 
   const [currentTab, setCurrentTab] = useState("choose-plan");
 
   //Toggle showing of tooltip
   const [showTip, setShowTip] = useState(true);
-  const toggleShowTip = () => setShowTip(!showTip);
+  const toggleShowTip = () => {
+    setShowTip(!showTip);
+    setFirstTime(false);
+  }
 
   //Left arrow keypress to decrement plan, right arrow keypress to increment plan
   const downHandler = (event) => {
@@ -135,7 +139,7 @@ function TimetablePage() {
             </Button>
           </Col>
         </Row>
-        {(window.innerWidth > 992) && (Object.entries(timetablePlans).length !== 0) ?
+        {(window.innerWidth > 1200) && (Object.entries(timetablePlans).length !== 0) && (firstTime) ?
           <Row className="top-row-toggle">
             <Toast show={showTip} onClose={toggleShowTip}>
               <Toast.Header>
