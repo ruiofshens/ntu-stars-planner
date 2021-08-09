@@ -3,7 +3,7 @@ import { fetchCourses, fetchExams, fetchVacanciesAndWaitlist } from "../DataRetr
 
 class TimetablesGenerator {
 
-  async generateAll(courseCodes, chosenIndexes, freeTimes, miscConstraints) {
+  async generateAll(allCourses, courseCodes, chosenIndexes, freeTimes, miscConstraints) {
     /**
      * Refer to CourseSelectionPage for more details regarding the last 3 parameters
      * @param courseCodes array of course codes
@@ -14,7 +14,7 @@ class TimetablesGenerator {
 
     courseCodes = courseCodes.filter(courseCode => courseCode); // remove empty strings
     // retrieve courses and exams from db
-    let courses = await fetchCourses(courseCodes);
+    let courses = allCourses.filter(courseObj => courseCodes.includes(courseObj.courseCode));
     let exams = await fetchExams(courseCodes);
 
     // check for exam clash first

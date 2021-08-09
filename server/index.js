@@ -5,8 +5,6 @@ import dotenv from 'dotenv';
 
 import courseRoutes from './routes/courseRouter.js'
 
-import doPeriodicRefresh from './refreshDatabase.js';
-
 //General Setup
 const app = express();
 dotenv.config(); //Allow use of env variables
@@ -29,4 +27,3 @@ mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedT
 
 mongoose.set('useFindAndModify', false);
 
-doPeriodicRefresh();

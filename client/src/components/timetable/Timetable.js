@@ -8,15 +8,25 @@ import { CustomisationContext } from '../../contexts/CustomisationContext';
 import Lesson from './Lesson';
 import OverlappedLessons from './OverlappedLessons';
 
-//https://flatuicolors.com/palette/tr
+
 const COLORS = [
+  //https://flatuicolors.com/palette/tr
   "#17c0eb", //Spiro Disco Ball
   "#cd84f1", //Bright Lilac
   "#ffaf40", //Mandarin Sorbet
   "#3ae374", //Weird Green
-  "#67e6dc", //Hammam Blue
+  "#7efff5", //Electric Blue
   "#ffb8b8", //Young Salmon
   "#ff4d4d", //Light Red
+
+  //https://flatuicolors.com/palette/es
+  "#706fd3", //C64 Purple
+  "#ccae62", //Desert
+  "#ff793f", //Synthetic Pumpkin
+
+  //https://flatuicolors.com/palette/defo
+  "#16a085", //Green Sea
+  "#8e44ad", //Wisteria
 ]
 
 function Timetable() {

@@ -17,6 +17,7 @@ import CurrentPlanContextProvider from './contexts/CurrentPlanContext';
 import SavedPlansContextProvider from './contexts/SavedPlansContext';
 import ConstraintsContextProvider from './contexts/ConstraintsContext';
 import CustomisationContextProvider from './contexts/CustomisationContext';
+import FirstTimeContextProvider from './contexts/FirstTimeContext';
 
 import { CoursesContext } from './contexts/CoursesContext';
 import { fetchAllCourses, fetchAcadSem } from './services/DataRetriever';
@@ -56,37 +57,39 @@ function App() {
             <CurrentPlanContextProvider>
               <ConstraintsContextProvider>
                 <CustomisationContextProvider>
-                  <Navbar 
-                  id="navbar"
-                  variant="light" 
-                  fixed="top" 
-                  className="sticky-nav d-flex justify-content-center">
-                    <LinkContainer to="/">
-                      <Navbar.Brand>
-                        <span role="img" aria-label="star">⭐</span>
-                        {' '}panel
-                      </Navbar.Brand>
-                    </LinkContainer>
-                    <Nav 
-                    // activeKey={window.location.pathname} 
-                    className="nav-options">
-                      <IndexLinkContainer to="/">
-                        <Nav.Link>Timetable</Nav.Link>
-                      </IndexLinkContainer>
-                      <LinkContainer to="/courses">
-                        <Nav.Link>Courses</Nav.Link>
+                  <FirstTimeContextProvider>
+                    <Navbar 
+                    id="navbar"
+                    variant="light" 
+                    fixed="top" 
+                    className="sticky-nav d-flex justify-content-center">
+                      <LinkContainer to="/">
+                        <Navbar.Brand>
+                          <span role="img" aria-label="star">⭐</span>
+                          {' '}panel
+                        </Navbar.Brand>
                       </LinkContainer>
-                      <LinkContainer to="/settings">
-                        <Nav.Link>Settings</Nav.Link>
-                      </LinkContainer>
-                    </Nav>
-                  </Navbar>
+                      <Nav 
+                      // activeKey={window.location.pathname} 
+                      className="nav-options">
+                        <IndexLinkContainer to="/">
+                          <Nav.Link>Timetable</Nav.Link>
+                        </IndexLinkContainer>
+                        <LinkContainer to="/courses">
+                          <Nav.Link>Courses</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/settings">
+                          <Nav.Link>Settings</Nav.Link>
+                        </LinkContainer>
+                      </Nav>
+                    </Navbar>
 
-                  <Switch>
-                    <Route exact path="/" component={TimetablePage}/>
-                    <Route path="/courses" component={CourseSelectionPage}/>
-                    <Route path="/settings" component={SettingsPage}/>
-                  </Switch>
+                    <Switch>
+                      <Route exact path="/" component={TimetablePage}/>
+                      <Route path="/courses" component={CourseSelectionPage}/>
+                      <Route path="/settings" component={SettingsPage}/>
+                    </Switch>
+                  </FirstTimeContextProvider>
                 </CustomisationContextProvider>
               </ConstraintsContextProvider>
             </CurrentPlanContextProvider>

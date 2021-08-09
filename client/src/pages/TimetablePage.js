@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Tabs from 'react-bootstrap/Tabs';
@@ -6,6 +6,7 @@ import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Toast from 'react-bootstrap/Toast';
 
 import Timetable from '../components/timetable/Timetable';
 import CourseOverview from '../components/overviews/CourseOverview';
@@ -16,7 +17,7 @@ import { CurrentPlanContext } from '../contexts/CurrentPlanContext';
 import { TimetablePlansContext } from '../contexts/TimetablePlansContext';
 import { SavedPlansContext } from '../contexts/SavedPlansContext';
 import { CustomisationContext } from '../contexts/CustomisationContext';
-
+import { FirstTimeContext } from '../contexts/FirstTimeContext';
 
 function TimetablePage() {
 
@@ -24,8 +25,37 @@ function TimetablePage() {
   const { savedPlans } = useContext(SavedPlansContext);
   const { currentPlan, setCurrentPlan } = useContext(CurrentPlanContext);
   const { customOptions } = useContext(CustomisationContext);
+  const { firstTime, setFirstTime } = useContext(FirstTimeContext);
 
   const [currentTab, setCurrentTab] = useState("choose-plan");
+
+  //Toggle showing of tooltip
+  const [showTip, setShowTip] = useState(true);
+  const toggleShowTip = () => {
+    setShowTip(!showTip);
+    setFirstTime(false);
+  }
+
+  //Left arrow keypress to decrement plan, right arrow keypress to increment plan
+  const downHandler = (event) => {
+    if (currentTab === "choose-plan"){
+      switch(event.key) {
+        case "ArrowLeft":
+          decreasePlanIndex();
+          break;
+        case "ArrowRight":
+          increasePlanIndex();
+          break;
+      }
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("keydown", downHandler);
+    return () => { // Remove event listeners on cleanup
+      window.removeEventListener("keydown", downHandler);
+    };
+  }, [downHandler]); //downHandler in dependency list since we require latest state of currentTab
 
   // for raising unsaved changes alert when user exits edit plans
   const exitEditPlan = (nextTabKey) => {
@@ -86,8 +116,8 @@ function TimetablePage() {
   return (
     <Container fluid className={`px-0 main ${customOptions.displaySetting}`}>
       <Row className="mx-0 pt-3 align-items-center">
-        {currentTab === "choose-plan" ?
-        <Col className="d-flex flex-row top-row-toggle">
+        {currentTab === "choose-plan" ? <>
+        <Row className=" mx-0 top-row-toggle">
           <Col xs="auto">
             <Button 
               variant="outline-primary my-1" 
@@ -108,7 +138,16 @@ function TimetablePage() {
               {'>'}
             </Button>
           </Col>
-        </Col>  : null }   
+        </Row>
+        {(window.innerWidth > 1200) && (Object.entries(timetablePlans).length !== 0) && (firstTime) ?
+          <Row className="mx-0 top-row-toggle">
+            <Toast show={showTip} onClose={toggleShowTip}>
+              <Toast.Header>
+                <strong className="me-auto">Tip: Left/Right arrow keys work too!</strong>
+              </Toast.Header>
+            </Toast>
+          </Row> : null }
+        </> : null }   
       </Row>
 
       <Container fluid className="timetableContainer">

@@ -8,10 +8,12 @@ import { fetchCourses } from '../../services/DataRetriever';
 import { SelectedCoursesContext } from '../../contexts/SelectedCoursesContext';
 import { ConstraintsContext } from '../../contexts/ConstraintsContext';
 import { CustomisationContext } from '../../contexts/CustomisationContext';
+import { CoursesContext } from '../../contexts/CoursesContext';
 
 const animatedComponents = makeAnimated();
 
 const UseIndexes = () => {
+  const { courses } = useContext(CoursesContext);
   const { selectedCourses } = useContext(SelectedCoursesContext);
   const [courseIndexes, setCourseIndexes] = useState([]);
   
@@ -19,20 +21,18 @@ const UseIndexes = () => {
   const { customOptions } = useContext(CustomisationContext);
 
   useEffect(() => {
-    async function getIndexes() {
-      const courseIndexes = [];
-      let courses = await fetchCourses(selectedCourses);
-      courses.forEach(course => {
+    const courseIndexes = [];
+    courses.forEach(course => {
+      if (selectedCourses.includes(course.courseCode)) {
         let indexNos = [];
         course.indexes.forEach(index => indexNos.push(index.indexNo));
         courseIndexes.push({
           courseCode: course.courseCode,
           indexNos: indexNos,
-        });
-      });
-      setCourseIndexes(courseIndexes);
-    }
-    getIndexes();
+        })
+      }
+    });
+    setCourseIndexes(courseIndexes);
 
     // create object of courseCodes, each courseCode having an array of selected indexes
     // if it hasn't been created already
