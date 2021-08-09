@@ -41,7 +41,7 @@ function CourseDatabase() {
   );
   
   return (
-    <Card className={`retrievedCourses ${customOptions.displaySetting}`} style={{height: "45rem"}} border={customOptions.displaySetting === "lightMode" ? "" : "secondary"}>
+    <Card className={`retrievedCourses ${customOptions.displaySetting}`} style={{height: "30rem"}} border={customOptions.displaySetting === "lightMode" ? "" : "secondary"}>
       <Card.Header className="database-title font-weight-bold">
         <Row className="align-items-center">
           <Col sm={7} xs={9}> 

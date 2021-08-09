@@ -26,3 +26,20 @@ Any new suggestions are welcomed.
 ### Removed
 
 - timetable download feature, did not work as intended on some browsers
+
+## [1.2.0] - 2021-08-09
+
+### Added
+
+- more colours for courses to accomodate 12 courses
+- spinner in button for generating plans
+
+### Changed
+
+- CourseInputGroup to show two columns of 6 inputs each
+- CourseInputGroup to be rendered in an Accordion for smaller screens
+
+### Fixed
+
+- bug for adding courses when CourseInputGroup is full
+- vacancy and waitlist headers in PlanDetails

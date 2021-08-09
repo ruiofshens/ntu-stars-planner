@@ -17,7 +17,7 @@ function PlanDetails() {
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Index/Waitlist/Vacancy</th>
+                <th scope="col">Index/Vacancy/Waitlist</th>
                 <th scope="col">Course Code/Name</th>
                 <th scope="col">AUs</th>
                 <th scope="col">Exam Timing</th>
