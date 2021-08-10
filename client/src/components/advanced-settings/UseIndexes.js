@@ -102,6 +102,7 @@ const SelectForm = ({ course, chosenIndexes, setChosenIndexes, customOptions }) 
         defaultValue={pastSelected}
         onChange={handleSelectChange}
         styles={customStyles}
+        id={`select-index-${course.courseCode}`}
       />
     </Form.Group>
   )

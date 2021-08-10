@@ -14,7 +14,7 @@ const MiscConstraints = () => {
         name="no-b2b"
         label="No back-to-back lessons"
         onChange={() => setMiscConstraints({...miscConstraints, noBackToBack: !miscConstraints.noBackToBack})}
-        id="no-b2b"
+        id="btn-no-b2b"
         defaultChecked={miscConstraints.noBackToBack}
       />
     </Form.Group>

@@ -43,7 +43,7 @@ function SettingsPage() {
       <Form>
         <Form.Check 
           type="switch"
-          id="scheme-switch"
+          id="switch-toggle-dark"
           label={customOptions.displaySetting === "lightMode" ? "Toggle to dark mode" : "Toggle to light mode"}
           onChange={() => toggleLightDarkMode()}
           defaultChecked={darkModeToggled}

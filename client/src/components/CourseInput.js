@@ -19,7 +19,7 @@ function CourseInput(props) {
         <InputGroup className="mb-2">
             <Button 
                 variant="outline-secondary" 
-                id="selection1"
+                id={`btn-remove-sel-${props.index}`}
                 size="sm"
                 onClick={()=> {
                     removeSelection(props.index);
@@ -34,6 +34,7 @@ function CourseInput(props) {
                 // inputRef={ref => { this.myInput = ref; }}
                 value={input}
                 readOnly
+                id={`input-sel-${props.index}`}
             />
         </InputGroup>
     );

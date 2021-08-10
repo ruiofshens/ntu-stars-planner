@@ -78,12 +78,12 @@ function CourseSelectionPage() {
     
       {!canGenerate && showError && 
         <Row className="px-4">
-          <Alert variant="danger" onClose={() => setShowError(false)} dismissible>
-            <span>{errorMessage.header}</span>
+          <Alert variant="danger" onClose={() => setShowError(false)} dismissible id="alert-error">
+            <span id="alert-error-header">{errorMessage.header}</span>
             {errorMessage.details &&
               <>
                 <hr />
-                <span style={{whiteSpace: "pre-wrap"}}>{errorMessage.details}</span>
+                <span style={{whiteSpace: "pre-wrap"}} id="alert-error-details">{errorMessage.details}</span>
               </>
             }
           </Alert>
@@ -120,7 +120,8 @@ const SelectedCourses = ({ retrieveTimetablePlans, generatingPlans }) => {
             className="w-75"
             disabled={generatingPlans}
             variant="outline-primary m-1"
-            onClick={() => retrieveTimetablePlans()}>
+            onClick={() => retrieveTimetablePlans()}
+            id="btn-generate-plans">
             {generatingPlans ?  
             <Spinner
               as="span"
@@ -135,7 +136,8 @@ const SelectedCourses = ({ retrieveTimetablePlans, generatingPlans }) => {
           <Button 
             className="w-75"
             variant="outline-primary m-1"
-            onClick={() => setSelectedCourses(Array(12).fill(""))}>
+            onClick={() => setSelectedCourses(Array(12).fill(""))}
+            id="btn-clear-all">
             Clear All
           </Button>
         </Row>
@@ -148,7 +150,7 @@ const SelectedCourses = ({ retrieveTimetablePlans, generatingPlans }) => {
       <Col xs={12} lg={3} className="pt-3 pl-0 px-0">
       <Accordion defaultActiveKey="course-input" className="pt-4">
       <Accordion.Item eventKey="course-input" className={customOptions.displaySetting}>
-        <Accordion.Header><strong>{`${selectedCourses.reduce((a,v) => (v !== "" ? a + 1 : a), 0)} Courses Selected`}</strong></Accordion.Header>
+        <Accordion.Header><strong id="text-num-selected">{`${selectedCourses.reduce((a,v) => (v !== "" ? a + 1 : a), 0)} Courses Selected`}</strong></Accordion.Header>
         <Accordion.Body>
           <InputGroup/>
         </Accordion.Body>
@@ -160,7 +162,7 @@ const SelectedCourses = ({ retrieveTimetablePlans, generatingPlans }) => {
   else {
     return (
       <Col xs={12} lg={3} className="pt-3 pl-0">
-        <h5 className="text-center">{`${selectedCourses.reduce((a,v) => (v !== "" ? a + 1 : a), 0)} Courses Selected`}</h5>
+        <h5 className="text-center" id="text-num-selected">{`${selectedCourses.reduce((a,v) => (v !== "" ? a + 1 : a), 0)} Courses Selected`}</h5>
         <hr/>
         <InputGroup/>
       </Col>

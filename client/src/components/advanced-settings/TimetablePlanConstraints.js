@@ -15,9 +15,9 @@ function TimetablePlanConstraints() {
   const { customOptions } = useContext(CustomisationContext);
 
     return (
-        <Accordion defaultActiveKey="advanced-settings">
+        <Accordion defaultActiveKey="advanced-settings" id="accordion-advanced-settings">
           <Accordion.Item eventKey="advanced-settings" className={customOptions.displaySetting}>
-            <Accordion.Header><strong>Advanced Settings</strong></Accordion.Header>
+            <Accordion.Header id="btn-advanced-settings"><strong>Advanced Settings</strong></Accordion.Header>
             <Accordion.Body>
               <Tabs className="vertical-if-sm mb-3" variant="pills" defaultActiveKey="use-indexes" id="adjust-rules">
                 <Tab eventKey="use-indexes" title="Use Indexes">
