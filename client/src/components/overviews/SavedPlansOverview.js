@@ -99,7 +99,8 @@ function SavedPlansOverview() {
                         size="sm" 
                         as="select" 
                         value={chosenPlan}
-                        onChange={choice => renderPlan(choice.target.value)}>
+                        onChange={choice => renderPlan(choice.target.value)}
+                        id="saved-plans-overview-load-plan">
                             <option value = {-1}>Choose Plan</option>
                             <option value = {0}>Plan 1</option>
                             <option value = {1}>Plan 2</option>
@@ -111,7 +112,7 @@ function SavedPlansOverview() {
                     <PlanDetails/>
                 </Col>
             </Row>
-            <Modal show={loading}>
+            <Modal show={loading} id="modal-loading-saved-plan">
                 <Modal.Body>
                     <Container className="d-flex flex-column justify-content-center align-items-center">
                         <Spinner animation="grow" role="status" variant="secondary">

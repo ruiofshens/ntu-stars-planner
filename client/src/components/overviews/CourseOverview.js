@@ -38,7 +38,7 @@ function CourseOverview() {
       <Col xs={12} lg={1} className="d-flex flex-column align-items-center">
         Save To:
         <Row className="px-1 pb-4 my-1 align-items-center">
-          <Form.Control size="sm" as="select" onChange={choice => saveToPlan(choice.target.value)}>
+          <Form.Control size="sm" as="select" onChange={choice => saveToPlan(choice.target.value)} id="course-overview-save-plan">
               <option value = {-1}>Choose Plan</option>
               <option value = {0}>Plan 1</option>
               <option value = {1}>Plan 2</option>

@@ -122,11 +122,12 @@ function TimetablePage() {
             <Button 
               variant="outline-primary my-1" 
               size="sm"
-              onClick={decreasePlanIndex}>
+              onClick={decreasePlanIndex}
+              id="btn-decrease-plan">
               {'<'}
             </Button>
           </Col>
-          <Col xs="auto" className=" font-italic align-plan-text">
+          <Col xs="auto" className=" font-italic align-plan-text" id="text-plan-number">
               {(Object.entries(timetablePlans).length === 0) ? "Select Courses" : 
               `Plan ${timetablePlans.currentIndex + 1}/${timetablePlans.timetables.length}`}
           </Col>
@@ -134,16 +135,17 @@ function TimetablePage() {
             <Button 
               variant="outline-primary my-1" 
               size="sm"
-              onClick={increasePlanIndex}>
+              onClick={increasePlanIndex}
+              id="btn-increase-plan">
               {'>'}
             </Button>
           </Col>
         </Row>
         {(window.innerWidth > 1200) && (Object.entries(timetablePlans).length !== 0) && (firstTime) ?
           <Row className="mx-0 top-row-toggle">
-            <Toast show={showTip} onClose={toggleShowTip}>
+            <Toast show={showTip} onClose={toggleShowTip} id="toast-arrow-tip">
               <Toast.Header>
-                <strong className="me-auto">Tip: Left/Right arrow keys work too!</strong>
+                <strong className="me-auto" id="toast-text-arrow-tip">Tip: Left/Right arrow keys work too!</strong>
               </Toast.Header>
             </Toast>
           </Row> : null }

@@ -49,11 +49,11 @@ function CourseRow(props) {
 
     return (
       <tr>
-        <th scope="row">{props.rowNo}</th>
-        <td>{`${props.index}/${props.vacancies}/${props.waitlistLength}`}</td>
-        <td>{props.courseCodeName}</td>
-        <td>{props.AUs}</td>
-        <td>{props.examStart} - {props.examEnd}</td>
+        <th id={`plan-details-row-no-${props.rowNo}`} scope="row">{props.rowNo}</th>
+        <td id={`plan-details-index-${props.rowNo}`}>{`${props.index}/${props.vacancies}/${props.waitlistLength}`}</td>
+        <td id={`plan-details-course-name-${props.rowNo}`}>{props.courseCodeName}</td>
+        <td id={`plan-details-aus-${props.rowNo}`}>{props.AUs}</td>
+        <td id={`plan-details-exam-${props.rowNo}`}>{props.examStart} - {props.examEnd}</td>
       </tr>
     )
   }

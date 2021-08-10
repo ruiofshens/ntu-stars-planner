@@ -64,7 +64,7 @@ function App() {
                     fixed="top" 
                     className="sticky-nav d-flex justify-content-center">
                       <LinkContainer to="/">
-                        <Navbar.Brand>
+                        <Navbar.Brand id="logo-stars-panel">
                           <span role="img" aria-label="star">⭐</span>
                           {' '}panel
                         </Navbar.Brand>
@@ -73,13 +73,13 @@ function App() {
                       // activeKey={window.location.pathname} 
                       className="nav-options">
                         <IndexLinkContainer to="/">
-                          <Nav.Link>Timetable</Nav.Link>
+                          <Nav.Link id="nav-timetable">Timetable</Nav.Link>
                         </IndexLinkContainer>
                         <LinkContainer to="/courses">
-                          <Nav.Link>Courses</Nav.Link>
+                          <Nav.Link id="nav-courses">Courses</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/settings">
-                          <Nav.Link>Settings</Nav.Link>
+                          <Nav.Link id="nav-settings">Settings</Nav.Link>
                         </LinkContainer>
                       </Nav>
                     </Navbar>

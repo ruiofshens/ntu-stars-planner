@@ -46,7 +46,7 @@ function IndexEditOverview() {
       <Col xs={12} lg={1} className="d-flex flex-column align-items-center">
       Save To:
         <Row className="px-1 pb-4 my-1 align-items-center">
-          <Form.Control size="sm" as="select" onChange={choice => saveToPlan(choice.target.value)}>
+          <Form.Control size="sm" as="select" onChange={choice => saveToPlan(choice.target.value)} id="index-edit-overview-save-plan">
               <option value = {-1}>Choose Plan</option>
               <option value = {0}>Plan 1</option>
               <option value = {1}>Plan 2</option>
@@ -133,10 +133,10 @@ function CourseRow(props) {
 
   return (
     <tr>
-      <th scope="row">{props.rowNo}</th>
+      <th scope="row" id={`index-edit-row-no-${props.rowNo}`}>{props.rowNo}</th>
       <td>
         <Form className="mr-4">
-          <Form.Select size="sm" aria-label="select-index" onChange={handleIndexChange} value={props.currIndex.indexNo}>
+          <Form.Select size="sm" aria-label="select-index" onChange={handleIndexChange} value={props.currIndex.indexNo} id={`index-edit-select-index-${props.rowNo}`}>
             {indexes.map(index => (
               <option id={index.indexNo} value={index.indexNo} key={index.indexNo}>
                 {`${index.indexNo}/${index.vacancies}/${index.waitlistLength}`}
@@ -145,9 +145,9 @@ function CourseRow(props) {
           </Form.Select>
         </Form>
       </td>
-      <td>{props.courseCodeName}</td>
-      <td>{props.AUs}</td>
-      <td>{props.examStart} - {props.examEnd}</td>
+      <td id={`index-edit-course-name-${props.rowNo}`}>{props.courseCodeName}</td>
+      <td id={`index-edit-aus-${props.rowNo}`}>{props.AUs}</td>
+      <td id={`index-edit-exam-${props.rowNo}`}>{props.examStart} - {props.examEnd}</td>
     </tr>
   )
 }
