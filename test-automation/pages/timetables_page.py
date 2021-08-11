@@ -62,3 +62,40 @@ def verify_timetable_not_saved(driver):
         logger.write_log("Verified timetable is not saved")
     except Exception:
         logger.report_issue("Unable to verify timetable is not saved")
+
+
+def toggle_overviews_tab(driver, overview):
+    """
+    :param overview: one of 'choose-plan', 'edit-plan', or 'save-plan'
+    """
+    try:
+        id = "toggle-course-overview-tab-" + overview
+        tab = driver.find_element_by_id(id)
+        scroll_to_element(driver, tab)
+        tab.click()
+        logger.write_log(f"Click on overview tab {overview}")
+    except Exception:
+        logger.report_issue(f"Unable to click on overview tab {overview}")
+
+
+def edit_index(driver, row_number, new_index):
+    """
+    :param row_number: starts from 1
+    """
+    try:
+        index_dropdown = driver.find_element_by_id(f"index-edit-select-index-{row_number}")
+        scroll_to_element(driver, index_dropdown)
+        Select(index_dropdown).select_by_value(new_index)
+        logger.write_log(f"Changed index to {new_index} (row {row_number})")
+    except Exception:
+        logger.report_issue(f"Unable to change index to {new_index} (row {row_number})")
+
+
+def save_timetable_index_edit_overview(driver, plan):
+    try:
+        save_dropdown = driver.find_element_by_id("index-edit-overview-save-plan")
+        scroll_to_element(driver, save_dropdown)
+        Select(save_dropdown).select_by_value(str(plan-1))
+        logger.write_log(f"Clicked on save to plan {plan}")
+    except Exception:
+        logger.report_issue(f"Unable to save timetable to plan {plan}")
