@@ -99,3 +99,24 @@ def save_timetable_index_edit_overview(driver, plan):
         logger.write_log(f"Clicked on save to plan {plan}")
     except Exception:
         logger.report_issue(f"Unable to save timetable to plan {plan}")
+
+
+def verify_vacancies_and_waitlist(driver, row_number, available):
+    """
+    :param row_number: starts from 1
+    """
+    try:
+        index = driver.find_element_by_id(f"plan-details-index-{row_number}")
+        scroll_to_element(driver, index)
+        if available:
+            if "NA/NA" not in index.text:
+                logger.write_log(f"Verified vacancies and waitlist are available (row {row_number})")
+            else:
+                logger.report_issue(f"Expected vacancies and waitlist to be available but they are not (row {row_number})")
+        else:
+            if "NA/NA" in index.text:
+                logger.write_log(f"Verified vacancies and waitlist are unavailable (row {row_number})")
+            else:
+                logger.report_issue(f"Expected vacancies and waitlist to be unavailable but they are (row {row_number})")
+    except Exception:
+        logger.report_issue(f"Unable to verify vacancies and waitlist (row {row_number})")
