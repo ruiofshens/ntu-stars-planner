@@ -1,11 +1,12 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
-import fs from 'fs';
 
 import CourseModel from '../models/courseDetails.js';
 import AcadSemModel from '../models/acadSemDetails.js';
 
-const getCourses = async () => {
+import saveToJson from './saveToJson.js';
+
+export const getCoursesFromNTU = async () => {
   /**
    * Writes to data/courses in JSON, an array of Course objects. 
    * Each Course object will have an array of Index objects.
@@ -136,16 +137,13 @@ const getCourses = async () => {
       }
     });
 
-    const coursesJSON = JSON.stringify(courses);
-    const fileName = `scrapper/data/courses/${acadSem}_courses_${Date.now()}.json`
-    fs.writeFile(fileName, coursesJSON, (err) => {
-      if (err) console.log(err);
-    });
+    saveToJson(courses, "courses", acadSem);
     console.log("Retrieved courses");
 
     return courses;
   } catch (error) {
     console.log(error);
+    return false;
   }
 }
 
@@ -156,18 +154,21 @@ export const getAcadSem = async () => {
 
     const acadSem = $('select[name="acadsem"] > option[selected="selected"]').attr('value');
 
-    const dropped = await AcadSemModel.collection.drop();
-    if (dropped) {
-      console.log("AcadSemModel dropped")
-    }
+    // const dropped = await AcadSemModel.collection.drop();
+    // if (dropped) {
+    //   console.log("AcadSemModel dropped")
+    // }
+
     const acadSemObject = {
       year: acadSem.split(";")[0],
       sem: acadSem.split(";")[1],
     }
-    await new AcadSemModel(acadSemObject).save((err) => {
-      if (err) console.log(err);
-      else console.log(`Added academic semester ${acadSem} to database.`)
-    })
+
+    saveToJson(acadSemObject, "acadSem", acadSem);
+    // await new AcadSemModel(acadSemObject).save((err) => {
+    //   if (err) console.log(err);
+    //   else console.log(`Added academic semester ${acadSem} to database.`)
+    // })
 
     return acadSem;
   } catch (err) {
@@ -176,7 +177,10 @@ export const getAcadSem = async () => {
 }
 
 export const addCoursesToDB = async () => {
-  const courses = await getCourses();
+  /**
+   * @deprecated not in use; replaced DB with pure JSON files
+   */
+  const courses = await getCoursesFromNTU();
 
   await CourseModel.collection.drop()
     .then(() => console.log("CourseModel dropped"))

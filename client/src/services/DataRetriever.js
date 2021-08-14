@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const url = "https://starspanel-api.herokuapp.com/courses/";
+// const url = "https://starspanel-api.herokuapp.com/courses/";
+const url = "http://localhost:5000/courses/"
 
 export const fetchAllCourses = async () => {
      

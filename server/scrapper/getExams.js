@@ -1,11 +1,12 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
-import fs from 'fs';
 import qs from 'qs';
 
 import ExamModel from '../models/examDetails.js';
 
-const getExamDetails = async (sem, acadYear, planNo, examYear) => {
+import saveToJson from './saveToJson.js';
+
+export const getExamsFromNTU = async (sem, acadYear, planNo, examYear) => {
   /**
    * Writes to data/exams in JSON, an array of Exam objects. E.g. of an Exam object:
    * {
@@ -82,21 +83,22 @@ const getExamDetails = async (sem, acadYear, planNo, examYear) => {
       }
     });
 
-    const examsJSON = JSON.stringify(exams);
-    const fileName = `scrapper/data/exams/${acadYear.split("-")[0]};${sem}_exams_${Date.now()}.json`; // e.g. of file name: 2021;1 (same as courses)
-    fs.writeFile(fileName, examsJSON, (err) => {
-      if (err) console.log(err);
-    });
+    const acadSem = `${acadYear.split("-")[0]};${sem}`;
+    saveToJson(exams, "exams", acadSem);
 
     console.log("Exams retrieved.")
     return exams;
   } catch (err) {
     console.log(err);
+    return false;
   }
 }
 
 export const addExamsToDB = async () => {
-  const exams = await getExamDetails("1", "2021-2022", "105", "2021");
+  /**
+   * @deprecated not in use; replaced DB with pure JSON files
+   */
+  const exams = await getExamsFromNTU("1", "2021-2022", "105", "2021");
 
   await ExamModel.collection.drop()
     .then(() => console.log("ExamModel dropped"))

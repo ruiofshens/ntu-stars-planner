@@ -1,17 +1,17 @@
 /* Handlers for the routes
 Keep the code for the routes shorter by shifting the handlers to this seperate file */
 import { getVacancies } from '../scrapper/getVacancies.js';
-import { addCoursesToDB } from '../scrapper/getCourses.js';
-import { addExamsToDB } from '../scrapper/getExams.js';
+import { getCoursesFromNTU } from '../scrapper/getCourses.js';
+import { getExamsFromNTU } from '../scrapper/getExams.js';
 
-/* Import models */
-import CourseModel from '../models/courseDetails.js';
-import ExamModel from '../models/examDetails.js';
-import AcadSemModel from '../models/acadSemDetails.js';
+
+import fs from 'fs';
 
 export const getAllCourses = async (req, res) => {
     try {
-        const allCourses = await CourseModel.find(); //Finding something in a model is async
+        // const allCourses = await CourseModel.find(); //Finding something in a model is async
+        const jsonData = fs.readFileSync("scrapper/data/courses/courses.json");
+        const allCourses = JSON.parse(jsonData);
         res.status(200).json(allCourses); // res.json() is a Express.js function that sends a JSON response
     } catch (error) {
         res.status(404).json({message: error.message});
@@ -21,7 +21,9 @@ export const getAllCourses = async (req, res) => {
 export const getCourses = async (req, res) => {
     try {
         const courseCodes = req.query.courseCodes.split(",");
-        const courses = await CourseModel.find({ courseCode: { $in: courseCodes } });
+        const jsonData = fs.readFileSync("scrapper/data/courses/courses.json");
+        const allCourses = JSON.parse(jsonData);
+        const courses = allCourses.filter(course => courseCodes.includes(course.courseCode));
         res.status(200).json(courses);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -43,12 +45,9 @@ export const getExamDetails = async (req, res) => {
     // courseCodes must be sent as a query params separated by comma
     try {
         const courseCodes = req.query.courseCodes.split(",");
-        const exams = []
-        for (let courseCode of courseCodes) {
-            const examDoc = await ExamModel.findOne({ courseCode });
-            exams.push(examDoc);
-        }
-
+        const jsonData = fs.readFileSync("scrapper/data/exams/exams.json");
+        const allExams = JSON.parse(jsonData);
+        const exams = allExams.filter(exam => courseCodes.includes(exam.courseCode));
         res.json(exams);
     } catch (error) {
         res.status(500).json({ error });
@@ -57,8 +56,9 @@ export const getExamDetails = async (req, res) => {
 
 export const getAcadSemDetails = async (req, res) => {
     try {
-        const acadSem = await AcadSemModel.find(); 
-        res.status(200).json(acadSem[0]); // should only have one
+        const jsonData = fs.readFileSync("scrapper/data/acadSem/acadSem.json");
+        const acadSem = JSON.parse(jsonData);
+        res.status(200).json(acadSem); // should only have one
     } catch (error) {
         res.status(500).json({ error });
     }
@@ -66,8 +66,8 @@ export const getAcadSemDetails = async (req, res) => {
 
 export const doRefreshDatabase = async (req, res) => {
     try {
-        let coursesDone = await addCoursesToDB();
-        let examsDone = await addExamsToDB();
+        let coursesDone = await getCoursesFromNTU();
+        let examsDone = await getExamsFromNTU();
         if (coursesDone && examsDone) {
             res.status(200).json({success: "Database refreshed successfully."})
         } else {
@@ -80,7 +80,7 @@ export const doRefreshDatabase = async (req, res) => {
 
 export const doRefreshCourses = async (req, res) => {
     try {
-        let coursesDone = await addCoursesToDB();
+        let coursesDone = await getCoursesFromNTU();
         if (coursesDone) {
             res.status(200).json({success: "Courses refreshed successfully."})
         } else {
@@ -93,7 +93,7 @@ export const doRefreshCourses = async (req, res) => {
 
 export const doRefreshExams = async (req, res) => {
     try {
-        let examsDone = await addExamsToDB();
+        let examsDone = await getExamsFromNTU("1", "2021-2022", "105", "2021");
         if (examsDone) {
             res.status(200).json({success: "Exams refreshed successfully."})
         } else {
