@@ -4,7 +4,7 @@ import { Col, Form } from 'react-bootstrap';
 import Select from 'react-select'; 
 import makeAnimated from 'react-select/animated'
 
-import { fetchCourses } from '../../services/DataRetriever';
+import { fetchVacanciesAndWaitlist } from '../../services/DataRetriever';
 import { SelectedCoursesContext } from '../../contexts/SelectedCoursesContext';
 import { ConstraintsContext } from '../../contexts/ConstraintsContext';
 import { CustomisationContext } from '../../contexts/CustomisationContext';
@@ -21,24 +21,39 @@ const UseIndexes = () => {
   const { customOptions } = useContext(CustomisationContext);
 
   useEffect(() => {
-    const courseIndexes = [];
-    courses.forEach(course => {
-      if (selectedCourses.includes(course.courseCode)) {
-        let indexNos = [];
-        course.indexes.forEach(index => indexNos.push(index.indexNo));
-        courseIndexes.push({
-          courseCode: course.courseCode,
-          indexNos: indexNos,
-        })
+    async function getIndexes() {
+      const courseIndexes = [];
+      const courseCodes = selectedCourses.filter(selected => selected);
+      if (courseCodes.length !== 0) { // no courses selected yet     
+        let temp = await fetchVacanciesAndWaitlist(courseCodes[0]);
+        if (temp[0].vacancies !== "NA") {
+          for (let i=0; i<courseCodes.length; i++) {
+            let indexes = await fetchVacanciesAndWaitlist(courseCodes[i]);
+            courseIndexes.push({ courseCode: courseCodes[i], indexes });
+          }
+        }
+      } else {
+        courses.forEach(course => {
+          if (courseCodes.includes(course.courseCode)) {
+            let indexes = [];
+            course.indexes.forEach(index => indexes.push({indexNo: index.indexNo, vacancies: "NA", waitlistLength: "NA"}));
+            courseIndexes.push({
+              courseCode: course.courseCode,
+              indexes: indexes,
+            })
+          }
+        });
       }
-    });
-    setCourseIndexes(courseIndexes);
+      // create object of courseCodes, each courseCode having an array of selected indexes
+      // if it hasn't been created already
+      courseCodes.forEach(course => {
+        if (course && !chosenIndexes[course]) chosenIndexes[course] = [];
+      })
 
-    // create object of courseCodes, each courseCode having an array of selected indexes
-    // if it hasn't been created already
-    selectedCourses.forEach(course => {
-      if (course && !chosenIndexes[course]) chosenIndexes[course] = [];
-    })
+      setCourseIndexes(courseIndexes);      
+    }
+    
+    getIndexes();
   }, [selectedCourses]);
 
   return (
@@ -57,17 +72,18 @@ const UseIndexes = () => {
 
 const SelectForm = ({ course, chosenIndexes, setChosenIndexes, customOptions }) => {
   const options = [];
-  course.indexNos.forEach(indexNo => options.push({ label: indexNo, value: indexNo }));
+  course.indexes.forEach(index => options.push({ label: `${index.indexNo}/${index.vacancies}/${index.waitlistLength}`, value: index.indexNo }));
   
   const pastSelected = options.filter(option => chosenIndexes[course.courseCode].includes(option.value));
 
   const handleSelectChange = (selected) => {
     // selected is an array of objects { label, value }
     const indexes = [];
-    selected.forEach(obj => indexes.push(Object.values(obj)[0])); // Object.values returns an array even if there's only one value in the object
+    selected.forEach(obj => indexes.push(obj.value)); 
     const temp = {...chosenIndexes};
     temp[course.courseCode] = indexes;
     setChosenIndexes(temp); 
+    console.log(temp);
   }
 
   // styling for Select
