@@ -66,7 +66,7 @@ def verify_timetable_not_saved(driver):
 
 def toggle_overviews_tab(driver, overview):
     """
-    :param overview: one of 'choose-plan', 'edit-plan', or 'save-plan'
+    :param overview: one of 'choose-plan', 'edit-plan', or 'saved-plan'
     """
     try:
         id = "toggle-course-overview-tab-" + overview
@@ -120,3 +120,34 @@ def verify_vacancies_and_waitlist(driver, row_number, available):
                 logger.report_issue(f"Expected vacancies and waitlist to be unavailable but they are (row {row_number})")
     except Exception:
         logger.report_issue(f"Unable to verify vacancies and waitlist (row {row_number})")
+
+
+def verify_edit_plans_vacancies_and_waitlist(driver, row_number, available):
+    """
+    :param row_number: starts from 1
+    """
+    try:
+        index = driver.find_element_by_id(f"index-edit-select-index-{row_number}")
+        scroll_to_element(driver, index)
+        if available:
+            if "NA/NA" not in index.get_attribute("value"):
+                logger.write_log(f"Verified vacancies and waitlist are available (row {row_number})")
+            else:
+                logger.report_issue(f"Expected vacancies and waitlist to be available but they are not (row {row_number})")
+        else:
+            if "NA/NA" in index.get_attribute("value"):
+                logger.write_log(f"Verified vacancies and waitlist are unavailable (row {row_number})")
+            else:
+                logger.report_issue(f"Expected vacancies and waitlist to be unavailable but they are (row {row_number})")
+    except Exception:
+        logger.report_issue(f"Unable to verify vacancies and waitlist (row {row_number})")
+
+
+def load_saved_plan(driver, plan):
+    try:
+        load_dropdown = driver.find_element_by_id("saved-plans-overview-load-plan")
+        scroll_to_element(driver, load_dropdown)
+        Select(load_dropdown).select_by_value(str(plan-1))
+        logger.write_log(f"Clicked on load saved plan {plan}")
+    except Exception:
+        logger.report_issue(f"Unable to load saved plan {plan}")
