@@ -12,13 +12,25 @@ import { SavedPlansContext } from '../../contexts/SavedPlansContext';
 import { CurrentPlanContext } from '../../contexts/CurrentPlanContext';
 import { CoursesContext } from '../../contexts/CoursesContext';
 
+import { SelectedCoursesContext } from '../../contexts/SelectedCoursesContext';
+import { SavedSelectedCoursesContext } from '../../contexts/SavedSelectedCoursesContext';
+
+import { ConstraintsContext } from '../../contexts/ConstraintsContext';
+import { SavedConstraintsContext } from '../../contexts/SavedConstraintsContext';
+
 import { fetchVacanciesAndWaitlist } from '../../services/DataRetriever';
 
 function SavedPlansOverview() {
 
     const { savedPlans, setSavedPlans } = useContext(SavedPlansContext);
     const { setCurrentPlan } = useContext(CurrentPlanContext);
-    
+
+    const { savedSelectedCourses, setSavedSelectedCourses } = useContext(SavedSelectedCoursesContext);
+    const { setSelectedCourses } = useContext(SelectedCoursesContext);
+
+    const { savedFreeTimes, setSavedFreeTimes } = useContext(SavedConstraintsContext);
+    const { setFreeTimes } = useContext(ConstraintsContext);
+
     const { courses } = useContext(CoursesContext); // for checking if courses are loaded in already
     const [ chosenPlan, setChosenPlan ] = useState("-1");
 
@@ -32,23 +44,29 @@ function SavedPlansOverview() {
         }
         if (savedPlans.plans[value]){
             setLoading(true);
-            setSavedPlans({...savedPlans, currentIndex: value})
-            const toLoad = savedPlans.plans[value];
-            addVacanciesAndWaitlist(toLoad)
+            setSavedPlans({...savedPlans, currentIndex: value});
+            setSavedSelectedCourses({...savedSelectedCourses});
+            setSavedFreeTimes({...savedFreeTimes});
+            const toLoadPlans = savedPlans.plans[value];
+            const toLoadSelectedCourses = savedSelectedCourses.selectedCourses[value];
+            const toLoadFreeTimes = savedFreeTimes.freeTimes[value];
+            addVacanciesAndWaitlist(toLoadPlans)
             .then(() => {
                 // check if indexes still valid
                 const unavailableIndexes = [];
                 const courseCodes = [];
-                toLoad.forEach(course => courseCodes.push(course.courseCode))
+                toLoadPlans.forEach(course => courseCodes.push(course.courseCode))
                 courses.forEach(course => {
                     if (courseCodes.includes(course.courseCode)) {
-                        const indexNo = toLoad.filter(savedCourse => savedCourse.courseCode === course.courseCode)[0].index.indexNo;
+                        const indexNo = toLoadPlans.filter(savedCourse => savedCourse.courseCode === course.courseCode)[0].index.indexNo;
                         if (!course.indexes.some(index => index.indexNo === indexNo)) { // index no longer valid
                             unavailableIndexes.push({courseCode: course.courseCode, indexNo});
                         }
                     }
                 })
-                setCurrentPlan(toLoad);
+                setCurrentPlan(toLoadPlans);
+                setSelectedCourses(toLoadSelectedCourses);
+                setFreeTimes(toLoadFreeTimes);
                 setChosenPlan(value);
                 setLoading(false);
                 if (unavailableIndexes.length !== 0) {
@@ -67,9 +85,9 @@ function SavedPlansOverview() {
         }
     }
 
-    const addVacanciesAndWaitlist = async (toLoad) => {
+    const addVacanciesAndWaitlist = async (toLoadPlans) => {
         const promiseArray = [];
-        toLoad.forEach(course => {
+        toLoadPlans.forEach(course => {
             promiseArray.push(new Promise((resolve, reject) => {
                 fetchVacanciesAndWaitlist(course.courseCode)
                 .then((indexes) => {

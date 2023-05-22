@@ -8,7 +8,7 @@ const PLANS_COUNT = 3;
 const SavedPlansContextProvider = (props) => {
     let plans = new Array(PLANS_COUNT);
     for (let i=0; i<PLANS_COUNT; i++) {
-        let plan = localStorage.getItem(`saved-${i+1}`);
+        let plan = localStorage.getItem(`saved-plans-${i+1}`);
         if (plan) plans[i] = JSON.parse(plan);
     }
 
