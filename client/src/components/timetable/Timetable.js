@@ -131,7 +131,7 @@ function TimetableRow({ day, lessons }) {
       return ((offsetInMin * ratio * 2) + 8) + "vw";
     } else {
       // For window width greater than 575.98px (computer screens)
-      return ((offsetInMin * ratio) + 4) + "vw";
+      return ((offsetInMin * ratio) + 4.42) + "vw";
     }
   }
   
