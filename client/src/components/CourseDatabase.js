@@ -49,7 +49,7 @@ function CourseDatabase() {
             { acadSem ? ` (AY${acadSem.year}-${((parseInt(acadSem.year)+1)+"").substring(2)} Sem ${acadSem.sem})` : ""}
           </Col>
           <Col sm={4} xs={10}>
-            <Form className="d-flex ml-auto">
+            <Form className="d-flex ml-auto" action = "javascript:void(0)">
               <Form.Control 
               placeholder="Search course code/name" 
               size="sm"

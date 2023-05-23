@@ -93,7 +93,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 4vw;
+  width: 5vw;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 /* ============= For light mode and dark mode customisation ============= */
